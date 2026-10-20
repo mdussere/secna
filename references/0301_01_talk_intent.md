@@ -31,7 +31,7 @@ they can run the same evening.
 | Who | Leaves with | Test |
 |---|---|---|
 | **Everyone** | The promise: *« Comprendre tout un corpus sans le lire en entier. »* — and the means: *« La data science trouve la structure, le LLM lui donne du sens. »* | Can repeat both over lunch the next day. |
-| **Product / business** | **The calculation**: the bill follows the number of *groups*, not the number of documents — with an order of magnitude they can quote (Clio: $48.81 for 100,000 conversations; our own measured curve). | Can say why reading 1 million reviews is no longer a budget question. |
+| **Product / business** | **The calculation**: the bill follows the number of *groups*, not the number of documents — with an order of magnitude they can quote (Clio: $48.81 for 100,000 conversations; the illustrative cost curve). | Can say why reading 1 million reviews is no longer a budget question. |
 | **Developers** | **The instructions**: five steps they can rebuild from memory (S · E · C · N · A), and a repo that runs. | Can scan the QR code, clone, run, and adapt it to their own corpus. |
 | **Everyone, on the way out** | The feeling that this is **within reach** — not a lab technique, not a vendor product. | Asks "would this work on my tickets?" in the Q&A or at the bar. |
 
