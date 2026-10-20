@@ -1,0 +1,11 @@
+{
+  "name": "secna-presentation",
+  "private": true,
+  "description": "Build the SECNA talk deck (Marp): node build.mjs <html|pdf|png|standalone|all>",
+  "scripts": {
+    "build": "node build.mjs all"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "4.5.1"
+  }
+}

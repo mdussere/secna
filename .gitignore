@@ -218,3 +218,27 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- secna ---
+# Marp outputs (deck.md + assets/ are the source)
+presentation/deck.html
+!presentation/dist/
+presentation/dist/*
+!presentation/dist/deck-standalone.html
+presentation/review/
+presentation/.theme-*.generated.css
+# Third-party paper PDFs — BIBLIO.md carries the links
+references/pdf/
+# Downloaded corpora and run outputs
+notebook/data/
+notebook/out/
+.DS_Store
+presentation/node_modules/
+
+# Claude Code — local only: the handover note (internal context) and skills linked from
+# outside this repo. Only the repo's own skill (secna-deck) is committed.
+CLAUDE.local.md
+.claude/settings.local.json
+.claude/skills/workplan
+.claude/skills/clean-verbatim
+.claude/skills/rtfm
