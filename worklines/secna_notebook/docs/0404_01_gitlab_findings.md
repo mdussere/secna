@@ -120,9 +120,10 @@ cluster with the metadata.
    in-house agent branches about 2.7 to 1. *Caveat: Claude Code signs by default; Duo leaves a trace
    through its branch and may be under-counted.*
 2. **The *Fix Pipeline* agent: 219 attempts, 14 merged.** 219 MRs opened by the Duo *Fix Pipeline*
-   agent for 114 people; **6 % merged**, 202 closed — 120 within a day. Either it is used as a
-   diagnostic (read its fix, redo it by hand) or it is not yet good enough. A measure of an agent's
-   real effectiveness that no product page gives.
+   agent for 114 people; **6 % merged**, 202 closed — 120 within a day. *Checked 2026-10-25*: 196 of
+   the 219 are drafts, and 155 target **the branch of the failing merge request**, not the main branch —
+   they are fix proposals for someone else's MR, which its author may apply another way. Read it as
+   *an agent proposes, people decide*, not as a failure rate.
 3. **Agents will be paid by usage — "GitLab Credits".** Per-session credit ingestion for agent
    workflows, per-model credit rates, credits dashboards, caps and "credits exhausted" banners. The
    business model is moving to consumption, read straight from the code.

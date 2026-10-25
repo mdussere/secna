@@ -20,6 +20,6 @@ def env():
         try:
             sm = boto3.Session(profile_name=profile, region_name=os.getenv("AWS_REGION") or None).client("secretsmanager")
             os.environ["SECNA_API_KEY"] = sm.get_secret_value(SecretId=secret)["SecretString"].strip()
-        except Exception as e:
-            pytest.fail(f"cannot read the key from AWS Secrets Manager ({type(e).__name__}: {e}) — "
-                        f"run `aws sso login --profile {profile}`", pytrace=False)
+        except Exception as e:  # only the steps that call a model need the key: they fail on their own
+            print(f"\n⚠ no API key: cannot read it from AWS Secrets Manager ({type(e).__name__}) — "
+                  f"run `aws sso login --profile {profile}`")

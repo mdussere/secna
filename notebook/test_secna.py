@@ -11,6 +11,7 @@ writes the same file back. Run in order:
 import json
 import os
 import pathlib
+import subprocess
 
 import numpy as np
 import pandas as pd
@@ -21,21 +22,34 @@ from sklearn.cluster import KMeans
 from tqdm import tqdm
 
 # ── Notebook cell: configuration — change REPOS to run it on your own code ───────────────────
+# All on GitLab or all on GitHub (no mix). On GitHub, a source is a repository ("github.com/owner/repo")
+# or a whole organisation ("github.com/owner").
 REPOS = [
-    "gitlab-org/gitlab",                                          # the product
-    "gitlab-org/ops/artifact-registry",                           # package registry
-    "gitlab-org/modelops/applied-ml/code-suggestions/ai-assist",  # the AI assistant's backend
-    "gitlab-org/orbit/knowledge-graph",                           # Orbit, the knowledge graph
-    "gitlab-org/editor-extensions/gitlab-lsp",                    # editor integration
-    "gitlab-org/gitlab-runner",                                   # CI runner
-    "gitlab-org/cli",                                             # command line
+    "gitlab.com/gitlab-org/gitlab",                                          # the product
+    "gitlab.com/gitlab-org/ops/artifact-registry",                           # package registry
+    "gitlab.com/gitlab-org/modelops/applied-ml/code-suggestions/ai-assist",  # the AI assistant's backend
+    "gitlab.com/gitlab-org/orbit/knowledge-graph",                           # Orbit, the knowledge graph
+    "gitlab.com/gitlab-org/editor-extensions/gitlab-lsp",                    # editor integration
+    "gitlab.com/gitlab-org/gitlab-runner",                                   # CI runner
+    "gitlab.com/gitlab-org/cli",                                             # command line
 ]
-SINCE, UNTIL = "2026-07-23", "2026-10-23"  # merge requests created in [SINCE, UNTIL)
-DATA = pathlib.Path(__file__).parent / "data" / f"gitlab_{SINCE}_{UNTIL}"
+NAME, TITLE = "gitlab", "GitLab"
+SINCE, UNTIL = "2026-07-23", "2026-10-23"  # created in [SINCE, UNTIL)
+# Another corpus without editing this file: see test_secna_langchain.py.
+REPOS = os.getenv("SECNA_REPOS", ",".join(REPOS)).split(",")
+NAME, TITLE = os.getenv("SECNA_NAME", NAME), os.getenv("SECNA_TITLE", TITLE)
+SINCE, UNTIL = os.getenv("SECNA_SINCE", SINCE), os.getenv("SECNA_UNTIL", UNTIL)
+
+HOSTS = {r.split("/")[0] for r in REPOS}
+assert HOSTS in ({"gitlab.com"}, {"github.com"}), f"all on GitLab or all on GitHub, not {HOSTS}"
+GITHUB = HOSTS == {"github.com"}
+UNITS = "pull requests" if GITHUB else "merge requests"
+DATA = pathlib.Path(__file__).parent / "data" / f"{NAME}_{SINCE}_{UNTIL}"
 CORPUS = DATA / "corpus.parquet"
-CONTEXT = (f"We are organising every merge request created between {SINCE} and {UNTIL} in these GitLab "
-           f"repositories: {', '.join(REPOS)}, to understand what the company does and how it operates.\n")
-EMBED_MODEL = os.getenv("SECNA_EMBED_MODEL", "text-embedding-3-large")
+CONTEXT = (f"We are organising every {UNITS[:-1]} created between {SINCE} and {UNTIL} in these {TITLE} "
+           f"repositories: {', '.join(REPOS)}, to understand what the organisation does and how it operates.\n")
+EMBED_MODEL = os.getenv("SECNA_EMBED_MODEL", "text-embedding-3-large")  # or a local model: "sentence-transformers/LaBSE"
+LOCAL_EMBED = EMBED_MODEL.startswith("sentence-transformers/")
 NAME_MODEL = os.getenv("SECNA_NAME_MODEL", "gpt-6-luna")  # N — names each cluster
 MAX_TOKENS = 8191  # text-embedding-3-large's input limit
 BATCH = 32         # merge requests per embedding call (32 × 8,191 stays under 300k tokens per call)
@@ -45,9 +59,14 @@ BATCH = 32         # merge requests per embedding call (32 × 8,191 stays under 
 def test_00_config():
     assert os.getenv("SECNA_API_KEY"), "no SECNA_API_KEY: fill .env (see env.template) or SECNA_SECRET_NAME + aws sso login"
     client = OpenAI(base_url=os.getenv("SECNA_BASE_URL") or None, api_key=os.environ["SECNA_API_KEY"])
-    r = client.embeddings.create(model=EMBED_MODEL, input=["SECNA configuration check"])
-    print(f"{'proxy' if os.getenv('SECNA_BASE_URL') else 'api.openai.com'} · {r.model} · {len(r.data[0].embedding)} dimensions · {r.usage.total_tokens} tokens")
-    assert len(r.data[0].embedding) == 3072
+    if LOCAL_EMBED:
+        from sentence_transformers import SentenceTransformer
+        v = SentenceTransformer(EMBED_MODEL, device="cpu").encode(["SECNA configuration check"])
+        print(f"local · {EMBED_MODEL} · {v.shape[1]} dimensions · CPU")
+    else:
+        r = client.embeddings.create(model=EMBED_MODEL, input=["SECNA configuration check"])
+        print(f"{'proxy' if os.getenv('SECNA_BASE_URL') else 'api.openai.com'} · {r.model} · {len(r.data[0].embedding)} dimensions · {r.usage.total_tokens} tokens")
+        assert len(r.data[0].embedding) == 3072
     assert NAME_MODEL in {m.id for m in client.models.list()}, f"{NAME_MODEL} is not offered by the endpoint"
     r = client.chat.completions.create(model=NAME_MODEL, messages=[{"role": "user", "content": "Answer OK."}])
     info = {}  # a LiteLLM proxy also tells each model's limits; OpenAI itself does not
@@ -58,8 +77,8 @@ def test_00_config():
     print(f"{r.model} · answers {r.choices[0].message.content!r} · input limit {info.get('max_input_tokens', '?')} tokens")
 
 
-# ── Notebook cell: the corpus — every merge request, from GitLab's public API ────────────────
-QUERY = """query($repo: ID!, $after: String) { project(fullPath: $repo) {
+# ── Notebook cell: the corpus — every merge or pull request, from GitLab's or GitHub's API ─────
+GITLAB_QUERY = """query($repo: ID!, $after: String) { project(fullPath: $repo) {
   mergeRequests(createdAfter: "%s", createdBefore: "%s", first: 100, after: $after) {
     pageInfo { hasNextPage endCursor }
     nodes { iid webUrl title description state draft createdAt updatedAt mergedAt closedAt
@@ -69,12 +88,18 @@ QUERY = """query($repo: ID!, $after: String) { project(fullPath: $repo) {
             commitCount diffStatsSummary { additions deletions fileCount }
             userNotesCount upvotes downvotes } } } }""" % (SINCE, UNTIL)
 
+GITHUB_QUERY = """query($q: String!, $after: String) { search(query: $q, type: ISSUE, first: 50, after: $after) {
+  pageInfo { hasNextPage endCursor }
+  nodes { ... on PullRequest { repository { name } number url title body state isDraft
+          createdAt updatedAt closedAt mergedAt author { __typename login } labels(first: 20) { nodes { name } }
+          additions deletions changedFiles commits { totalCount } comments { totalCount } baseRefName } } } }"""
 
-def extract(repo):
+
+def extract_gitlab(repo):  # GitLab's public API: no account needed
     mrs, after = [], None
     while True:
         page = requests.post("https://gitlab.com/api/graphql", timeout=60,
-                             json={"query": QUERY, "variables": {"repo": repo, "after": after}})
+                             json={"query": GITLAB_QUERY, "variables": {"repo": repo, "after": after}})
         page = page.json()["data"]["project"]["mergeRequests"]
         mrs += [{"repo": repo, **mr} for mr in page["nodes"]]
         print(f"\r{repo}: {len(mrs):,} merge requests", end="", flush=True)
@@ -84,22 +109,63 @@ def extract(repo):
         after = page["pageInfo"]["endCursor"]
 
 
+def extract_github(source, day):  # one day at a time: a GitHub search returns at most 1,000 results
+    token = os.getenv("GITHUB_TOKEN") or subprocess.run(["gh", "auth", "token"], capture_output=True, text=True).stdout.strip()
+    q = f"{'repo' if '/' in source else 'org'}:{source} is:pr created:{day}..{day}"
+    prs, after = [], None
+    while True:
+        page = requests.post("https://api.github.com/graphql", timeout=60, headers={"Authorization": f"bearer {token}"},
+                             json={"query": GITHUB_QUERY, "variables": {"q": q, "after": after}})
+        page = page.json()["data"]["search"]
+        prs += page["nodes"]
+        print(f"\r{source} {day}: {len(prs):,} pull requests", end="", flush=True)
+        if not page["pageInfo"]["hasNextPage"]:
+            return prs
+        after = page["pageInfo"]["endCursor"]
+
+
+def from_github(source, pr):  # a GitHub pull request in the shape of a GitLab merge request
+    a = pr["author"]
+    return {"repo": source if "/" in source else f"{source}/{pr['repository']['name']}", "iid": pr["number"],
+            "webUrl": pr["url"], "title": pr["title"], "description": pr["body"], "draft": pr["isDraft"],
+            "state": {"MERGED": "merged", "CLOSED": "closed", "OPEN": "opened"}[pr["state"]],
+            **{k: pr[k] for k in ["createdAt", "updatedAt", "mergedAt", "closedAt"]},
+            "author": a and {"username": a["login"], "bot": a["__typename"] == "Bot" or a["login"].endswith("[bot]")},
+            "labels": {"nodes": [{"title": label["name"]} for label in pr["labels"]["nodes"]]},
+            "diffStatsSummary": {"additions": pr["additions"], "deletions": pr["deletions"], "fileCount": pr["changedFiles"]},
+            "commitCount": pr["commits"]["totalCount"], "userNotesCount": pr["comments"]["totalCount"],
+            "targetBranch": pr["baseRefName"]}
+
+
 def test_0_extract():
-    DATA.mkdir(parents=True, exist_ok=True)
-    for repo in REPOS:  # one cached file per repository: a re-run only fetches what is missing
-        cache = DATA / f"{repo.replace('/', '__')}.json"
-        if not cache.exists():
-            cache.write_text(pd.DataFrame(extract(repo)).to_json(orient="records"))
-    df = pd.concat([pd.read_json(DATA / f"{r.replace('/', '__')}.json") for r in REPOS], ignore_index=True)
+    rows = []
+    for source in REPOS:  # cached on disk: a re-run only fetches what is missing
+        path = source.split("/", 1)[1]
+        if GITHUB:
+            print()
+            for day in pd.date_range(SINCE, UNTIL, inclusive="left").strftime("%Y-%m-%d"):
+                cache = DATA / path.replace("/", "__") / f"{day}.json"
+                if not cache.exists():
+                    cache.parent.mkdir(parents=True, exist_ok=True)
+                    cache.write_text(json.dumps(extract_github(path, day)))
+                rows += [from_github(path, pr) for pr in json.loads(cache.read_text())]
+        else:
+            cache = DATA / f"{path.replace('/', '__')}.json"
+            if not cache.exists():
+                DATA.mkdir(parents=True, exist_ok=True)
+                cache.write_text(json.dumps(extract_gitlab(path)))
+            rows += json.loads(cache.read_text())
+    df = pd.DataFrame(rows)
 
     # Flatten: nested objects become plain columns, lists of people become lists of usernames.
     df["author_bot"] = df["author"].map(lambda a: bool(a and a["bot"]))
-    for c in ["author", "mergeUser"]:
+    for c in {"author", "mergeUser"} & set(df):
         df[c] = df[c].map(lambda a: a["username"] if a else None)
-    for c in ["assignees", "reviewers", "approvedBy"]:
+    for c in {"assignees", "reviewers", "approvedBy"} & set(df):  # GitLab only
         df[c] = df[c].map(lambda l: [n["username"] for n in l["nodes"]])
     df["labels"] = df["labels"].map(lambda l: [n["title"] for n in l["nodes"]])
-    df["milestone"] = df["milestone"].map(lambda m: m["title"] if m else None)
+    if "milestone" in df:
+        df["milestone"] = df["milestone"].map(lambda m: m["title"] if m else None)
     for k in ["additions", "deletions", "fileCount"]:
         df[k] = df["diffStatsSummary"].map(lambda d: d[k] if d else None)
     df = df.drop(columns="diffStatsSummary")
@@ -117,7 +183,7 @@ def test_0_extract():
     end = df["mergedAt"].fillna(df["closedAt"]).fillna(pd.Timestamp(UNTIL, tz="UTC"))
     df["age_days"] = (end - df["createdAt"]).dt.total_seconds() / 86400
     df.to_parquet(CORPUS, index=False)
-    print(f"{len(df):,} merge requests · {df['author'].nunique():,} authors · {df.shape[1]} columns")
+    print(f"{len(df):,} {UNITS} · {df['repo'].nunique()} repositories · {df['author'].nunique():,} authors · {df.shape[1]} columns")
 
 
 # ── Notebook cell: S — Summarise ─────────────────────────────────────────────────────────────
@@ -137,7 +203,7 @@ def test_s_summarise():
         ["agent", "bot", "human + agent"], "human")
     text = ("# " + df["title"] + "\n\nrepository: " + df["repo"] + "\norigin: " + df["origin"]
             + "\nlabels: " + df["labels"].map(", ".join) + "\n\n" + df["description"].fillna(""))
-    enc = tiktoken.encoding_for_model(EMBED_MODEL)
+    enc = tiktoken.get_encoding("cl100k_base")  # OpenAI's embedding tokenizer; a local model also cuts on its own
     tokens = enc.encode_batch(text.tolist())
     df["summary_tokens"] = [len(t) for t in tokens]  # before the cut, to see what the cut removes
     df["summary"] = [enc.decode(t[:MAX_TOKENS]) for t in tokens]
@@ -158,6 +224,14 @@ def test_e_embed():
     if "embedding" not in df:
         df["embedding"] = None
     todo = df.index[df["embedding"].isna()]
+    if LOCAL_EMBED:  # a local model on the CPU: no key, no bill; its own bar shows progress and time left
+        from sentence_transformers import SentenceTransformer
+        vectors = SentenceTransformer(EMBED_MODEL, device="cpu").encode(
+            df.loc[todo, "summary"].tolist(), batch_size=BATCH, show_progress_bar=True)
+        df.loc[todo, "embedding"] = pd.Series(list(vectors.astype(np.float32)), index=todo)
+        df.to_parquet(CORPUS, index=False)
+        print(f"{df['embedding'].notna().sum():,} vectors of {vectors.shape[1]} dimensions · {EMBED_MODEL} on the CPU")
+        return
     client = OpenAI(base_url=os.getenv("SECNA_BASE_URL") or None, api_key=os.environ["SECNA_API_KEY"], max_retries=10)
     tokens = 0
     with tqdm(total=len(df), initial=len(df) - len(todo), unit="MR") as bar:
@@ -196,10 +270,10 @@ def test_c_cluster():
 # the cluster's centre (its most typical ones), after a line of facts about the cluster (size, authors,
 # origin, months), and answers a name and a description — what, where, why, and how — in JSON.
 NB_SAMPLES = 10
-NAME_PROMPT = CONTEXT + """The merge requests below come from one cluster of that corpus: first the cluster's
-facts, then its most typical merge requests. Answer in JSON with two fields:
+NAME_PROMPT = CONTEXT + f"""The {UNITS} below come from one cluster of that corpus: first the cluster's
+facts, then its most typical {UNITS}. Answer in JSON with two fields:
 - "name": a name for the cluster, 8 to 15 words;
-- "description": 50 words at most, saying what the merge requests change, where and why, and how
+- "description": 50 words at most, saying what the {UNITS} change, where and why, and how
   they are made: by people, with AI agents or by bots; as one-off changes or as a repeated campaign.
 """
 
@@ -211,7 +285,7 @@ def test_n_name():
     for n, (c, members) in enumerate(df.groupby("cluster"), 1):
         origins = ", ".join(f"{o} {p:.0%}" for o, p in members["origin"].value_counts(normalize=True).items())
         months = ", ".join(f"{m} {k}" for m, k in members["createdAt"].dt.strftime("%Y-%m").value_counts().sort_index().items())
-        message = (NAME_PROMPT + f"\nCluster facts: {len(members)} merge requests by {members['author'].nunique()} authors;"
+        message = (NAME_PROMPT + f"\nCluster facts: {len(members)} {UNITS} by {members['author'].nunique()} authors;"
                    f" origin: {origins}; created per month: {months}.")
         for summary in members.nsmallest(NB_SAMPLES, "centroid_distance")["summary"]:
             message += "\n\n" + summary
@@ -232,7 +306,7 @@ def test_n_name():
 # as JSON and gathers them into 5 to 7 themes, lettered A, B, C… so they never mix with the cluster
 # numbers.
 AGG_EFFORT = "high"
-THEME_PROMPT = CONTEXT + """Below, as JSON, are the clusters found in those merge requests. Gather them into 5 to 7 themes:
+THEME_PROMPT = CONTEXT + f"Below, as JSON, are the clusters found in those {UNITS}. " + """Gather them into 5 to 7 themes:
 the main themes of what happened. Every cluster belongs to exactly one theme.
 
 Answer in JSON only, in this format:
@@ -259,12 +333,12 @@ def test_a_themes():
     df.to_parquet(CORPUS, index=False)
     print(f"{len(themes)} themes · {r.usage.total_tokens:,} tokens ({r.usage.completion_tokens:,} out, reasoning included)")
     for t in themes:
-        print(f"{t['id']} · {t['name']} · {(df['theme'] == t['id']).sum():,} MRs · clusters {t['clusters']}")
+        print(f"{t['id']} · {t['name']} · {(df['theme'] == t['id']).sum():,} {UNITS} · clusters {t['clusters']}")
     assert set(of) == set(clusters["cluster"]), f"clusters left out: {set(clusters['cluster']) - set(of)}"
 
 
 # ── Notebook cell: the picture — themes by size, split by repository ──────────────────
-COLORS = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6"]  # one per repository, in REPOS order
+COLORS = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6"]  # one per repository, largest first
 
 
 def test_graph():
@@ -272,18 +346,21 @@ def test_graph():
 
     df = pd.read_parquet(CORPUS, columns=["theme", "theme_name", "repo"])
     df["bar"] = df["theme"] + "  " + df["theme_name"]
-    counts = pd.crosstab(df["bar"], df["repo"])[REPOS]
+    top = df["repo"].value_counts().index  # past 7 repositories, the smallest share one "other" colour
+    df["repo"] = df["repo"].where(df["repo"].isin(top[:len(COLORS) - (len(top) > len(COLORS))]), "other")
+    repos = df["repo"].value_counts().drop("other", errors="ignore").index.tolist() + (["other"] if "other" in set(df["repo"]) else [])
+    counts = pd.crosstab(df["bar"], df["repo"])[repos]
     counts = counts.loc[counts.sum(axis=1).sort_values().index]
     fig, ax = plt.subplots(figsize=(11, 0.55 * len(counts) + 2), facecolor="#fcfcfb")
     ax.set_facecolor("#fcfcfb")
     left = np.zeros(len(counts))
-    for repo, color in zip(REPOS, COLORS):
+    for repo, color in zip(repos, COLORS):
         ax.barh(counts.index, counts[repo], left=left, height=0.6, color=color, edgecolor="#fcfcfb", linewidth=2,
-                label=repo.removeprefix("gitlab-org/").split("/")[-1])
+                label=repo.split("/")[-1])
         left += counts[repo]
     for y, total in enumerate(left):
         ax.text(total + left.max() * 0.01, y, f"{total:,.0f}  ({total / len(df):.0%})", va="center", color="#52514e")
-    fig.suptitle(f"What happened in GitLab — {len(df):,} merge requests, {SINCE} → {UNTIL}",
+    fig.suptitle(f"What happened in {TITLE} — {len(df):,} {UNITS}, {SINCE} → {UNTIL}",
                  x=0.01, ha="left", color="#0b0b0b", fontsize=12)
     ax.legend(loc="lower right", frameon=False, labelcolor="#52514e", title="repository", title_fontsize=9)
     ax.set_xlim(0, left.max() * 1.18)
