@@ -40,8 +40,8 @@ they can run the same evening.
 The abstract has been sent; the talk must keep each of its promises.
 
 1. Anthropic's Clio (2024) as the opening story — *a million conversations, read without reading them*.
-2. The same recipe found elsewhere — Google, open source — and at GitHub **five months before Clio**:
-   nobody coordinated.
+2. The same recipe found elsewhere — Google, LangChain, open source. *(The abstract as sent also
+   names GitHub; GitHub is no longer cited — Michael, 2026-10-23.)*
 3. The principle in one sentence (§3 — the abstract's wording, *« le LLM se contente de la nommer »*,
    is superseded on stage by *« lui donne du sens »*), and the consequence: the bill no longer
    follows corpus size.
@@ -58,7 +58,7 @@ The abstract has been sent; the talk must keep each of its promises.
 1. **The hook — a slightly conspiratorial wink.** The big AI labs sell tokens; to read *their own*
    logs, they use a recipe that spends almost none. Said in its honest form: the recipe is
    **published**, just **barely publicised**, and almost never applied to ordinary business text.
-2. **The proof it is real** — Clio, then the convergence (GitHub before Clio, Google, open source).
+2. **The proof it is real** — Clio, then the others who do the same (Google, LangChain, open source).
 3. **The recipe** — SECNA, coined for the talk and said so. Data science (embeddings, clustering)
    finds the structure; the LLM gives it meaning. E and C are nearly free; S and N cost tokens; skip
    S when you can.

@@ -242,3 +242,4 @@ CLAUDE.local.md
 .claude/skills/workplan
 .claude/skills/clean-verbatim
 .claude/skills/rtfm
+.claude/skills/duckdb

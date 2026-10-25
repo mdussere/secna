@@ -99,10 +99,13 @@ the name to remember for a set of **converging** solutions, not a paternity clai
 | **Clio** — Anthropic, Dec 2024 | ✅ | ✅ | ✅ k-means | ✅ | ✅ hierarchy + counts | full SECNA — the reference |
 | **Kura** — open source | ✅ | ✅ | ✅ recursive | ✅ | ✅ | full SECNA; *"a simple reproduction of the CLIO paper"* |
 | **Urania** — Google, COLM 2025 | ⚠️ summarises clusters; per-document step not established | ✅ | ✅ DP clustering | ✅ | ✅ DP histograms | SECNA-shaped, with differential privacy |
-| **GitHub** — 30 Jul 2024 | ❌ embeds raw feedback | ✅ BERT | ✅ HDBSCAN | ✅ GPT-4 | ✅ | **ECNA** — the cheap variant |
-| **LangSmith Insights** — LangChain | — | — | — | ✅ | ✅ | the counter-example: sample capped at 1,000 traces |
+| **GitHub** — 30 Jul 2024 | ❌ embeds raw feedback | ✅ BERT | ✅ HDBSCAN ("typically") | ✅ GPT-4 on the clusters | ◐ dashboards, top pain points per product; no hierarchy | **ECNA** — the cheap variant |
+| **LangSmith Insights** — LangChain | ✅ a summary of every trace | ? never mentioned | ✅ done by an LLM ("thinking model") | ✅ | ✅ categories → subcategories, distribution | the counter-example: an LLM on every step, sample capped at 1,000 traces |
 
 ### 5.1 Evidence — verified, do not re-litigate
+
+> **2026-10-23 — GitHub is no longer cited in the talk or the video** (Michael's decision). Its rows
+> below are kept as research record only.
 
 - **GitHub is dated 30 July 2024 — five months before Clio** — and mentions neither Clio nor
   Anthropic. Method, from the post: BERTopic (*"BERT's ability to generate high-quality document
@@ -118,11 +121,16 @@ the name to remember for a set of **converging** solutions, not a paternity clai
   overclaim, corrected.)
 - **Do NOT put OpenAI in the gallery.** Their ChatGPT-usage study (NBER w34255) is
   **classifier-first**: zero occurrences of "cluster", "embedding" or "k-means" in the paper.
-- **LangSmith Insights**: the public docs never mention Clio, and the analysed sample is capped at
-  **1,000 traces**. ⏳ The slide states only what the public documentation says; a stronger version
-  depends on a source that is not yet citable.
+- **LangSmith Insights** (public docs, checked 2026-10-20): *"create a brief summary of every trace"*;
+  *"the thinking model performs the clustering step"*; categories and subcategories with distribution
+  bars; embeddings never mentioned; the sample is capped at **1,000 traces**; Clio never mentioned.
+  → an LLM on every step, which is what the cap protects.
 
 ### 5.2 Say / don't say
+
+- *"Isn't this BERTopic?"* → *BERTopic is one convenient glue for E and C — I use it because it
+  makes a short notebook. It is replaceable: any embedding model plus any clustering does the job.
+  SECNA is the recipe, not the tool. GitHub says it used it; the others don't say.*
 
 - ✅ *"Nobody coordinated this."* · *"GitHub was doing it before Anthropic named it."* · *"Google added
   differential privacy."*

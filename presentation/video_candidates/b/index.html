@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SECNA — la vidéo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+  <canvas id="fx"></canvas>
+  <div id="layer"></div>
+  <div id="hud">
+    <div id="brand"><b>SECNA</b><span id="chap"></span></div>
+    <div id="rail"><i>S</i><i>E</i><i>C</i><i>N</i><i>A</i></div>
+    <div id="illus">exemple illustratif</div>
+    <div id="src"></div>
+  </div>
+</div>
+
+<div id="start">
+  <div class="start-inner">
+    <div class="start-k">Vidéo · ~20 min · sans voix</div>
+    <div class="start-t">Vos corpus grossissent.<br><span>Pas votre budget de tokens.</span></div>
+    <button id="startBtn" aria-label="Lancer la vidéo">&#9654;&nbsp; Lancer</button>
+    <div class="start-help">Espace : lecture / pause · ← → : ±5 s · Maj + ← → : ±30 s · [ ] : scène précédente / suivante · 1–5 : chapitres · F : plein écran · N : notes de narration · H : masquer l’interface</div>
+  </div>
+</div>
+
+<div id="ui">
+  <div id="bar"><div id="buf"></div><div id="prog"></div><div id="ticks"></div><div id="tip"></div></div>
+  <div id="row">
+    <button id="play" aria-label="Lecture / pause">&#9654;</button>
+    <span id="tc">00:00 / 00:00</span>
+    <span id="scn"></span>
+    <span class="sp"></span>
+    <button id="notesBtn" title="Notes de narration (N)">Notes</button>
+    <button id="fsBtn" title="Plein écran (F)">Plein écran</button>
+  </div>
+</div>
+<aside id="notes"><div class="nk">Narration — scène</div><div id="notesT"></div><div id="notesB"></div><div id="notesTime"></div></aside>
+
+<script src="js/engine.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/s0_s2.js"></script>
+<script src="js/s3.js"></script>
+<script src="js/s4.js"></script>
+<script src="js/s4_notebook.js"></script>
+<script src="js/s5.js"></script>
+<script src="js/timing.js"></script>
+<script>Engine.start();</script>
+</body>
+</html>

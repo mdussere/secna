@@ -8,7 +8,7 @@ download them from the links.
 | Who | What | Link |
 |---|---|---|
 | Anthropic (Tamkin et al., Dec 2024) | **Clio: Privacy-Preserving Insights into Real-World AI Use** — summarise each conversation, embed, cluster, name the clusters, build a hierarchy. Published cost: **$48.81 for 100,000 conversations**. | [arXiv:2412.13678](https://arxiv.org/abs/2412.13678) · [research page](https://www.anthropic.com/research/clio) |
-| GitHub (30 Jul 2024) | *How GitHub harnesses AI to transform customer feedback into action* — BERT embeddings → HDBSCAN (via BERTopic) → GPT-4 writes the summaries. **Five months before Clio**, and it does not mention it. | [github.blog](https://github.blog/engineering/how-github-harnesses-ai-to-transform-customer-feedback-into-action/) |
+| GitHub (30 Jul 2024) — *not cited in the talk (decided 2026-10-23)* | *How GitHub harnesses AI to transform customer feedback into action* — BERT embeddings → HDBSCAN (via BERTopic) → GPT-4 writes the summaries. **Five months before Clio**, and it does not mention it. | [github.blog](https://github.blog/engineering/how-github-harnesses-ai-to-transform-customer-feedback-into-action/) |
 | Google Research (Liu et al., COLM 2025) | **Urania: Differentially Private Insights into AI Use** — the same shape with differential-privacy guarantees. Cites Clio as its non-private **baseline**, not as a pipeline it rebuilt. | [arXiv:2506.04681](https://arxiv.org/abs/2506.04681) |
 | Kura (open source) | Describes itself as *"a simple reproduction of the CLIO paper"*. | [github.com/567-labs/kura](https://github.com/567-labs/kura) · [usekura.xyz](https://usekura.xyz/) |
 | OpenClio (open source) | Two independent reimplementations. | [Phylliida/OpenClio](https://github.com/Phylliida/OpenClio) · [R0bk/openclio](https://github.com/R0bk/openclio) |
@@ -18,7 +18,7 @@ download them from the links.
 
 | Who | What | Link |
 |---|---|---|
-| LangChain — LangSmith Insights (Oct 2025) | Groups agent traces and names the groups; the analysed sample is capped at **1,000 traces**. The public docs never mention Clio. | [docs](https://docs.langchain.com/langsmith/insights) · [launch post](https://www.langchain.com/blog/from-traces-to-insights-understanding-agent-behavior-at-scale) · [announcement](https://blog.langchain.com/insights-agent-multiturn-evals-langsmith/) |
+| LangChain — LangSmith Insights (Oct 2025) | Summarises **every trace** with an LLM, then a "thinking model" performs the clustering into categories and subcategories (embeddings never mentioned); the analysed sample is capped at **1,000 traces**. The public docs never mention Clio. | [docs](https://docs.langchain.com/langsmith/insights) · [launch post](https://www.langchain.com/blog/from-traces-to-insights-understanding-agent-behavior-at-scale) · [announcement](https://blog.langchain.com/insights-agent-multiturn-evals-langsmith/) |
 
 ## Deliberately *not* in the gallery
 

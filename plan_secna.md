@@ -1,194 +1,194 @@
 ---
-**Status**: 🧪 Active — deck dropped 2026-10-09; intent ✅ (3.1); structure in Markdown (3.2), awaiting agreement
-**Date**: 2026-10-09 (updated 2026-10-20)
+**Status**: 🧪 Active — **storyboard-first** (2026-10-23): the talk and the video are told from one five-section storyboard; the notebook comes next and shapes it; slide decks archived
+**Date**: 2026-10-09 (restructured 2026-10-23)
 **Priority**: High — **meetup on Thursday 19 November 2026** (date confirmed)
 **Maintained**: Yes
 ---
 
-# SECNA — talk + notebook for Generative AI Bordeaux (workline `secna`)
+# SECNA — talk, video and notebook for Generative AI Bordeaux (workline `secna`)
 
 ## Overview
 
-A talk for the **Generative AI Bordeaux** meetup, in French, 15–30 min, for an audience of
-product managers and developers: **« Vos corpus grossissent. Pas votre budget de tokens. »**
+A talk for the **Generative AI Bordeaux** meetup, in French, ~20 min, for product managers and
+developers: **« Vos corpus grossissent. Pas votre budget de tokens. »** — and the same story as a
+~20-min recorded video.
 
 The thesis: the real question is not *what would I do with unlimited tokens* but *how do I process
 corpora that keep growing, on the budget I have*. The answer is a recipe several teams reached
-independently (Anthropic's Clio, GitHub, Google's Urania, Kura): **S**ummarise · **E**mbed ·
-**C**luster · **N**ame · **A**ggregate — **SECNA**. Data science finds the structure; the LLM gives
-it meaning. E and C are nearly free, so the bill follows the number of clusters, not the number of documents.
+(Anthropic's Clio, Google's Urania, LangChain's LangSmith Insights, open-source reproductions):
+**S**ummarise · **E**mbed · **C**luster · **N**ame · **A**ggregate — **SECNA**. Data science finds
+the structure; the LLM gives it meaning; the bill follows the number of groups, not of documents.
 
-This repository holds everything public about the talk: the **deck**, a **notebook** (≈100–200
-lines) running SECNA end to end on a **public corpus**, and the **references**. It is private until
-the material is ready, then made public; the deck's QR code points here.
+**The form is a storyboard, not slides.** Five sections, each making one point with its own animated
+visual (HTML / SVG / JS). The same storyboard serves:
+- **live** at the meetup — presenter-driven; the notebook shown as an animation with a QR code to the
+  real one (or run live);
+- **recorded** — the same scenes driven by a voice-over (a natural French TTS voice).
 
-**Done means**: the repo is public, the notebook runs from a clean clone in one command and shows
-the recipe end to end with its token count, the deck is exported (PDF + HTML) with no placeholders left, and
-every factual claim on a slide traces to a reference in `references/`.
+The **notebook** runs SECNA end to end on a public developer corpus — **what happened in a large
+open-source code base over three months**, read from its merge requests (corpus and run in workline
+[`secna_notebook`](worklines/secna_notebook/plan_secna_notebook.md)) — and its real outputs (cluster
+names, themes, measured bill) feed the storyboard.
 
-## Workline directory layout
+**Done means**: the repo is public; the notebook runs from a clean clone in one command and shows the
+recipe end to end with its measured token count; the storyboard is built as an animated HTML piece
+(live and recorded versions) with no placeholder left; every factual claim traces to `references/`.
+
+## Directory layout
 
 - Plan (this file): `plan_secna.md`
-- `presentation/` — the Marp deck (`deck.md`, `assets/`), exports under `dist/` (gitignored)
-- `notebook/` — the SECNA notebook + a script to fetch the corpus (data gitignored)
-- `references/` — `BIBLIO.md` (links) + the preparation notes; PDFs gitignored
+- `references/` — intent, storyboard, preparation record, `BIBLIO.md`. Docs keep the step number they
+  were written under (e.g. `0301_01` intent, `0601_01` storyboard) — no renumbering.
+- `worklines/<name>/` — sub-worklines with their own plan and docs (`secna_notebook`)
+- `notebook/` — the SECNA notebook + a script to fetch the corpus (data and outputs gitignored)
+- `presentation/` — the animated storyboard (to build); `presentation/design/` (palette, style
+  proposals); archived deck tooling (Marp theme + build, PPTX generator) and the first video attempt
 
 ## Goals ✅
 
-- A notebook a developer can run in an afternoon: fetch a public corpus → S(optional)·E·C·N·A →
-  named themes + **measured** token/cost figures.
-- A deck that lands two takeaways in one talk: **the economics** for PMs, **the recipe** for devs.
-- A public repo that is self-explanatory from the README alone (the QR code's landing page).
+- A storyboard of five sections that a mixed room follows and remembers: **the economics** for PMs,
+  **the recipe** for developers.
+- A notebook a developer can run in an afternoon on a corpus everyone understands (the merge
+  requests of a well-known open-source project).
+- A public repo that is self-explanatory from its README (the QR code's landing page).
 
 ## Non-goals ❌
 
-- No product, no library, no package — a notebook and a deck.
-- **A personal talk, not an employer talk.** The speaker presents in his own name, not on behalf of
-  his employer — but where he comes from is not hidden. The **only** employer mention allowed is the
-  **speaker identification line** (*name — GenAI Center of Excellence, employer*): deck cover, abstract
-  speaker line, the meetup's own programme. Everywhere else — slide content, notebook, README,
-  references, code, commit history — the employer is not cited, explicitly or by allusion, and
-  nothing is presented as the employer's work or position. No employer branding (logo, fonts,
-  colours, backgrounds, emotes).
-- No employer-internal material of any kind: no internal data, figures, use cases, architecture,
-  or product names. Public sources and public corpora only.
-- No benchmark tables or algorithm names on the slides (UMAP, HDBSCAN, BERTopic stay in the Q&A).
+- **No slide deck** as the main support (decided 2026-10-23 — *« ça, personne n'y croit »*).
+- No humour, no characters, no illustration for its own sake — a serious tech talk.
+- No product, no library, no package — a notebook and a storyboard.
+- **A personal talk, not an employer talk.** The **only** employer mention allowed is the **speaker
+  identification line** (*name — GenAI Center of Excellence, employer*): opening frame, abstract
+  speaker line, the meetup's programme. Everywhere else — content, notebook, README, references,
+  code, commit history — the employer is not cited, explicitly or by allusion, and nothing is
+  presented as the employer's work or position. No employer branding.
+- No employer-internal material of any kind. Public sources and public corpora only.
+- No algorithm names on screen (they stay in the Q&A and the README).
 
-## Key decisions / assumptions
+## Key decisions
 
-- **Acronym: SECNA** — coined for the talk, said so on stage (the field has no canonical name).
-- **Convergence, not lineage**: GitHub's pipeline (July 2024) predates Clio (Dec 2024). Never say
-  "they all copied Clio"; never put OpenAI in the gallery (their usage study is classifier-based).
-- **Running order** (20-min assumption): question → Clio → SECNA → **cost curve** → gallery →
-  "only for the giants?" (curve reused) → **notebook** → use cases + callback → cliffhanger video.
-- **Corpus**: a large public developer corpus (Linux-kernel commits/PRs is the lead candidate) —
-  the x-axis of the cost curve can honestly run to "the whole history".
-- **Commits use the personal identity** (`michael.dussere@gmail.com`) — this history goes public.
-- **Deck toolchain**: the Marp slide-deck tooling already used elsewhere (it produces good decks),
-  but with a **de-branded copy of its theme CSS** living in `presentation/` — every employer-specific
-  element (logo, brand fonts, colours, backgrounds, emotes, footer) removed or replaced by neutral ones.
-  The branded theme itself never enters this repo.
-- **This plan names no employer on purpose** — it is itself published. The word list used by the
-  audit (employer name, internal names, channels, page IDs, paths) is kept **outside** this repo.
+- **Storyboard, five sections** (2026-10-23) → [`references/0601_01_video_narrative_storyboard.md`](references/0601_01_video_narrative_storyboard.md):
+  **L'impasse** · **Clio** · **SECNA** · **Les gros, et nous** (→ the notebook, ≥ 5 min) ·
+  **Ma recette** (→ the agent cliffhanger).
+- **Corpus** (revised 2026-10-24): ~~the Linux kernel~~ (*old school*, obscure themes) → the merge
+  requests of a large, very active open-source code base over three months — *« qu'est-ce qui s'est
+  passé dans <projet> ces derniers mois ? »*; chosen and run in
+  [`secna_notebook`](worklines/secna_notebook/plan_secna_notebook.md).
+- **The notebook shapes the storyboard**: live, the notebook part is an animation with a QR code to the
+  real notebook (possibly run live); recorded, the same animation.
+- **Palette**: *Charbon & citron vert* (red only for tokens). **Visual style**: to choose (Step 3.3).
+- **Acronym SECNA**, coined for the talk and said so. **GitHub not cited**. Convergence, not lineage;
+  OpenAI not in the gallery. **BERTopic** off screen (a replaceable glue).
+- **Voice**: a TTS model with natural French intonation (Step 5.2) — the browser voice is ruled out.
+- **Commits use the personal identity**. **This plan names no employer on purpose**; the audit word
+  list lives outside this repo.
 
 ## Risks / constraints
 
-- **Git history is permanent once public.** Anything that must not be published never enters this
-  repo — not even temporarily. Mitigation: Step 5 audits the full history before the visibility flip.
-- **Paper PDFs are mostly copyrighted** → gitignored; `BIBLIO.md` carries the links.
-- **Slot length unknown** (15/20/30 min) — the gallery collapses to one slide at 15 min.
-- **Fixed date, 30 days out** (from 2026-10-20). The notebook feeds the deck (measured cost curve)
-  and the README feeds the QR code: Step 2 is on the critical path, not a side task.
+- **Git history is permanent once public** — Step 7 audits the full history before the visibility flip.
+- **Fixed date** (19 Nov): the notebook is on the critical path — its outputs feed the storyboard.
+- **Corpus size**: fetch only the chosen period through the public API and keep the data out of git.
+- **TTS quality**: a voice Michael would not put his name on is worse than captions — blind test first.
 
-## 📅 Calendar — back-planned from Thu 19 Nov 2026 (proposed, to confirm)
+## 📅 Calendar — back-planned from Thu 19 Nov 2026 (proposed)
 
 | By | Milestone | Steps |
 |---|---|---|
-| Fri 23 Oct | Intent written and validated; corpus chosen and fetchable; slot length asked of the organisers | 3.1 · 2.1 |
-| Fri 30 Oct | Notebook runs end to end; **measured** cost curve produced | 2.2–2.4 |
-| Fri 6 Nov | Deck v1 complete (structure + slides, curve in); first timed run-through | 3.2 · 3.3 |
-| Tue 10 Nov | Closing video in; README written; QR code on the slide | 3.4 · 3.5 · 4 |
-| Fri 13 Nov | Deck exported and reviewed slide by slide; pre-publication audit done | 3.6 · 5.1–5.4 |
-| Tue 17 Nov | Sign-off → **repo public**, QR code checked from a phone; final rehearsal | 5.5 |
-| Thu 19 Nov | **Meetup** (18:30) — PDF + standalone HTML on a USB key as fallback | — |
+| Tue 27 Oct | Storyboard sections deepened; visual style chosen | 3.2 · 3.3 |
+| Fri 30 Oct | Notebook runs end to end on the chosen corpus; measured bill | 4 |
+| Wed 4 Nov | Storyboard final with the notebook's real outputs; narration script | 3.4 |
+| Mon 9 Nov | Animated storyboard v1 (five sections); voice chosen | 5.1 · 5.2 |
+| Fri 13 Nov | Recorded version with voice; README; pre-publication audit | 5.3 · 6 · 7.1–7.4 |
+| Tue 17 Nov | Sign-off → **repo public**, QR checked from a phone; rehearsal | 7.5 |
+| Thu 19 Nov | **Meetup** (18:30) — offline copy of the HTML as fallback | — |
 
 ## 🚦 Green light protocol
 
 - Planning/docs only until the user explicitly says **"🟩 go Step N"**.
 - If scope changes materially, update this plan before proceeding.
 
-## Plan steps (no execution until green light)
+## Plan steps
 
-### Step 1 — Scaffold + bring the existing material in
-**Status**: ✅ Done (2026-10-09) — build check moved to 3.0
-- [x] 1.1 Decided: shared research material is **copied**, not moved — the full bibliography stays in
-      the source workspace; this repo gets a **short public list** of what the talk cites. The long
-      prior-art notes stay there (they compare the literature to non-public work).
-      *Deck theme: de-branded copy of the existing theme — see Step 3.0.*
-- [x] 1.2 `presentation/`, `notebook/`, `references/` created; `.gitignore` covers Marp outputs,
-      `references/pdf/`, `notebook/data/`, `notebook/out/`.
-- [x] 1.3 Deck source in `presentation/` (`deck.md` + `assets/img/courbe_cout.png`). On the way:
-      `theme: secna` (the theme itself is Step 3.0 — **the deck does not build until then**); the
-      LangSmith slide states only what LangSmith's public docs say (1,000-trace cap; Clio never
-      mentioned) — a stronger version waits for a citable source; TODOs renumbered to 3.2 / 3.3.
-- [x] 1.4 `references/BIBLIO.md` (public, every source the talk relies on, arXiv IDs verified against
-      the arXiv API), `references/0104_01_talk_preparation.md` (decisions, scrubbed), `references/0104_02_abstract_fr.md`
-      (the abstract as sent to the organisers).
-- [x] 1.5 Source workspace: the deck replaced by a pointer stub; the preparation record and the
-      abstract carry a banner pointing here (originals frozen there).
-- **Acceptance**: ✅ the word-list scan over the tree finds only the two allowed speaker lines (deck
-  cover, abstract). The PNG carries no metadata beyond the plotting software. ✅ builds here (3.0).
+### Step 1 — Scaffold + references
+**Status**: ✅ Done (2026-10-09) — folders, `.gitignore`, `references/BIBLIO.md` (arXiv IDs verified),
+the scrubbed preparation record [`0104_01`](references/0104_01_talk_preparation.md), the abstract as sent
+[`0104_02`](references/0104_02_abstract_fr.md). Word-list scan clean.
 
-### Step 2 — The notebook
+### Step 2 — The talk's intent
+**Status**: ✅ Done (2026-10-20) → [`references/0301_01_talk_intent.md`](references/0301_01_talk_intent.md)
+— purpose, room, take-aways, the abstract's promises, tone. Key sentence: promise *« Comprendre tout
+un corpus sans le lire en entier »* + means *« La data science trouve la structure, le LLM lui donne
+du sens »*. Audience personas for reviews: [`0302_02`](references/0302_02_audience_personas.md).
+
+### Step 3 — The storyboard
+**Status**: 🧪 In progress
+- [x] 3.1 Five sections, v2 (serious tech-talk tone) → [`0601_01`](references/0601_01_video_narrative_storyboard.md);
+      decisions: voice-over, ~20 min with ≥ 5 min on the notebook, HTML / SVG / JS, GitHub not cited.
+- [ ] 3.2 Deepen each section (what is shown, what is said, the transitions) — to be revised once the
+      notebook's outputs exist.
+- [ ] 3.3 **Visual style**: 3–4 proposals rendered on the same scene → [`presentation/design/styles.html`](presentation/design/styles.html); Michael chooses.
+- [ ] 3.4 Narration script, written for the ear (French, ~20 min at ~140 words/min).
+- [ ] 3.5 **New approach (2026-10-23)** — stop steering the form: the raw material only (story, five sequences, explanations, facts, sources; no style or layout guidance) → [`references/0305_01_video_material.md`](references/0305_01_video_material.md); three context-free agents get the same short prompt (*« Prépare une vidéo qui ne soit pas des slides, moderne, impactful, ~20 min, avec tout ce matériel »*) and work in parallel → `presentation/video_candidates/{a,b,c}/`; Michael chooses.
+- **Acceptance**: each section makes one point with its own visual; Michael validates the storyboard
+  and the script.
+
+### Step 4 — The notebook
+**Status**: 📋 Moved to its own workline (2026-10-23) →
+[`worklines/secna_notebook/plan_secna_notebook.md`](worklines/secna_notebook/plan_secna_notebook.md)
+— dataset choice, fetch, E · C · N · A notebook (no S, basic libraries only), run review, outputs for
+the storyboard. Its former checklist (fetch, cells ↔ letters, measured bill, outputs) is carried over
+there.
+- **Acceptance** (unchanged in spirit): fresh clone → one documented command → the notebook runs top to
+  bottom and answers *what happened in <project> over <period>?*
+
+### Step 5 — Build the animated storyboard
 **Status**: ⏳ Pending
-- [ ] 2.1 Choose and fetch the corpus (script, not committed data); size it for a laptop run.
-- [ ] 2.2 Five cells ↔ five letters (S optional, E, C, N, A); ≤ 200 lines.
-- [ ] 2.3 Print the tokens/cost of the run ("LLM on the groups only") and what "LLM on every document"
-      would have cost. *(Decided 2026-10-20: the deck's curve is illustrative, not measured — 3.3.)*
-- [ ] 2.4 Provider-agnostic LLM/embedding calls (env vars), documented in the notebook header.
-- **Acceptance**: fresh clone → one documented command → notebook runs top to bottom and writes the
-  cost-curve figure.
+- [ ] 5.1 The five sections in HTML / SVG / JS: one scene per section, a camera, the chosen style; the
+      notebook part as an animation of the real run + QR code; **live mode** (presenter-driven).
+- [ ] 5.2 **Choose a TTS model** with natural French intonation over long passages: shortlist (leads,
+      to verify: hosted expressive TTS such as Microsoft MAI-Voice-2 or Fish Audio S2.1 Pro; open models
+      such as Kokoro's French voice or a bilingual EN–FR model); **blind listening test** by Michael on
+      one 2-min excerpt rich in technical words; criteria: prosody, pronunciation of English terms,
+      licence, cost, timestamps for syncing.
+- [ ] 5.3 **Recorded mode**: the voice drives the scenes (one audio file per beat).
+- **Acceptance**: no numbered steps, no text panels; Michael watches both modes end to end.
 
-### Step 3 — The deck
-**Status**: 🧪 Restarted from scratch (2026-10-09) — the previous deck (v2, 13 slides) was dropped;
-the theme and the build stay. Previous version recoverable from the source workspace's git history.
-*Substeps renumbered 2026-10-20 to fit the doc numbering (3.A → 3.1, 3.B → 3.2, old 3.1–3.4 → 3.3–3.6).*
-- [x] 3.0 ✅ **Neutral theme** (2026-10-09): `presentation/theme/secna.css` — written compact (only
-      what the deck uses: cover / impact / clip, chapter bar, cols, cards) rather than stripped from
-      the original: no logo, no brand background images, no emotes; **Inter + IBM Plex Mono** (OFL,
-      licences beside the woff2, embedded so the HTML renders offline); neutral blue for titles and
-      chrome; red kept **only** for meaning ("costs tokens", slide 4). Self-contained build:
-      `presentation/package.json` (marp-cli 4.5.1 locked) + `build.mjs <html|pdf|png|standalone|all>`
-      → `dist/deck.pdf`, `dist/deck-standalone.html` (0.3 MB), `review/deck.NNN.png`. All 13 slides
-      read back; fixed the page-number offset and the missing gap under card/column blocks.
-- [x] 3.1 ✅ **Intent, from scratch** — what the talk is for, for whom, what they leave with; written
-      before any slide. The preparation record in `references/` is input, not the answer.
-      ✅ **Validated 2026-10-20** (open points §10 carried into 3.2) → [`references/0301_01_talk_intent.md`](references/0301_01_talk_intent.md) — purpose,
-      room, take-aways per audience (with a test each), the abstract's promises, story, tone, non-goals,
-      success signals, lessons from the dropped draft, 4 open points. **Acceptance**: Michael validates
-      it (and settles or defers §10) before 3.2 starts.
-- [ ] 3.2 Structure + slide list derived from 3.1 — **in Markdown first, no deck generation until
-      agreed**, in two passes: (a) parts, number of slides, one line per slide; (b) the content of
-      each slide. 🧪 (a) **adopted: proposal B v2** → [`references/0302_06_talk_structure_letters.md`](references/0302_06_talk_structure_letters.md)
-      — one slide per letter, 24 slides, ~17 min (proposal A, v3, kept as the explored alternative in
-      [`0302_01`](references/0302_01_talk_structure.md); reviews `0302_03`–`0302_07`). **Acceptance**: Michael agrees (a), then (b),
-      before the deck is generated.
-- [ ] 3.3 Cost curve as a **slide graphic** (illustrative, near-log axis 1k → 1M documents, an arrow that
-      climbs vs a flat line), neutral palette of 3.0; Clio's published figures are the only numbers.
-- [ ] 3.4 Insert the repo QR code + URL.
-- [ ] 3.5 Insert the closing video (60–90 s, unbranded, explains nothing).
-- [ ] 3.6 Export PDF + standalone HTML; render every slide to PNG and review each one.
-- **Acceptance**: no `TODO` / placeholder left in `deck.md`; every slide image reviewed; no employer
-  logo, font, colour or name visible on any slide.
-
-### Step 4 — README
+### Step 6 — README
 **Status**: ⏳ Pending
-- [ ] 4.1 Tagline, the SECNA idea in five lines, how to run the notebook, links to the deck and refs.
-- **Acceptance**: someone who scanned the QR code understands the recipe and can run it without the talk.
+- [ ] 6.1 Tagline, SECNA in five lines, how to run the notebook, links to the video and references.
+- **Acceptance**: someone who scanned the QR code understands the recipe and can run it.
 
-### Step 5 — Pre-publication review + make public
+### Step 7 — Pre-publication review + make public
 **Status**: ⏳ Pending — 🔴 **mandatory gate before the visibility flip**
-- [ ] 5.1 **Clear review that nothing is sensitive or compromising**: every file in the tree is read,
-      not just grepped — deck, notebook, README, references, plan.
-- [ ] 5.2 **No employer mention beyond the speaker identification line**: the talk is given in a
-      personal capacity — the employer is not cited in the content, explicitly or by allusion
-      (internal tool names, colleagues, internal channels, URLs, page IDs, local paths), and nothing
-      reads as the employer's work, data or position.
-- [ ] 5.3 **No employer branding**: theme CSS, fonts, images, rendered exports, video.
-- [ ] 5.4 Audit the **whole history** (`git log -p --all`) and commit metadata (author names/emails)
-      against the external word list; rewrite or re-create the repo if anything slipped.
-- [ ] 5.5 Final sign-off by Michael, then flip the repo to public.
-- **Acceptance**: 5.1–5.4 clean and recorded in the time log; repo public; QR code resolves.
+- [ ] 7.1 Every file in the tree read (not just grepped) — nothing sensitive or compromising.
+- [ ] 7.2 No employer mention beyond the speaker identification line; nothing reads as the
+      employer's work, data or position.
+- [ ] 7.3 No employer branding (styles, fonts, images, exports, video).
+- [ ] 7.4 Audit the **whole history** (`git log -p --all`) and commit metadata against the external
+      word list.
+- [ ] 7.5 Final sign-off by Michael, then flip the repo to public.
+- **Acceptance**: 7.1–7.4 clean and logged; repo public; QR code resolves.
+
+### Archived — the slide-deck track (superseded 2026-10-23)
+Kept as record, not maintained: the Marp neutral theme and build (`presentation/theme/`, `build.mjs`,
+`deck.md` v1); structure proposals A and B and their persona reviews (`references/0302_01`–`0302_08`);
+the slide proposals (`0302_09`); the PowerPoint generator (`presentation/pptx/`); the first video
+attempt (`presentation/video/secna_video.html`, *« des slides, pas une vidéo »*); palette and
+graphic-direction explorations (`presentation/design/`). What carries over: the intent, the cost
+figures, the five-letter explanation, the palette, the review personas.
 
 ---
 
 ## Progress tracking ✅
 
-- ✅ Step 1 — Scaffold + bring the existing material in (build check → 3.0)
-- ⏳ Step 2 — The notebook
-- 🧪 Step 3 — The deck (3.0 theme ✅; 3.1 intent ✅; 3.2 structure drafted; 3.3–3.6 pending)
-- ⏳ Step 4 — README
-- ⏳ Step 5 — Pre-publication audit + make public
+- ✅ Step 1 — Scaffold + references
+- ✅ Step 2 — The talk's intent
+- 🧪 Step 3 — The storyboard (3.1 ✅; 3.2–3.4 pending)
+- 📋 Step 4 — The notebook → workline `secna_notebook`
+- ⏳ Step 5 — Build the animated storyboard (live + recorded, voice)
+- ⏳ Step 6 — README
+- ⏳ Step 7 — Pre-publication review + make public
+- 📦 Archived — the slide-deck track
 
 ---
 
@@ -198,6 +198,21 @@ the theme and the build stay. Previous version recoverable from the source works
 
 | Timestamp (`date`) | Update |
 |---|---|
+| Fri Oct 23 22:52 CEST 2026 (notebook) | **Step 4 moved to workline `secna_notebook`** (Michael) → `worklines/secna_notebook/plan_secna_notebook.md`, drafted and reviewed, awaiting 🟩. **Corpus revised**: the Linux kernel dropped (*old school*, obscure themes, no PRs) → merged PRs of a very active, sprawling, GenAI-related open-source project, chosen on evidence in that workline's Step 1. Notebook: E · C · N · A, **no S**, basic libraries only (pandas, raw embeddings, k-means, no BERTopic / UMAP). |
+| Fri Oct 23 2026 (candidates) | **Three video candidates delivered**, all open without JS errors (checked in headless Chrome): **A** 21:10, 41 scenes, offline (no CDN), C = voice-over script on screen · **B** 19:58, 42 scenes, N = narration panel, durations in `js/timing.js`, `?rec` for capture · **C** 20:41, 40 scenes, T = teleprompter, `?audio=` sync. All: ~5 min of notebook as an animated mock, invented outputs and function names marked *illustratif*. Awaiting Michael's choice. |
+| Fri Oct 23 2026 (parallel) | **Change of method** (Michael: *the more instructions and examples, the more it reproduces them and loses what made the first unprepared videos good*). Style explorations stopped (variations deleted; the galactic sequence kept in `presentation/design/` as record). Raw material written → `references/0305_01_video_material.md` (~2,500 words, content only). **Three agents launched in parallel**, no context, same short prompt → `presentation/video_candidates/a|b|c/`. |
+| Fri Oct 23 2026 (variations) | **3.3 — styles 1 (tableau blanc) and 2 (schéma d'ingénieur) kept** (Michael). Six variations on the same scene → `presentation/design/styles_variations.html`: 1a tableau blanc feutres · 1b tableau noir craie (stays in the charcoal palette) · 1c carnet d'ingénieur (squared paper, ink) · 2a schéma sombre · 2b schéma clair · 2c **schéma annoté** (hybrid: the precise diagram, annotated by hand in lime). Awaiting Michael's choice. |
+| Fri Oct 23 2026 (styles) | **3.3 — four visual styles** rendered on the same SECNA scene (kernel commits, illustrative) → `presentation/design/styles.html`: **tableau blanc** (traced by hand, pedagogical, live-friendly), **schéma d'ingénieur** (dark system diagram, data flowing on a wire, gauges as instruments), **terminal / notebook** (the story is what the program prints — continuous with the notebook section), **éditorial / data journalisme** (thesis title + a chart that builds + annotations). Each with what it carries, why it works, its limit; three combinations suggested. Awaiting Michael's choice. |
+| Fri Oct 23 2026 (restructure) | **Plan restructured — storyboard-first** (Michael: *« structure plus slides, personne n'y croit »*). The talk and the video both come from the five-section storyboard; the **notebook comes next and shapes it**; corpus decided: **the Linux kernel, last six months** (commits and merged pull requests); live: notebook shown as an animation + QR code (or run live). Steps renumbered: 1 scaffold ✅ · 2 intent ✅ · 3 storyboard · 4 notebook · 5 build (live + recorded, TTS) · 6 README · 7 pre-publication review; the slide-deck track archived. Older log rows keep their old step numbers. Visual style proposals launched (3.3). |
+| Fri Oct 23 2026 (decisions) | **6.1 decisions** (Michael): voice-over narration; ~20 min with **> 5 min on the notebook** (cell by cell on the real run — depends on Step 2); HTML / SVG / JS; **GitHub not cited** — removed from the video, the deck generator (slide 14 table, notes), the adopted structure, the proposals, the intent, this plan and BIBLIO (marked not cited; evidence kept in the preparation record). New **6.3: choose a TTS model** with natural French intonation (shortlist + blind listening test). Note: the abstract as sent still names GitHub. |
+| Fri Oct 23 2026 (later) | **6.1 storyboard v2** (Michael: v1 *too much* — no humour, no characters, no illustration; a tech talk). Rebuilt on his five sections: **L'impasse** (corpora vs context windows on a log scale; the loop — data grows with the models; not a race, not the same scale) · **Clio** (Dec 2024, the real case of technical impossibility, structure + meaning) · **SECNA** (the pipeline block by block, a cost gauge per block) · **Les gros, et nous** (Urania, LangSmith — **GitHub dropped**; the cost curve; can I do it too? → the notebook) · **Ma recette** (without S, why a table, limits, tomorrow, *et si on mettait des agents dessus ?*). Open: narration, length, build, GitHub in the deck. |
+| Fri Oct 23 2026 | **Step 6 opened — the video, restarted from the intent.** Michael: the first attempt is *slides, not a video* (24 numbered steps, a 1-to-24 bar, text panels left on screen; the synthetic voice removed as "terribly horrible"). New approach → `references/0601_01_video_narrative_storyboard.md`: the video's intent, a narrative frame in **five sections** (La pile → Le mur → La recette des géants → Chez vous → Et si quelqu'un parcourait la carte ?), two story devices (a hero document followed from start to end, a bill meter as the tension), a shot-by-shot storyboard. 5 open questions (narration, length, hero, characters, build). |
+| Wed Oct 21 11:30 CEST 2026 | **Narrated video of the talk** (Michael: a modern ~20-min video, not a slide sequence, palette kept, creative freedom, no MP4 needed) → `presentation/video/secna_video.html`: one HTML page, 24 chapters, ~3,200-word French script (first person, public facts only, same structure and decisions as the deck); one continuous particle world (piles → sphere → groups → names → treemap), kinetic type, bill bar, self-drawing curve, typed pseudo-notebook, agent teaser marked *illustratif*; voice = the browser's French speech synthesis, synced step by step, with subtitles, chapters, pause; `#s=N` opens chapter N silently (review). Key scenes captured with puppeteer and read back; fixes: frames under particles, treemap vs zoom card, highlight on large type, agent bubbles. |
+| Wed Oct 21 10:05 CEST 2026 | **Visual identity, step 1 — palette chosen: « Charbon & citron vert »** (Michael, from six proposals in `presentation/design/palettes.html`): dominant `#18191C`, light `#F3F4F2`, emphasis `#5E8C00` (text on light) / `#C6F432` (on dark, fills, marker), **cost `#EF4444` (tokens only)**, groups `#7C5CFF` · `#06B6D4` · `#F59E0B`. Rule: lime never as text on white. The three graphic directions (A constellation, B editorial, C gradients) redone in this palette for the next choice. |
+| Wed Oct 21 02:15 CEST 2026 | **Deck v1 generated — then switched to native PowerPoint** (Michael: the Marp render "looks ugly"). Marp v1 (`presentation/deck.md`, 24 slides, recommended picks) went through two rounds of a single balanced reviewer (7/10 → 8/10; fixes: group count 11/12, caption 16, colour rule, letter-slide alignment, sources, closing line). Michael then asked for **PowerPoint with a standard modern theme, not the employer's**: `presentation/pptx/build_deck.js` (pptxgenjs 4.0.1 pinned in `package.json`, structured deck: theme, layouts, sections; Calibri; ink / teal, red only for tokens; sphere, bill bar, treemap and table as native shapes, the curve as a native chart) → `dist/secna.pptx` (not committed). Validated (skill validator: all passed) and rendered through PowerPoint → PDF → images, every slide read back. **Decision to record**: the deck toolchain is now PowerPoint; the `secna-deck` skill (Marp) needs updating. |
+| Tue Oct 20 22:10 CEST 2026 | **3.2 (b) — slide proposals** → `references/0302_09_slide_proposals.md` (~6,000 words): visual grammar (red = tokens, the letter template, cost badge / bill bar, recurring props: piles, sphere, curve); 24 slides × 3 proposals (layout, on-screen French text, reading path, speaker gist, needs) + a recommendation each; pending fresh-review items shown as ⏳ variants only; 11 theme components and 9 images to add. Next: Michael's picks, then a first deck generated locally with `secna-deck`. |
+| Tue Oct 20 21:40 CEST 2026 | **Decided (Michael): BERTopic stays off the slides** — a convenient, replaceable glue for E + C (used in the notebook to keep it short), not part of the recipe; only GitHub names it publicly. Q&A answer added to the preparation record §5.2. |
+| Tue Oct 20 21:30 CEST 2026 | **3.2 — slide 14 becomes a table** (Michael): a row per solution (Clio, GitHub, Google Urania, LangSmith Insights), a column per letter. Checked against public sources: GitHub = raw text → BERTopic → GPT-4 on the clusters, A partial (dashboards, top pain points, no hierarchy); **LangSmith Insights docs: an LLM summary of every trace and an LLM ("thinking model") doing the clustering, ≤ 1,000 traces, embeddings never mentioned**. `BIBLIO.md` and the preparation record updated. Also: Laurent's signals table restored in `0302_08` §2. |
 | Tue Oct 20 21:05 CEST 2026 | **3.2 — fresh review of B v2** (4 new agents, no history) → `references/0302_08_fresh_review_b_v2.md`. All would come; Camille ~70 % happy, Laurent "mostly senior — probably". Slide 8 (S, 92 %) is the best slide. Decisive: slide 17 (output + one measured point). Not working: slide 14 (jargon, LangSmith, BERTopic missing). Also: ending vs Monday action, limits slide too packed, abstract overclaims, accuracy batch from Yanis. 6 decisions for Michael. |
 | Tue Oct 20 20:40 CEST 2026 | **3.2 — proposal B adopted, B v2 applied** (Michael): E keeps its own slide (projection on a sphere); S stays *Summarise* but is presented as data preparation (summarise, translate, strip wording, bring forward meaning) — my recipe does a light, LLM-free version; slide 21 *the only LLM step that grows*; video 30 s (one question, one answer), limits slide 45 s; notebook slide open until Step 2; **cost curve illustrative** (near-log 1k → 1M, an arrow) — *Done means*, 2.3 and 3.3 updated accordingly. 24 slides, ~17 min. Fresh 4-persona review launched (new agents, no history). |
 | Tue Oct 20 20:15 CEST 2026 | **3.2 — concurrent proposal B** (Michael: rather one slide per letter, like an image-led explainer) → `references/0302_06_talk_structure_letters.md`: 23 slides, each letter with its cost (Clio: S $45 / 92 %, N $3.75), players on one slide, pending fixes built in. A (v3) kept as is. **4-persona comparison** → `references/0302_07_review_a_vs_b.md`: **B unanimous**; keep from A the *data science / LLM* sentence, convergence weight, coarse-to-fine; merge E+C; honest badges with running total; S described literally; slide 20 *only LLM step that grows*. B v2 proposed — awaiting Michael. |
@@ -235,5 +250,6 @@ the theme and the build stay. Previous version recoverable from the source works
 - [`references/0302_06_talk_structure_letters.md`](references/0302_06_talk_structure_letters.md) — proposal B: one slide per SECNA letter, each with its cost (3.2)
 - [`references/0302_07_review_a_vs_b.md`](references/0302_07_review_a_vs_b.md) — 4-persona comparison A vs B: B unanimous; B v2 proposed (3.2)
 - [`references/0302_08_fresh_review_b_v2.md`](references/0302_08_fresh_review_b_v2.md) — fresh 4-persona review (no history) of B v2; decisions for Michael (3.2)
+- [`references/0302_09_slide_proposals.md`](references/0302_09_slide_proposals.md) — three content + form proposals per slide, picks, components, images (3.2 b)
 - [`references/0104_01_talk_preparation.md`](references/0104_01_talk_preparation.md) — the decisions behind the deck
 - [`references/0104_02_abstract_fr.md`](references/0104_02_abstract_fr.md) — the abstract

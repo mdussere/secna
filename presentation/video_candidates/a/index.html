@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SECNA — la vidéo</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-seq="0">
+<div id="viewport">
+  <div id="stage">
+    <div id="aurora"></div>
+    <div id="grain"></div>
+    <div id="chip"><span id="chipNum"></span><span id="chipTitle"></span></div>
+    <!-- les scènes sont injectées ici -->
+    <div id="subs"><span></span></div>
+  </div>
+</div>
+
+<div id="ui">
+  <div id="bar">
+    <div id="track"></div>
+    <div id="fill"></div>
+    <div id="marks"></div>
+    <div id="head"></div>
+    <div id="tip"></div>
+  </div>
+  <div id="controls">
+    <button id="bPlay" title="Lecture / pause (espace)">▶</button>
+    <button id="bPrev" title="Scène précédente (P)">⏮</button>
+    <button id="bNext" title="Scène suivante (N)">⏭</button>
+    <span id="time">00:00 / 00:00</span>
+    <span id="sceneName"></span>
+    <span class="sp"></span>
+    <button id="bRate" title="Vitesse (+ / −)">1×</button>
+    <button id="bCC" title="Script à l'écran (C)">CC</button>
+    <button id="bFS" title="Plein écran (F)">⛶</button>
+  </div>
+</div>
+
+<div id="start">
+  <div class="startInner">
+    <div class="startKicker">Generative AI Bordeaux · 19 novembre 2026</div>
+    <div class="startTitle">Vos corpus grossissent.<br><span>Pas votre budget de tokens.</span></div>
+    <button id="bGo">▶&nbsp; Lancer la vidéo</button>
+    <div class="startHelp">
+      <b>Espace</b> lecture/pause · <b>← →</b> ±5 s · <b>Maj ← →</b> ±30 s · <b>N / P</b> scène suivante/précédente ·
+      <b>0–5</b> séquences · <b>C</b> script à l'écran · <b>F</b> plein écran · <b>H</b> masquer l'interface · <b>+ / −</b> vitesse
+    </div>
+  </div>
+</div>
+
+<script src="js/lib.js"></script>
+<script src="js/seq0-1.js"></script>
+<script src="js/seq2.js"></script>
+<script src="js/seq3.js"></script>
+<script src="js/seq4.js"></script>
+<script src="js/seq4-notebook.js"></script>
+<script src="js/seq5.js"></script>
+<script src="js/engine.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+pandas
+pyarrow
+numpy
+scikit-learn
+matplotlib
+requests
+tiktoken
+openai
+tqdm
+python-dotenv
+# tests only
+pytest
+boto3

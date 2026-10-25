@@ -50,6 +50,26 @@ Camille's photo and Yanis's best slide; 11 (*one call per group*), 12 (zoom), 18
 | 23 | Video | 🟡 | 🟡 | ✅ | Yanis: cut it; Laurent: hype reflex |
 | 24 | Close | ✅ | ✅ | 🟡 | the Monday action must be concrete — and one for business people |
 
+**Laurent (CTO)** judges the talk as a whole, not slide by slide (persona rule) — his seniority signals:
+
+| Signal | | Slides — his words |
+|---|---|---|
+| Economic framing | ✅ | 2, 8, 11, 15, the title |
+| Simple over fashionable | ✅ | 10 (*"no LLM, pure computation"*), 18 — **undercut by 22–23** (an agent pitch right after "simple beats fashionable") |
+| Numbers, sourced or measured | 🟡 | sourced: 5, 8, 11, 12 (Clio) — **measured: none yet**; 17 must carry them |
+| Stated limit | 🟡 | 20 is right but packs five items into 0:45 |
+| Deliberate trade-off | ✅ | 18; 21 if X becomes a computed threshold |
+| Clarity for a mixed room | ✅ | 7–13 template, E on its own slide, 13 |
+| Clean public code | 🟡 | 17, 24 — QR code shown twice, quality unknown |
+| Personal point of view | ✅ | 18 (*« pas mon invention — celle que je défends »*), 21 |
+
+Where it sounds junior, salesy or hype, for him: the abstract's overclaims (*« la seule… »*,
+*« personne ne s'est concerté »*, *« le calcul »* promised but the curve is illustrative); coining
+SECNA can look like flag-planting unless *« pas mon invention »* comes at slide 7; the 1-minute
+teaser + video + *« prochaine fois »*; **no word on how the groups are validated** — *"my first
+question to any candidate"*. Walk up: **probably** → **yes** if 17 shows a real run (N documents,
+$Y, Z minutes, one group that came out wrong) and the repo works in one command that evening.
+
 ## 3. Findings, ranked by how many raised them
 
 | # | Finding | Raised by | Proposed fix |
