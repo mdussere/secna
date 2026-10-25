@@ -243,3 +243,6 @@ CLAUDE.local.md
 .claude/skills/clean-verbatim
 .claude/skills/rtfm
 .claude/skills/duckdb
+
+# Commit scripts prepared for review (local only — they hold local paths)
+commits/

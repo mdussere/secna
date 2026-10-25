@@ -60,6 +60,8 @@ the rule (see §6).
 
 ## 4. The themes (A, 5–7 themes, last run)
 
+![The seven themes of three months of GitLab merge requests, each bar split by repository](0404_01_themes.png)
+
 | Theme | MRs | % |
 |---|---|---|
 | Engineering Quality and Operational Upkeep | 6,179 | 25 % |
