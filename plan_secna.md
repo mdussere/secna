@@ -1,6 +1,6 @@
 ---
-**Status**: 🧪 Active — **storyboard-first** (2026-10-23): the talk and the video are told from one five-section storyboard; the notebook comes next and shapes it; slide decks archived
-**Date**: 2026-10-09 (restructured 2026-10-23)
+**Status**: 🧪 Active — **short → long** (2026-10-26): the 90-second video is frozen and becomes the base; the 20-min storyboard is written by extending it, in its graphic environment; slide decks archived
+**Date**: 2026-10-09 (restructured 2026-10-23, re-based on the short video 2026-10-26)
 **Priority**: High — **meetup on Thursday 19 November 2026** (date confirmed)
 **Maintained**: Yes
 ---
@@ -19,8 +19,12 @@ corpora that keep growing, on the budget I have*. The answer is a recipe several
 **S**ummarise · **E**mbed · **C**luster · **N**ame · **A**ggregate — **SECNA**. Data science finds
 the structure; the LLM gives it meaning; the bill follows the number of groups, not of documents.
 
-**The form is a storyboard, not slides.** Five sections, each making one point with its own animated
-visual (HTML / SVG / JS). The same storyboard serves:
+**The form is a storyboard, not slides — grown from a short video.** A 90-second video
+([`presentation/video_90s/`](presentation/video_90s/index.html), English, no audio) already tells the whole
+story with a few high-impact visuals: three dead ends, Clio's bill, the five letters, the cost curve, the
+giants, a real run on LangChain, a weak signal. The short format forced the strong graphs; the long
+format **extends it** — same engine, palette and visual vocabulary, each beat given room (sections,
+the notebook, my recipe) — rather than cutting a short from a long. The same storyboard serves:
 - **live** at the meetup — presenter-driven; the notebook shown as an animation with a QR code to the
   real one (or run live);
 - **recorded** — the same scenes driven by a voice-over (a natural French TTS voice).
@@ -41,8 +45,12 @@ recipe end to end with its measured token count; the storyboard is built as an a
   were written under (e.g. `0301_01` intent, `0601_01` storyboard) — no renumbering.
 - `worklines/<name>/` — sub-worklines with their own plan and docs (`secna_notebook`)
 - `notebook/` — the SECNA notebook + a script to fetch the corpus (data and outputs gitignored)
-- `presentation/` — the animated storyboard (to build); `presentation/design/` (palette, style
-  proposals); archived deck tooling (Marp theme + build, PPTX generator) and the first video attempt
+- `presentation/video_90s/` — **the short video**, the base of the long one: `index.html` (deterministic
+  `render(t)`, canvas particles + DOM beats, time-warp holds), `capture.mjs` (frames → MP4),
+  `facts_en.md` (neutral fact sheet). Frames and MP4 are rebuilt, not committed.
+- `presentation/video_candidates/a/` — the long candidate kept from the three context-free agents (3.5),
+  a source of material for the long storyboard
+- `presentation/` also holds the archived deck tooling (Marp theme + build, PPTX generator)
 
 ## Goals ✅
 
@@ -67,19 +75,22 @@ recipe end to end with its measured token count; the storyboard is built as an a
 
 ## Key decisions
 
+- **Short → long** (2026-10-26): the 90-second video is the reference; the long storyboard extends its
+  beats, keeps its engine and visual vocabulary, and adds what a short cannot hold (the notebook ≥ 5 min,
+  my recipe, the agents). Not a long video cut down to a short.
 - **Storyboard, five sections** (2026-10-23) → [`references/0601_01_video_narrative_storyboard.md`](references/0601_01_video_narrative_storyboard.md):
   **L'impasse** · **Clio** · **SECNA** · **Les gros, et nous** (→ the notebook, ≥ 5 min) ·
-  **Ma recette** (→ the agent cliffhanger).
+  **Ma recette** (→ the agent cliffhanger) — input for 3.7, re-read against the short video.
 - **Corpus** (revised 2026-10-24): ~~the Linux kernel~~ (*old school*, obscure themes) → the merge
   requests of a large, very active open-source code base over three months — *« qu'est-ce qui s'est
   passé dans <projet> ces derniers mois ? »*; chosen and run in
   [`secna_notebook`](worklines/secna_notebook/plan_secna_notebook.md).
 - **The notebook shapes the storyboard**: live, the notebook part is an animation with a QR code to the
   real notebook (possibly run live); recorded, the same animation.
-- **Palette**: *Charbon & citron vert* (red only for tokens). **Visual style**: to choose (Step 3.3).
+- **Visual style and palette**: the short video's (near-black sky, particles, very large figures; pink = LLM / cost, cyan = data science, lime accent) — supersedes the *Charbon & citron vert* and style explorations (3.3). **All supports in English**; the talk is spoken in French. **No audio** in the short video (synthetic voice and generated music both rejected).
 - **Acronym SECNA**, coined for the talk and said so. **GitHub not cited**. Convergence, not lineage;
   OpenAI not in the gallery. **BERTopic** off screen (a replaceable glue).
-- **Voice**: a TTS model with natural French intonation (Step 5.2) — the browser voice is ruled out.
+- **Voice** (recorded version only, open): a TTS model with natural French intonation (Step 5.2) — the browser voice is ruled out.
 - **Commits use the personal identity**. **This plan names no employer on purpose**; the audit word
   list lives outside this repo.
 
@@ -94,7 +105,7 @@ recipe end to end with its measured token count; the storyboard is built as an a
 
 | By | Milestone | Steps |
 |---|---|---|
-| Tue 27 Oct | Storyboard sections deepened; visual style chosen | 3.2 · 3.3 |
+| Tue 27 Oct | Long storyboard extended from the short video (style fixed by the short) | 3.7 · 3.2 |
 | Fri 30 Oct | Notebook runs end to end on the chosen corpus; measured bill | 4 |
 | Wed 4 Nov | Storyboard final with the notebook's real outputs; narration script | 3.4 |
 | Mon 9 Nov | Animated storyboard v1 (five sections); voice chosen | 5.1 · 5.2 |
@@ -126,11 +137,13 @@ du sens »*. Audience personas for reviews: [`0302_02`](references/0302_02_audie
       decisions: voice-over, ~20 min with ≥ 5 min on the notebook, HTML / SVG / JS, GitHub not cited.
 - [ ] 3.2 Deepen each section (what is shown, what is said, the transitions) — to be revised once the
       notebook's outputs exist.
-- [ ] 3.3 **Visual style**: 3–4 proposals rendered on the same scene → [`presentation/design/styles.html`](presentation/design/styles.html); Michael chooses.
+- [x] 3.3 **Visual style** — decided by the short video (3.6); the explorations (`presentation/design/`) archived out of the repo.
 - [ ] 3.4 Narration script, written for the ear (French, ~20 min at ~140 words/min).
-- [ ] 3.5 **New approach (2026-10-23)** — stop steering the form: the raw material only (story, five sequences, explanations, facts, sources; no style or layout guidance) → [`references/0305_01_video_material.md`](references/0305_01_video_material.md); three context-free agents get the same short prompt (*« Prépare une vidéo qui ne soit pas des slides, moderne, impactful, ~20 min, avec tout ce matériel »*) and work in parallel → `presentation/video_candidates/{a,b,c}/`; Michael chooses.
-- **Acceptance**: each section makes one point with its own visual; Michael validates the storyboard
-  and the script.
+- [x] 3.5 **New approach (2026-10-23)** — stop steering the form: the raw material only (story, five sequences, explanations, facts, sources; no style or layout guidance) → [`references/0305_01_video_material.md`](references/0305_01_video_material.md); three context-free agents get the same short prompt (*« Prépare une vidéo qui ne soit pas des slides, moderne, impactful, ~20 min, avec tout ce matériel »*) and work in parallel → `presentation/video_candidates/{a,b,c}/`. **Kept: A** (2026-10-26); B and C removed.
+- [x] 3.6 **The short video** (2026-10-25/26) — 90 s storyboard made by a context-free agent from the neutral fact sheet, then iterated with Michael (English, no captions, pauses after busy screens, real LangChain run with $0.15 as the hero figure, weak signal from the clustering) → [`presentation/video_90s/`](presentation/video_90s/index.html), 1:46. **Frozen** as the base of the long format. Other short variants (`free` FR, `free_v2`, `with_ref_a`) archived out of the repo.
+- [ ] 3.7 **Long storyboard, extended from the short video**: beat by beat, what each short beat becomes in ~20 min (sections, transitions, what is shown, what is said); where the notebook (≥ 5 min), the giants, my recipe and the agent cliffhanger go; what to take from candidate A and from `0601_01`. Same engine and visual vocabulary. → a new storyboard doc; Michael validates before any build.
+- **Acceptance**: each section makes one point with its own visual, in the short video's language;
+  Michael validates the long storyboard (3.7) and the script (3.4).
 
 ### Step 4 — The notebook
 **Status**: 📋 Moved to its own workline (2026-10-23) →
@@ -143,8 +156,9 @@ there.
 
 ### Step 5 — Build the animated storyboard
 **Status**: ⏳ Pending
-- [ ] 5.1 The five sections in HTML / SVG / JS: one scene per section, a camera, the chosen style; the
-      notebook part as an animation of the real run + QR code; **live mode** (presenter-driven).
+- [ ] 5.1 The long storyboard built **on the short video's engine** (`render(t)`, particle layouts,
+      DOM beats, holds): the notebook part as an animation of the real run + QR code; **live mode**
+      (presenter-driven: advance beat by beat).
 - [ ] 5.2 **Choose a TTS model** with natural French intonation over long passages: shortlist (leads,
       to verify: hosted expressive TTS such as Microsoft MAI-Voice-2 or Fish Audio S2.1 Pro; open models
       such as Kokoro's French voice or a bilingual EN–FR model); **blind listening test** by Michael on
@@ -172,10 +186,11 @@ there.
 ### Archived — the slide-deck track (superseded 2026-10-23)
 Kept as record, not maintained: the Marp neutral theme and build (`presentation/theme/`, `build.mjs`,
 `deck.md` v1); structure proposals A and B and their persona reviews (`references/0302_01`–`0302_08`);
-the slide proposals (`0302_09`); the PowerPoint generator (`presentation/pptx/`); the first video
-attempt (`presentation/video/secna_video.html`, *« des slides, pas une vidéo »*); palette and
-graphic-direction explorations (`presentation/design/`). What carries over: the intent, the cost
-figures, the five-letter explanation, the palette, the review personas.
+the slide proposals (`0302_09`); the PowerPoint generator (`presentation/pptx/`). **Out of the repo**
+(local archive `../secna_attic_2026-10-26.tar.gz`, never committed): the first video attempt
+(*« des slides, pas une vidéo »*), the palette and graphic-direction explorations, the short variants
+`free` / `free_v2` / `with_ref_a`, long candidates B and C. What carries over: the intent, the cost
+figures, the five-letter explanation, the review personas — and now the short video.
 
 ---
 
@@ -183,7 +198,7 @@ figures, the five-letter explanation, the palette, the review personas.
 
 - ✅ Step 1 — Scaffold + references
 - ✅ Step 2 — The talk's intent
-- 🧪 Step 3 — The storyboard (3.1 ✅; 3.2–3.4 pending)
+- 🧪 Step 3 — The storyboard (3.1, 3.3, 3.5, 3.6 ✅ — short video frozen; **next: 3.7 long storyboard from the short**; 3.2, 3.4 pending)
 - 📋 Step 4 — The notebook → workline `secna_notebook`
 - ⏳ Step 5 — Build the animated storyboard (live + recorded, voice)
 - ⏳ Step 6 — README
@@ -198,7 +213,14 @@ figures, the five-letter explanation, the palette, the review personas.
 
 | Timestamp (`date`) | Update |
 |---|---|
+| Mon Oct 26 00:22 CET 2026 | **Re-based: short → long** (Michael). The 90 s video is frozen as the base of the 20-min format — the long storyboard extends it (same engine and visual vocabulary) instead of cutting a short from a long. **Cleanup**: `free_en` flattened into `presentation/video_90s/` (`index.html`, `capture.mjs`, `facts_en.md`; frames and MP4 gitignored, rebuilt by `capture.mjs` + ffmpeg); long candidates: **A kept**, B and C removed; short variants `free` / `free_v2` / `with_ref_a`, the first video attempt and `presentation/design/` archived out of the repo (`../secna_attic_2026-10-26.tar.gz`). Plan: Status, Overview, layout, key decisions (style and palette = the short video's; no audio), 3.3 / 3.5 closed, **3.6 short video ✅**, **3.7 long storyboard from the short** (next), 5.1 builds on the short's engine. Commit script prepared, awaiting Michael's 🟩. |
+| Sun Oct 25 2026 (90 s, EN v6) | **`free_en` weak signal** (Michael): *7% merged* dropped (misleading) → *One cluster · 310 PRs · 5 repos* (duckdb on the corpus); the cluster cloud and its label enlarged and lowered by about a quarter of their height; descenders no longer cut by the mask reveal (clip extended below the box). Re-rendered: 1:46. |
+| Sun Oct 25 2026 (90 s, EN v5) | **`free_en` wording** (Michael): strike-through drawn over the text (11 px, one bar per line); bill line *92% of the bill is S.*, S label no larger than N's; *Short texts? Skip the LLM.* kept; Aggregate card *LLM · 1 call in total* (LLM calls counted, as for S and N). Re-rendered: 1:46. |
+| Sun Oct 25 2026 (90 s, EN v4) | **`free_en` tuned** (Michael): LangChain run and weak-signal beats shortened (run leaves 1.2 s earlier, its hold 2.0 → 0.4 s; weak-signal hold 1.6 → 0.6 s; ending moved up); thicker strike-through on the three dead ends; *December 2024* enlarged. |
 | Fri Oct 23 22:52 CEST 2026 (notebook) | **Step 4 moved to workline `secna_notebook`** (Michael) → `worklines/secna_notebook/plan_secna_notebook.md`, drafted and reviewed, awaiting 🟩. **Corpus revised**: the Linux kernel dropped (*old school*, obscure themes, no PRs) → merged PRs of a very active, sprawling, GenAI-related open-source project, chosen on evidence in that workline's Step 1. Notebook: E · C · N · A, **no S**, basic libraries only (pandas, raw embeddings, k-means, no BERTopic / UMAP). |
+| Sun Oct 25 2026 (90 s, EN v3) | **`free_en` made readable** (Michael): **holds** — the picture freezes 0.5–2.2 s once a busy screen has settled (14 holds, length 1:30 → ≈ 1:48; `HOLDS` table + `story(T)` time map, `capture.mjs` reads `window.DUR`); Clio's bill titled in large type (*Clio's published bill · 100,000 conversations*); comparison cards without the LangSmith controversy and without repeating Clio → **Urania** (benchmarked against Clio) · **LangSmith Insights** (groups agent traces and names them) · **Kura** (*"a simple reproduction of the CLIO paper"*), line *The same recipe, again and again*; run frame: **LangChain** in large type, *S: no LLM · E: on-premise*, $0.15 hero, no ¢/1,000; **weak signal replaced** by one the clustering visibly surfaced, shown as a group on its own beat: *the largest of the 100 groups — a bot fixing LangChain's docs assistant, 310 PRs, 7 % merged* (cluster 2, checked in `corpus.parquet`). |
+| Sun Oct 25 2026 (90 s, EN v2) | **`free_en` corrected** (Michael): S = *small LLM (SLM) · 1 call per document — or plain code, no LLM*; redundant letter tags and captions removed; new beat after *92 % of the bill*: the S block collapses, the bill counts down **$48.81 → $3.81**, *Short texts? Skip the LLM.*; cost curve redrawn so the groups line stays below the per-document line everywhere; real run switched from GitLab to **LangChain** (14,947 PRs · 137 repos · S without LLM · E on a laptop CPU · 100 groups · 7 themes), **$0.15 as the hero number** (≈ 1¢ per 1,000 PRs); weak signal: *their own coding agent signs 27 % of human PRs, 588 → 1,333 a month* (from `worklines/secna_notebook/docs/0405_01`). Re-rendered `secna_90s.mp4`. |
+| Sun Oct 25 2026 (90 s, EN) | **Back to the 90-second videos** (made from the notebook workline in `presentation/video_90s/`: `free`, `free_v2`, `with_ref_a`). Michael prefers **`free`**; rule confirmed: **all supports in English** (talk spoken in French over English visuals). `free` translated → `presentation/video_90s/free_en/` (every on-screen string, captions, labels, number formats; timing unchanged), re-rendered to `secna_90s.mp4` (90 s, 30 fps). Comparative analysis of the three given to Michael; awaiting his view. |
 | Fri Oct 23 2026 (candidates) | **Three video candidates delivered**, all open without JS errors (checked in headless Chrome): **A** 21:10, 41 scenes, offline (no CDN), C = voice-over script on screen · **B** 19:58, 42 scenes, N = narration panel, durations in `js/timing.js`, `?rec` for capture · **C** 20:41, 40 scenes, T = teleprompter, `?audio=` sync. All: ~5 min of notebook as an animated mock, invented outputs and function names marked *illustratif*. Awaiting Michael's choice. |
 | Fri Oct 23 2026 (parallel) | **Change of method** (Michael: *the more instructions and examples, the more it reproduces them and loses what made the first unprepared videos good*). Style explorations stopped (variations deleted; the galactic sequence kept in `presentation/design/` as record). Raw material written → `references/0305_01_video_material.md` (~2,500 words, content only). **Three agents launched in parallel**, no context, same short prompt → `presentation/video_candidates/a|b|c/`. |
 | Fri Oct 23 2026 (variations) | **3.3 — styles 1 (tableau blanc) and 2 (schéma d'ingénieur) kept** (Michael). Six variations on the same scene → `presentation/design/styles_variations.html`: 1a tableau blanc feutres · 1b tableau noir craie (stays in the charcoal palette) · 1c carnet d'ingénieur (squared paper, ink) · 2a schéma sombre · 2b schéma clair · 2c **schéma annoté** (hybrid: the precise diagram, annotated by hand in lime). Awaiting Michael's choice. |
@@ -238,7 +260,9 @@ figures, the five-letter explanation, the palette, the review personas.
 ## Workline artifacts
 
 - [`CLAUDE.md`](CLAUDE.md) — orientation for Claude Code; [`.claude/skills/secna-deck/`](.claude/skills/secna-deck/SKILL.md) — the deck skill
-- `presentation/deck.md` — *(dropped 2026-10-09, to be rewritten from the intent, 3.1)*
+- [`presentation/video_90s/`](presentation/video_90s/index.html) — **the short video** (3.6), base of the long format; `capture.mjs` rebuilds frames and the MP4
+- [`presentation/video_candidates/a/`](presentation/video_candidates/a/index.html) — long candidate A (3.5)
+- `presentation/deck.md` — *(archived slide-deck track)*
 - [`presentation/theme/secna.css`](presentation/theme/secna.css) + `theme/fonts/` — the neutral theme; [`presentation/build.mjs`](presentation/build.mjs) — `node build.mjs all`
 - [`references/BIBLIO.md`](references/BIBLIO.md) — every source the talk relies on
 - [`references/0301_01_talk_intent.md`](references/0301_01_talk_intent.md) — the talk's intent (3.1): purpose, audience, take-aways
