@@ -234,6 +234,10 @@ notebook/data/
 notebook/out/
 .DS_Store
 presentation/node_modules/
+# The 90 s video: index.html + capture.mjs are the source; frames and the MP4 are rebuilt
+presentation/video_90s/frames/
+presentation/video_90s/render/
+*.mp4
 
 # Claude Code — local only: the handover note (internal context) and skills linked from
 # outside this repo. Only the repo's own skill (secna-deck) is committed.
