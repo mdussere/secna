@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SECNA in 90 seconds</title>
+<title>SECNA in two minutes</title>
 <style>
 :root{
   --ink:#08090D; --paper:#F3F1EA; --dim:#8A8F9C;
@@ -62,6 +62,8 @@ html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:var
 /* bars gitlab */
 .bl{font-size:30px;font-weight:650;text-align:right;width:620px;line-height:36px}
 .bp{font-family:var(--mono);font-size:28px;line-height:36px;color:var(--hot)}
+.code pre{margin:0;font-family:var(--mono);font-size:29px;line-height:1.55;color:#E9E9EC;background:rgba(255,255,255,.04);border:2px solid #2A2E39;border-radius:14px;padding:26px 36px}
+.code .kw{color:#F2F0EA;font-weight:700}
 .gchip{font-family:var(--mono);font-size:34px;padding:10px 22px;border:2px solid #3A3F4C;border-radius:50px}
 /* controls */
 #ui{position:fixed;left:0;right:0;bottom:0;padding:14px 20px;display:flex;gap:14px;align-items:center;background:linear-gradient(transparent,rgba(0,0,0,.85));transition:opacity .3s;font-family:var(--mono);font-size:14px;color:#ddd;z-index:5}
@@ -80,8 +82,8 @@ body.clean #ui{display:none}
 
 <!-- ===== 1. Flood 0–6 ===== -->
 <div class="it flash c" data-in="0.25" data-out="1.15" data-fx="slam">Customer reviews</div>
-<div class="it flash c hot" data-in="1.15" data-out="2.0" data-fx="slam">Tickets</div>
-<div class="it flash c" data-in="2.0" data-out="2.8" data-fx="slam">Logs</div>
+<div class="it flash c hot" data-in="1.15" data-out="2" data-fx="slam">Tickets</div>
+<div class="it flash c" data-in="2" data-out="2.8" data-fx="slam">Logs</div>
 <div class="it flash c llm" data-in="2.8" data-out="3.7" data-fx="slam">Agent traces</div>
 <div class="it flash c" data-in="3.7" data-out="5.9" data-fx="up" style="font-size:132px">Nobody reads <span class="hot">it all.</span></div>
 
@@ -89,7 +91,7 @@ body.clean #ui{display:none}
 <div class="it k" style="left:120px;top:250px" data-in="6.6" data-out="13.8">The corpus</div>
 <div class="it huge" style="left:1020px;top:300px;font-size:92px" data-in="6.9" data-out="13.8" data-fx="left">1 million reviews</div>
 <div class="it" style="left:1024px;top:410px;font-size:44px;color:#C9CBD3" data-in="7.9" data-out="13.8" data-fx="left">× ~100 tokens each</div>
-<div class="it huge" style="left:1020px;top:480px;font-size:92px" data-in="8.7" data-out="13.8" data-fx="left">≈ <span data-count="0,100000000,8.8,10.0,int">100,000,000</span></div>
+<div class="it huge" style="left:1020px;top:480px;font-size:92px" data-in="8.7" data-out="13.8" data-fx="left">≈ <span data-count="0,100000000,8.8,10,int">100,000,000</span></div>
 <div class="it" style="left:1024px;top:585px;font-size:40px;color:#C9CBD3" data-in="8.9" data-out="13.8" data-fx="left">tokens</div>
 <div class="it hot" style="left:1020px;top:680px;font-size:46px;font-weight:800;white-space:normal;width:780px;line-height:1.15" data-in="10.3" data-out="13.8" data-fx="left">▪ The largest context window: ≈&nbsp;1&nbsp;million</div>
 <div class="it huge c" style="top:820px;font-size:110px;text-shadow:0 0 40px #000" data-in="12.2" data-out="13.9" data-fx="slam">It doesn't fit.</div>
@@ -105,24 +107,24 @@ body.clean #ui{display:none}
 <div class="it k c" style="top:200px;color:var(--hot);font-size:52px;letter-spacing:.12em;font-weight:700" data-in="21.2" data-out="27.6">December 2024</div>
 <div class="it huge c" style="top:290px;font-size:120px" data-in="21.4" data-out="27.6" data-fx="up">Anthropic publishes <span class="ds">Clio</span>.</div>
 <div class="it c" style="top:460px;font-size:44px;color:#C9CBD3" data-in="22.4" data-out="27.6" data-fx="up">Millions of conversations. Private. Impossible to read by hand.</div>
-<div class="it huge c" style="top:610px;font-size:76px;line-height:1.08;white-space:normal" data-in="24.0" data-out="27.6" data-fx="mask">Understand a whole corpus<br><span class="hot">without reading all of it.</span></div>
+<div class="it huge c" style="top:610px;font-size:76px;line-height:1.08;white-space:normal" data-in="24" data-out="27.6" data-fx="mask">Understand a whole corpus<br><span class="hot">without reading all of it.</span></div>
 
 <!-- ===== 5. SECNA rail 28–52 ===== -->
-<div class="it rail" id="r0" style="top:200px" data-in="28.0" data-out="52.2" data-fx="left">S</div>
+<div class="it rail" id="r0" style="top:200px" data-in="28" data-out="52.2" data-fx="left">S</div>
 <div class="it rail" id="r1" style="top:350px" data-in="28.1" data-out="52.2" data-fx="left">E</div>
 <div class="it rail" id="r2" style="top:500px" data-in="28.2" data-out="52.2" data-fx="left">C</div>
 <div class="it rail" id="r3" style="top:650px" data-in="28.3" data-out="52.2" data-fx="left">N</div>
 <div class="it rail" id="r4" style="top:800px" data-in="28.4" data-out="52.2" data-fx="left">A</div>
-<div class="it k" style="left:1290px;top:915px;font-size:20px" data-in="28.6" data-out="52.0">illustrative example · customer reviews</div>
+<div class="it k" style="left:1290px;top:915px;font-size:20px" data-in="28.6" data-out="52">illustrative example · customer reviews</div>
 
 <div class="it step" data-in="28.3" data-out="32.9" data-fx="left"><div class="v">Summarise</div><div class="d">Each document is cut down to what carries meaning.</div><div class="chip llm">small LLM (SLM) · 1 call per document — or plain code, no LLM</div></div>
 <div class="it step" data-in="33.1" data-out="37.9" data-fx="left"><div class="v">Embed</div><div class="d">Each text becomes a point. Meaning becomes geometry.</div><div class="chip ds">small model · a few cents</div></div>
 <div class="it step" data-in="38.1" data-out="42.9" data-fx="left"><div class="v">Cluster</div><div class="d">Nearby points form groups. A few stay on their own.</div><div class="chip ds">pure computation · 0 tokens</div></div>
 <div class="it step" data-in="43.1" data-out="47.9" data-fx="left"><div class="v">Name</div><div class="d">The LLM reads a few examples per group and names it.</div><div class="chip llm">LLM · 1 call per group</div></div>
-<div class="it step" data-in="48.1" data-out="52.0" data-fx="left"><div class="v">Aggregate</div><div class="d">From fine groups to big themes: a map.</div><div class="chip llm">LLM · 1 call in total</div></div>
+<div class="it step" data-in="48.1" data-out="52" data-fx="left"><div class="v">Aggregate</div><div class="d">From fine groups to big themes: a map.</div><div class="chip llm">LLM · 1 call in total</div></div>
 
 <!-- E: same meaning example -->
-<div class="it" style="left:1130px;top:300px;font-size:30px;font-weight:600" data-in="35.0" data-out="37.9" data-fx="up">“parcel never arrived” <span class="ds">≈</span> “late delivery”</div>
+<div class="it" style="left:1130px;top:300px;font-size:30px;font-weight:600" data-in="35" data-out="37.9" data-fx="up">“parcel never arrived” <span class="ds">≈</span> “late delivery”</div>
 
 <!-- N labels (positioned by JS) -->
 <div id="labels"></div>
@@ -130,24 +132,23 @@ body.clean #ui{display:none}
 <div id="themes"></div>
 
 <div class="it huge c ds" style="top:380px;font-size:92px" data-in="52.2" data-out="54.9" data-fx="mask">Data science finds the structure.</div>
-<div class="it huge c llm" style="top:520px;font-size:92px" data-in="53.0" data-out="54.9" data-fx="mask">The LLM gives it meaning.</div>
+<div class="it huge c llm" style="top:520px;font-size:92px" data-in="53" data-out="54.9" data-fx="mask">The LLM gives it meaning.</div>
 
 <!-- ===== 6. The bill 55–62 ===== -->
-<div class="it" style="left:160px;top:110px;font-size:58px;font-weight:850;letter-spacing:-.01em" data-in="55.2" data-out="63.3" data-fx="left"><span class="ds">Clio</span>'s published bill <span style="color:#C9CBD3;font-weight:600">· 100,000 conversations</span></div>
-<div class="it huge" style="left:150px;top:210px;font-size:220px" data-in="55.3" data-out="60.9" data-fx="up">$<span data-count="0,48.81,55.4,56.8,money">48.81</span></div>
-<div class="it huge" style="left:150px;top:210px;font-size:220px" data-in="60.9" data-out="63.3" data-fx="fade">$<span data-count="48.81,3.81,61.0,62.1,money">48.81</span></div>
-<div class="it" style="left:1180px;top:300px;font-size:40px;color:#C9CBD3;white-space:normal;width:600px" data-in="56.6" data-out="60.9" data-fx="left">≈&nbsp;$500 for a million documents</div>
-<div class="it ds" style="left:1180px;top:300px;font-size:40px;font-weight:800;white-space:normal;width:600px" data-in="61.0" data-out="63.3" data-fx="left">without an LLM on every document</div>
-<div class="it" style="left:160px;top:520px;width:1474px;height:90px;border:3px dashed var(--llm);border-radius:4px;opacity:0" data-in="61.6" data-out="63.3" data-fx="fade"></div>
-<div class="it seg" id="segS" style="left:160px;width:1474px;background:var(--llm)" data-in="57.0" data-out="63.3" data-fx="grow" data-dur="0.7"></div>
+<div class="it" style="left:160px;top:110px;font-size:58px;font-weight:850;letter-spacing:-.01em" data-in="55.2" data-out="60.9" data-fx="left"><span class="ds">Clio</span>'s published bill <span style="color:#C9CBD3;font-weight:600">· 100,000 conversations</span></div>
+<div class="it" style="left:160px;top:110px;font-size:58px;font-weight:850;letter-spacing:-.01em" data-in="60.9" data-out="63.3" data-fx="left">Can we cut this bill further?</div>
+<div class="it huge" style="left:150px;top:210px;font-size:220px" data-in="55.3" data-out="61.5" data-fx="up">$<span data-count="0,48.81,55.4,56.8,money">48.81</span></div>
+<div class="it huge" style="left:150px;top:210px;font-size:220px" data-in="61.5" data-out="63.3" data-fx="fade">$<span data-count="48.81,3.81,61.6,62.7,money">48.81</span></div>
+<div class="it" style="left:160px;top:520px;width:1474px;height:90px;border:3px dashed var(--llm);border-radius:4px;opacity:0" data-in="62.1" data-out="63.3" data-fx="fade"></div>
+<div class="it seg" id="segS" style="left:160px;width:1474px;background:var(--llm)" data-in="57" data-out="63.3" data-fx="grow" data-dur="0.7"></div>
 <div class="it seg" style="left:1638px;width:118px;background:#FFA3C3" data-in="57.6" data-out="63.3" data-fx="grow" data-dur="0.3"></div>
 <div class="it seg" style="left:1760px;width:4px;background:var(--ds)" data-in="57.8" data-out="63.3" data-fx="grow" data-dur="0.2"></div>
-<div class="it" style="left:160px;top:640px;font-size:34px;font-weight:700" data-in="57.5" data-out="60.9" data-fx="up"><span class="llm">S</span> · summarise every document · $45.00</div>
-<div class="it" style="left:160px;top:640px;font-size:34px;font-weight:700" data-in="61.0" data-out="63.3" data-fx="up"><span class="ds">S</span> · short texts: plain code, no LLM · $0</div>
+<div class="it" style="left:160px;top:640px;font-size:34px;font-weight:700" data-in="57.5" data-out="61.5" data-fx="up"><span class="llm">S</span> · summarise every document · $45.00</div>
+<div class="it" style="left:160px;top:640px;font-size:34px;font-weight:700" data-in="61.5" data-out="63.3" data-fx="up"><span class="ds">S</span> · short texts: plain code, no LLM · $0</div>
 <div class="it" style="left:1764px;top:640px;font-size:34px;font-weight:700;transform-origin:100% 0" data-in="57.9" data-out="63.3" data-fx="up"><div style="transform:translateX(-100%)"><span style="color:#FFA3C3">N</span> · name · $3.75</div></div>
 <div class="it" style="left:1764px;top:695px;font-size:30px;color:#C9CBD3" data-in="58.1" data-out="63.3" data-fx="up"><div style="transform:translateX(-100%)"><span class="ds">E · C · A</span> · a few cents</div></div>
 <div class="it huge" style="left:160px;top:790px;font-size:96px" data-in="58.4" data-out="60.7" data-fx="slam"><span class="llm">92%</span> of the bill is <span class="llm">S.</span></div>
-<div class="it huge" style="left:160px;top:790px;font-size:96px" data-in="60.9" data-out="63.3" data-fx="slam">Short texts? <span class="ds">Skip the LLM.</span></div>
+<div class="it huge" style="left:160px;top:790px;font-size:96px" data-in="61.5" data-out="63.3" data-fx="slam">Short texts? <span class="ds">Skip the LLM.</span></div>
 
 <!-- ===== 7. Curve 62–70 ===== -->
 <div class="it huge" style="left:160px;top:90px;font-size:80px" data-in="63.6" data-out="66.6" data-fx="left">And when the corpus grows?</div>
@@ -165,7 +166,7 @@ body.clean #ui{display:none}
   <path id="pSEC" fill="none" stroke="#4FD1FF" stroke-width="9" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
 </svg>
 <div class="it llm" style="left:1080px;top:290px;font-size:36px;font-weight:800" data-in="65.4" data-out="69.9" data-fx="up">LLM on every document</div>
-<div class="it ds" style="left:300px;top:700px;font-size:36px;font-weight:800" data-in="66.8" data-out="69.9" data-fx="up">LLM on the groups only</div>
+<div class="it ds" style="left:1660px;top:722px;font-size:36px;font-weight:800" data-in="66.8" data-out="69.9" data-fx="up"><div style="transform:translateX(-100%)">LLM on the groups only</div></div>
 <div class="it k" style="left:1300px;top:930px;font-size:20px" data-in="64" data-out="69.9">illustrative · orders of magnitude</div>
 
 <!-- ===== 8. Players 70–75 ===== -->
@@ -175,28 +176,41 @@ body.clean #ui{display:none}
 <div class="it card" style="left:1260px" data-in="71.2" data-out="74.9"><div class="o">Open source</div><div class="nm ds">Kura</div><div class="y">2025</div><div class="ds2">“A simple reproduction of the CLIO paper.”</div></div>
 <div class="it" style="left:160px;top:760px;font-size:50px;font-weight:800" data-in="72.2" data-out="74.9" data-fx="left">The same recipe, <span class="hot">again and again.</span></div>
 
-<!-- ===== 9. GitLab run 75–85 ===== -->
-<div class="it k" style="left:160px;top:80px;color:var(--hot)" data-in="75.2" data-out="83.6">Real run · public data</div>
-<div class="it huge" style="left:150px;top:120px;font-size:130px" data-in="75.3" data-out="83.6" data-fx="up"><span data-count="0,14947,75.4,76.8,int">14,947</span></div>
-<div class="it" style="left:690px;top:108px;font-size:34px;font-weight:700;line-height:1.12;white-space:normal;width:640px" data-in="75.7" data-out="83.6" data-fx="left"><span style="font-size:76px;font-weight:900;letter-spacing:-.02em">LangChain</span><br><span style="color:#C9CBD3;font-weight:500">pull requests · 3 months · 137 repos</span></div>
-<div class="it gchip" style="left:160px;top:285px" data-in="77.0" data-out="83.6" data-fx="up">→ 100 groups</div>
+<!-- ===== 8b. Within reach? 75.2–80.0 ===== -->
+<div class="it huge c" style="top:150px;font-size:92px" data-in="75.2" data-out="77.7" data-fx="up">Is it within everyone's reach?</div>
+<div class="it huge c hot" style="top:290px;font-size:120px" data-in="76.0" data-out="77.7" data-fx="slam">Yes.</div>
+<div class="it c" style="top:450px;font-size:52px;font-weight:800" data-in="76.5" data-out="77.7" data-fx="up">A few dozen lines of Python are enough.</div>
+<div class="it code" style="left:380px;top:605px" data-in="76.7" data-out="77.7" data-fx="up"><pre><span class="kw">texts</span>    = [as_text(pr) <span class="kw">for</span> pr <span class="kw">in</span> prs]        <span class="ds"># S · plain code</span>
+<span class="kw">vectors</span>  = embed(texts)                       <span class="ds"># E · on the laptop</span>
+<span class="kw">clusters</span> = KMeans(100).fit_predict(vectors)   <span class="ds"># C · 0 tokens</span>
+<span class="kw">names</span>    = [name(c) <span class="kw">for</span> c <span class="kw">in</span> range(100)]      <span class="llm"># N · 1 call per cluster</span>
+<span class="kw">themes</span>   = aggregate(names)                   <span class="llm"># A · 1 call</span></pre></div>
+<div class="it huge c" style="top:290px;font-size:110px" data-in="78.0" data-out="80.0" data-fx="up">So we tried it</div>
+<div class="it c" style="top:470px;font-size:72px;font-weight:850" data-in="78.4" data-out="80.0" data-fx="up">on <span class="ds">LangChain</span>'s pull requests,</div>
+<div class="it c hot" style="top:580px;font-size:72px;font-weight:850" data-in="78.9" data-out="80.0" data-fx="up">at the lowest possible cost.</div>
 
-<div class="it huge hot" style="left:1330px;top:92px;font-size:190px;text-shadow:0 0 50px rgba(232,255,58,.35)" data-in="77.8" data-out="83.6" data-fx="slam">$0.15</div>
-<div class="it" style="left:1345px;top:285px;font-size:34px;font-weight:700;color:#C9CBD3" data-in="78.4" data-out="83.6" data-fx="up">the whole run</div>
-<div class="it ds" style="left:690px;top:280px;font-size:44px;font-weight:850" data-in="77.0" data-out="83.6" data-fx="left">S: no LLM · E: on-premise</div>
+<!-- ===== 9. LangChain run 80.2–88.8 ===== -->
+<div class="it k" style="left:160px;top:80px;color:var(--hot)" data-in="80.4" data-out="87.3">Real run · public data</div>
+<div class="it huge" style="left:150px;top:120px;font-size:130px" data-in="80.5" data-out="87.3" data-fx="up"><span data-count="0,14947,80.6,82,int">14,947</span></div>
+<div class="it" style="left:690px;top:108px;font-size:34px;font-weight:700;line-height:1.12;white-space:normal;width:640px" data-in="80.9" data-out="87.3" data-fx="left"><span style="font-size:76px;font-weight:900;letter-spacing:-.02em">LangChain</span><br><span style="color:#C9CBD3;font-weight:500">pull requests · 3 months · 137 repos</span></div>
+<div class="it gchip" style="left:160px;top:285px" data-in="82.2" data-out="87.3" data-fx="up">→ 100 clusters</div>
+
+<div class="it huge hot" style="left:1330px;top:92px;font-size:190px;text-shadow:0 0 50px rgba(232,255,58,.35)" data-in="83" data-out="87.3" data-fx="slam">$0.15</div>
+<div class="it" style="left:1345px;top:285px;font-size:34px;font-weight:700;color:#C9CBD3" data-in="83.6" data-out="87.3" data-fx="up">our cost · the whole run</div>
+<div class="it ds" style="left:690px;top:280px;font-size:44px;font-weight:850" data-in="82.2" data-out="87.3" data-fx="left">S: no LLM · E: on-premise</div>
 <div id="bars"></div>
 
 
-<!-- ===== 9b. Weak signal 85–89.4 ===== -->
-<div class="it k" style="left:160px;top:250px;color:var(--llm)" data-in="84.1" data-out="88.2">Weak signal · the largest of the 100 groups</div>
-<div class="it huge" style="left:155px;top:310px;font-size:84px;white-space:normal;width:900px;line-height:1.02" data-in="84.4" data-out="88.2" data-fx="left">A bot fixing LangChain's <span class="llm">docs assistant</span></div>
-<div class="it" style="left:160px;top:560px;font-size:48px;font-weight:800" data-in="85.2" data-out="88.2" data-fx="up">One cluster · 310 PRs · 5 repos</div>
-<div class="it lab" style="left:1380px;top:490px;color:var(--llm);font-size:30px" data-in="84.9" data-out="88.2" data-fx="fade"><span>Bot-led hardening of the docs agent</span></div>
-<!-- ===== 10. End 89.5–94.5 ===== -->
-<div class="it huge c" id="endword" style="top:250px;font-size:300px;letter-spacing:-.02em" data-in="88.5" data-out="99"><span>S</span><span>E</span><span>C</span><span>N</span><span>A</span></div>
-<div class="it c" style="top:580px;font-family:var(--mono);font-size:34px;color:#C9CBD3;letter-spacing:.06em" data-in="89.5" data-out="99" data-fx="up">Summarise · Embed · Cluster · Name · Aggregate</div>
-<div class="it c" style="top:670px;font-size:46px;font-weight:700" data-in="90.2" data-out="99" data-fx="up"><span class="ds">Data science finds the structure</span>, <span class="llm">the LLM gives it meaning.</span></div>
-<div class="it c hot" style="top:810px;font-family:var(--mono);font-size:42px" data-in="91.1" data-out="99" data-fx="up">github.com/mdussere/secna</div>
+<!-- ===== 9b. The unexpected 89.0–95.6 ===== -->
+<div class="it huge" style="left:160px;top:110px;font-size:80px" data-in="87.5" data-out="94.1" data-fx="left">Can it surface the unexpected?</div>
+<div class="it huge" style="left:155px;top:310px;font-size:84px;white-space:normal;width:900px;line-height:1.02" data-in="90.3" data-out="94.1" data-fx="left">A bot fixing LangChain's <span class="llm">docs assistant</span></div>
+<div class="it" style="left:160px;top:560px;font-size:42px;font-weight:800" data-in="91.1" data-out="94.1" data-fx="up">The largest of the 100 clusters · <span class="llm">2% of all PRs</span></div>
+<div class="it lab" style="left:1380px;top:490px;color:var(--llm);font-size:30px" data-in="90.8" data-out="94.1" data-fx="fade"><span>Bot-led hardening of the docs agent</span></div>
+<!-- ===== 10. End 95.7– ===== -->
+<div class="it huge c" id="endword" style="top:250px;font-size:300px;letter-spacing:-.02em" data-in="94.4" data-out="104.9"><span>S</span><span>E</span><span>C</span><span>N</span><span>A</span></div>
+<div class="it c" style="top:580px;font-family:var(--mono);font-size:34px;color:#C9CBD3;letter-spacing:.06em" data-in="95.4" data-out="104.9" data-fx="up">Summarise · Embed · Cluster · Name · Aggregate</div>
+<div class="it c" style="top:670px;font-size:46px;font-weight:700" data-in="96.1" data-out="104.9" data-fx="up"><span class="ds">Data science finds the structure</span>, <span class="llm">the LLM gives it meaning.</span></div>
+<div class="it c hot" style="top:810px;font-family:var(--mono);font-size:42px" data-in="97" data-out="104.9" data-fx="up">github.com/mdussere/secna</div>
 </div>
 <div id="cc" class="off"><span></span></div>
 </div></div>
@@ -211,9 +225,9 @@ body.clean #ui{display:none}
 <script>
 (function(){
 "use strict";
-const STORY = 93.3, W = 1920, H = 1080, N = 1400;
+const STORY = 99.2, W = 1920, H = 1080, N = 1400;
 // [story time, extra seconds]: pauses once a busy screen has settled
-const HOLDS=[[13.4,.9],[20.4,1.3],[27.2,1.0],[32.5,.5],[37.5,.5],[42.5,.5],[47.5,.5],[51.6,.6],[54.5,.9],[60.3,1.0],[62.9,2.2],[69.5,1.0],[74.5,.8],[83.2,0.4],[87.8,0.6]];
+const HOLDS=[[13.4,.9],[20.4,1.3],[27.2,1.0],[32.5,.5],[37.5,.5],[42.5,.5],[47.5,.5],[51.6,.6],[54.5,.9],[60.3,1.0],[61.2,1.0],[62.9,2.2],[69.5,1.0],[74.5,.8],[76.4,1.0],[77.3,1.4],[79.3,1.6],[93.7,0.6]];
 const DUR = STORY + HOLDS.reduce((a,h)=>a+h[1],0);
 function story(T){let off=0;for(const [h,d] of HOLDS){if(T-off<h)break; if(T-off<h+d)return h; off+=d;}return Math.min(STORY,T-off);}
 window.DUR = DUR;
@@ -295,8 +309,8 @@ GL.forEach((g,b)=>{
   const y=BAR_Y0+b*BAR_PITCH+ROWS*CELL/2;
   const len=Math.ceil(g.n/ROWS)*CELL;
   barsEl.insertAdjacentHTML('beforeend',
-   `<div class="it bl" style="left:${BAR_X-640}px;top:${y-18}px" data-in="${(77.2+b*.12).toFixed(2)}" data-out="83.6" data-fx="left">${g[0]}</div>`+
-   `<div class="it bp" style="left:${BAR_X+len+18}px;top:${y-18}px" data-in="${(78.0+b*.12).toFixed(2)}" data-out="83.6" data-fx="fade">${g[1]} %</div>`);
+   `<div class="it bl" style="left:${BAR_X-640}px;top:${y-18}px" data-in="${(82.4+b*.12).toFixed(2)}" data-out="87.3" data-fx="left">${g[0]}</div>`+
+   `<div class="it bp" style="left:${BAR_X+len+18}px;top:${y-18}px" data-in="${(83.2+b*.12).toFixed(2)}" data-out="87.3" data-fx="fade">${g[1]} %</div>`);
 });
 // labels + themes DOM
 const labEl=document.getElementById('labels');
@@ -304,7 +318,7 @@ CL.forEach((c,k)=>{labEl.insertAdjacentHTML('beforeend',`<div class="it lab" id=
 const thEl=document.getElementById('themes');
 THEMES.forEach((th,k)=>{
   const pct=Math.round(CL.filter(c=>c.th===k).reduce((a,c)=>a+c.w,0)*100);
-  thEl.insertAdjacentHTML('beforeend',`<div class="it theme" style="left:${th.x-200+30}px;top:330px;color:${th.col}" data-in="${(49.0+k*.2).toFixed(1)}" data-out="52.0" data-fx="up">${th.n}</div>`)
+  thEl.insertAdjacentHTML('beforeend',`<div class="it theme" style="left:${th.x-200+30}px;top:330px;color:${th.col}" data-in="${(49.0+k*.2).toFixed(1)}" data-out="52" data-fx="up">${th.n}</div>`)
 });
 
 /* ---------- layouts: (p,i,t,o) -> fills o {x,y,w,h,r,g,b,a} ---------- */
@@ -382,9 +396,10 @@ const KF=[
  [48.0,1.6,L_agg,.4],
  [52.0,.6,L_aggDim,0],
  [54.8,.4,L_aggOff,0],
- [76.4,1.6,L_bars,.6],
- [83.6,1.2,L_signal,.4],
- [88.2,1.2,L_end,.3]
+ [75.1,.8,L_field,.3],
+ [81.6,1.6,L_bars,.6],
+ [87.3,1.2,L_signal,.4],
+ [94.1,1.2,L_end,.3]
 ];
 const A={},B={};
 function particleState(p,i,t,o){
@@ -437,7 +452,7 @@ function renderDom(t){
     const v=lerp(c.from,c.to,eo(seg(t,c.t0,c.t1)));
     c.e.textContent=c.fmt==='money'?fmtMoney(v):fmtInt(v);
   }
-  {const sg=document.getElementById('segS'); if(t>60.8&&t<63.3){sg.style.transform=`scaleX(${1-eio(seg(t,61.0,61.9))})`;}}
+  {const sg=document.getElementById('segS'); if(t>60.8&&t<63.3){sg.style.transform=`scaleX(${1-eio(seg(t,61.5,62.4))})`;}}
   for(let k=0;k<3;k++){const w=(eo(seg(t,17.8+k*.3,18.1+k*.3))*100)+'% 11px';document.getElementById('sx'+k).style.backgroundSize='0% 11px';document.getElementById('sxo'+k).style.backgroundSize=w;}
   // rail state
   const act=t<33?0:t<38?1:t<43?2:t<48?3:4;
@@ -460,8 +475,8 @@ function renderDom(t){
   // end word letters
   const ew=document.getElementById('endword').children;
   const cols=['#F3F1EA','#4FD1FF','#4FD1FF','#FF3D7F','#E8FF3A'];
-  for(let k=0;k<5;k++){const q=eback(seg(t,88.6+k*.12,89.1+k*.12));
-    ew[k].style.display='inline-block'; ew[k].style.transform=`translateY(${(1-q)*120}px)`; ew[k].style.opacity=clamp(seg(t,88.6+k*.12,88.8+k*.12)); ew[k].style.color=cols[k];}
+  for(let k=0;k<5;k++){const q=eback(seg(t,94.5+k*.12,95.0+k*.12));
+    ew[k].style.display='inline-block'; ew[k].style.transform=`translateY(${(1-q)*120}px)`; ew[k].style.opacity=clamp(seg(t,94.5+k*.12,94.7+k*.12)); ew[k].style.color=cols[k];}
   // captions
   let cap=''; for(const c of CAPS){if(t>=c[0]&&t<c[1]){cap=c[2];break;}}
   if(cap!==ccLast){ccSpan.textContent=cap; ccSpan.style.display=cap?'inline-block':'none'; ccLast=cap;}
@@ -497,7 +512,7 @@ function renderCanvas(t){
     ctx.fillStyle=g;ctx.fillRect(x-120,AREA.y0-30,120,AREA.y1-AREA.y0+60);
     ctx.fillStyle='#FF3D7F';ctx.fillRect(x-2,AREA.y0-30,4,AREA.y1-AREA.y0+60);}
   // scene wipes
-  for(const s of [6,14,21,28,55,63.5,70,75,83.8,88.3]){
+  for(const s of [6,14,21,28,55,63.5,70,75,77.9,80.2,87.4,94.2]){
     const q=seg(t,s-.25,s+.2); if(q>0&&q<1){const x=lerp(-300,W+300,eio(q));
       ctx.fillStyle='#E8FF3A';ctx.save();ctx.translate(x,0);ctx.transform(1,0,-.25,1,0,0);ctx.fillRect(-60,0,60,H);ctx.restore();}
   }

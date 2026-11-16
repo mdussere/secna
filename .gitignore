@@ -234,9 +234,11 @@ notebook/data/
 notebook/out/
 .DS_Store
 presentation/node_modules/
-# The 90 s video: index.html + capture.mjs are the source; frames and the MP4 are rebuilt
-presentation/video_90s/frames/
-presentation/video_90s/render/
+# The short video (presentation/short/, ~2 min): index.html + capture.mjs are the source; frames and the MP4 are rebuilt
+presentation/short/frames/
+presentation/long/frames/
+presentation/long/render/
+presentation/short/render/
 *.mp4
 
 # Claude Code — local only: the handover note (internal context) and skills linked from
@@ -250,3 +252,8 @@ CLAUDE.local.md
 
 # Commit scripts prepared for review (local only — they hold local paths)
 commits/
+# The talk's voice (presentation/long/tools/voice.py): the Kokoro model and the rendered audio are local;
+# voice/script.js (text, cues, durations) is tracked
+presentation/long/tools/models/
+presentation/long/voice/*.m4a
+presentation/long/voice/.cache/

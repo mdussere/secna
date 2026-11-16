@@ -1,7 +1,7 @@
 // Usage: node capture.mjs frames <t1,t2,...>   -> frames/t_XX.png
 //        node capture.mjs all <outdir> [fps]    -> outdir/00000.png ... (full frame dump)
 // MP4:   mkdir render && node capture.mjs all render 30, then
-//        ffmpeg -framerate 30 -i render/%05d.png -c:v libx264 -pix_fmt yuv420p -crf 20 -movflags +faststart secna_90s.mp4
+//        ffmpeg -framerate 30 -i render/%05d.png -c:v libx264 -pix_fmt yuv420p -crf 20 -movflags +faststart secna_short.mp4
 // Node 22 (mise exec node@22 --); puppeteer-core comes with presentation/node_modules (npm ci); Chrome at the macOS path below.
 import { createRequire } from 'module';
 import path from 'path';
