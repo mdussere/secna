@@ -1,5 +1,5 @@
 ---
-**Status**: 🧪 Active — **short → long** (2026-10-26): the 90-second video is frozen and becomes the base; the 20-min storyboard is written by extending it, in its graphic environment; slide decks archived
+**Status**: 🧪 Active — **short → long** (2026-10-26): the short video (~2 min) is frozen and becomes the base; the 20-min storyboard is written by extending it, in its graphic environment; slide decks archived
 **Date**: 2026-10-09 (restructured 2026-10-23, re-based on the short video 2026-10-26)
 **Priority**: High — **meetup on Thursday 19 November 2026** (date confirmed)
 **Maintained**: Yes
@@ -19,8 +19,8 @@ corpora that keep growing, on the budget I have*. The answer is a recipe several
 **S**ummarise · **E**mbed · **C**luster · **N**ame · **A**ggregate — **SECNA**. Data science finds
 the structure; the LLM gives it meaning; the bill follows the number of groups, not of documents.
 
-**The form is a storyboard, not slides — grown from a short video.** A 90-second video
-([`presentation/video_90s/`](presentation/video_90s/index.html), English, no audio) already tells the whole
+**The form is a storyboard, not slides — grown from a short video.** A short video (~2 min)
+([`presentation/short/`](presentation/short/index.html), English, no audio) already tells the whole
 story with a few high-impact visuals: three dead ends, Clio's bill, the five letters, the cost curve, the
 giants, a real run on LangChain, a weak signal. The short format forced the strong graphs; the long
 format **extends it** — same engine, palette and visual vocabulary, each beat given room (sections,
@@ -45,9 +45,14 @@ recipe end to end with its measured token count; the storyboard is built as an a
   were written under (e.g. `0301_01` intent, `0601_01` storyboard) — no renumbering.
 - `worklines/<name>/` — sub-worklines with their own plan and docs (`secna_notebook`)
 - `notebook/` — the SECNA notebook + a script to fetch the corpus (data and outputs gitignored)
-- `presentation/video_90s/` — **the short video**, the base of the long one: `index.html` (deterministic
+- `presentation/short/` — **the short video**, the base of the long one: `index.html` (deterministic
   `render(t)`, canvas particles + DOM beats, time-warp holds), `capture.mjs` (frames → MP4),
   `facts_en.md` (neutral fact sheet). Frames and MP4 are rebuilt, not committed.
+- `presentation/long/` — **the talk itself** (live, ~20 min): sequences the speaker triggers, each ending on a
+  still screen; progress bar with stop and section marks; `h` lists the keys. Since 2026-11-06 a WebGL scene
+  (`js/gl.js` renderer, `js/talk.js` timeline) where the 14,947 particles are the real LangChain pull requests,
+  on a 3-D map of their embeddings (`data.js`, built from the run by `tools/build_data.py`; positions and
+  numbers only). `capture.mjs stops` writes one still per stop (frames not committed).
 - `presentation/video_candidates/a/` — the long candidate kept from the three context-free agents (3.5),
   a source of material for the long storyboard
 - `presentation/` also holds the archived deck tooling (Marp theme + build, PPTX generator)
@@ -75,7 +80,7 @@ recipe end to end with its measured token count; the storyboard is built as an a
 
 ## Key decisions
 
-- **Short → long** (2026-10-26): the 90-second video is the reference; the long storyboard extends its
+- **Short → long** (2026-10-26): the short video (~2 min) is the reference; the long storyboard extends its
   beats, keeps its engine and visual vocabulary, and adds what a short cannot hold (the notebook ≥ 5 min,
   my recipe, the agents). Not a long video cut down to a short.
 - **Storyboard, five sections** (2026-10-23) → [`references/0601_01_video_narrative_storyboard.md`](references/0601_01_video_narrative_storyboard.md):
@@ -140,8 +145,8 @@ du sens »*. Audience personas for reviews: [`0302_02`](references/0302_02_audie
 - [x] 3.3 **Visual style** — decided by the short video (3.6); the explorations (`presentation/design/`) archived out of the repo.
 - [ ] 3.4 Narration script, written for the ear (French, ~20 min at ~140 words/min).
 - [x] 3.5 **New approach (2026-10-23)** — stop steering the form: the raw material only (story, five sequences, explanations, facts, sources; no style or layout guidance) → [`references/0305_01_video_material.md`](references/0305_01_video_material.md); three context-free agents get the same short prompt (*« Prépare une vidéo qui ne soit pas des slides, moderne, impactful, ~20 min, avec tout ce matériel »*) and work in parallel → `presentation/video_candidates/{a,b,c}/`. **Kept: A** (2026-10-26); B and C removed.
-- [x] 3.6 **The short video** (2026-10-25/26) — 90 s storyboard made by a context-free agent from the neutral fact sheet, then iterated with Michael (English, no captions, pauses after busy screens, real LangChain run with $0.15 as the hero figure, weak signal from the clustering) → [`presentation/video_90s/`](presentation/video_90s/index.html), 1:46. **Frozen** as the base of the long format. Other short variants (`free` FR, `free_v2`, `with_ref_a`) archived out of the repo.
-- [ ] 3.7 **Long storyboard, extended from the short video**: beat by beat, what each short beat becomes in ~20 min (sections, transitions, what is shown, what is said); where the notebook (≥ 5 min), the giants, my recipe and the agent cliffhanger go; what to take from candidate A and from `0601_01`. Same engine and visual vocabulary. → a new storyboard doc; Michael validates before any build.
+- [x] 3.6 **The short video** (2026-10-25/26) — short storyboard made by a context-free agent from the neutral fact sheet, then iterated with Michael (English, no captions, pauses after busy screens, real LangChain run with $0.15 as the hero figure, weak signal from the clustering) → [`presentation/short/`](presentation/short/index.html), 1:46. **Frozen** as the base of the long format. Other short variants (`free` FR, `free_v2`, `with_ref_a`) archived out of the repo.
+- [ ] 3.7 🧪 **Long storyboard, extended from the short video** → draft [`0307_01`](references/0307_01_long_storyboard.md), awaiting Michael: beat by beat, what each short beat becomes in ~20 min (sections, transitions, what is shown, what is said); where the notebook (≥ 5 min), the giants, my recipe and the agent cliffhanger go; what to take from candidate A and from `0601_01`. Same engine and visual vocabulary. → a new storyboard doc; Michael validates before any build.
 - **Acceptance**: each section makes one point with its own visual, in the short video's language;
   Michael validates the long storyboard (3.7) and the script (3.4).
 
@@ -198,7 +203,7 @@ figures, the five-letter explanation, the review personas — and now the short 
 
 - ✅ Step 1 — Scaffold + references
 - ✅ Step 2 — The talk's intent
-- 🧪 Step 3 — The storyboard (3.1, 3.3, 3.5, 3.6 ✅ — short video frozen; **next: 3.7 long storyboard from the short**; 3.2, 3.4 pending)
+- 🧪 Step 3 — The storyboard (3.1, 3.3, 3.5, 3.6 ✅ — short video frozen; **3.7 long storyboard drafted, awaiting validation**; 3.2, 3.4 pending)
 - 📋 Step 4 — The notebook → workline `secna_notebook`
 - ⏳ Step 5 — Build the animated storyboard (live + recorded, voice)
 - ⏳ Step 6 — README
@@ -213,6 +218,13 @@ figures, the five-letter explanation, the review personas — and now the short 
 
 | Timestamp (`date`) | Update |
 |---|---|
+| Fri Nov  6 22:41 CET 2026 | **Long version reworked from the ground — same content, new form** (Michael: *the content is there, get me a breathtaking form*; branch `presentation-rework`, worktree `../secna-rework`, not committed). Unchanged: the 45 sequences, every on-screen sentence and figure, the timings (799 s of animation), the stops, keys and progress bar. New: a WebGL2 renderer (instanced particles and light lines, bloom, depth of field, grain, a 3-D camera) and a timeline of particle layouts, camera and mood keyframes and text effects. **The particles are the corpus, literally**: the 14,947 LangChain pull requests on a 3-D map of their real embeddings (`data.js`, from `tools/build_data.py`), shown as a day-by-day histogram (people · bots · signed by an agent), embedded in run order, coloured by their 100 clusters, gathered into 7 theme galaxies, poured into the run's bars, lit for Open SWE and the two signals. Elsewhere: the opening sky, the flood of text, a 10 × 10 wall of context windows (one lit), the loop as a ring, Clio as a spiral galaxy (blurred when private), SECNA written in particles, Clio's bill as a bar of light whose S dissolves, the cost curves as flows, the agent's path as a comet. Checked: every stop and key mid-animation frames read back; keys and stops; 59 frames/s on the map (headless Chrome); the QR code decodes to the repo; word-list audit: no new hit (only the public Open SWE lines already in v1). Commit script for review in `commits/` (worktree). |
+| Wed Oct 28 01:44 CET 2026 | **Long version v1 built; short renamed** (Michael). Decisions in `0307_03` §3b/§4: 20 min is the whole presentation, live — the speaker triggers each sequence, ⅔ animation then ⅓ still screen, a steerable progress bar (stop marks, bigger section marks); one theme in depth + two weak signals with verbatims; *cluster* = level 0, *theme* = level 1; system fonts. Transitions: questions only at turning points (§3a). Built [`presentation/long/`](presentation/long/index.html): 45 sequences, 5 sections, 799 s of animation (≈ 20 min with the stills), notebook from the real LangChain run; `capture.mjs stops` writes one still per stop. HTML only, no MP4. The short video lasts 1:56, not 90 s: `presentation/video_90s/` → `presentation/short/`, `secna_90s.mp4` → `secna_short.mp4`. |
+| Tue Oct 27 2026 (3.7 analysis) | **Short video frozen; analysis before the long storyboard** (Michael: short first, then extend). Two docs: [`0307_02`](references/0307_02_short_video_analysis.md) — the short shot by shot (15 shots, 1:56), its story as a chain of questions, its graphic concept (the particles are the corpus; cyan = data science, pink = LLM / cost, lime = emphasis; motion vocabulary; pauses as reading rhythm) and nine rules learned in review; [`0307_03`](references/0307_03_short_vs_long.md) — each shot against `0601_01` and candidate A, with what the long version dwells on, deepens or inserts (title, the loop, demonstrated dead ends, letter examples, the notebook after *So we tried it*, table / limits / tomorrow, agents), ≈ 20:05 with 5:30 of notebook; supersedes the map of `0307_01`. Five points to decide. |
+| Tue Oct 27 2026 (90 s, EN v9) | **Short video validated** (Michael: *on va dire c'est bon*). Last touches, HTML only: *without an LLM on every document* and *≈ $500 for a million documents* removed from the bill (redundant / too small); the curve's blue label moved right, between the two curves; *Yes. — A few dozen lines of Python are enough.*, code card lowered by one line. Weak-signal quote not added. Re-rendered: **1:56**. |
+| Tue Oct 27 2026 (90 s, EN v8) | **Within-reach screens given time and colour** (Michael: they chained too fast, plain text). Pauses after *Yes.* (1.0 s), after the Python line (1.4 s) and on *So we tried it* (1.6 s); *A few dozen lines of Python* now shows a five-line code card (S E C in cyan, N A in pink comments); *on LangChain's pull requests* (LangChain in cyan) / *at the lowest possible cost.* (lime), 72 px; a faint drifting particle field behind both. The run screen shortened by 1.5 s and its hold removed. Re-rendered: **1:56**. Weak-signal quote proposed (303 / 310 PRs end with *Opened from a LangSmith Engine issue, which has the diagnosis and the traces that surfaced it.*), awaiting Michael. |
+| Tue Oct 27 2026 (90 s, EN v7) | **Short video: the story told as questions** (Michael, after showing it to colleagues — two transitions unclear). Bill: the title turns into *Can we cut this bill further?* and holds before S collapses to $3.81 (going beyond Clio). New screens after *Not an isolated case*: *Is it within everyone's reach? — Yes. A few dozen lines of Python.* then *So we tried it. LangChain's pull requests, at the lowest possible cost.*; the run's $0.15 now reads *our cost · the whole run*. Weak signal opens on *Can it surface the unexpected?*, then the answer and its weight: *The largest of the 100 clusters · 2% of all PRs* (310 / 14,947). Chip *→ 100 clusters*. Later beats shifted by 5.2 s and 7.4 s (keyframes, holds, wipes, bar labels, ending). Re-rendered: **1:54** (was 1:46). |
+| Mon Oct 26 2026 (3.7) | **3.7 drafted** (Michael's 🟩) → [`references/0307_01_long_storyboard.md`](references/0307_01_long_storyboard.md): each of the short's 11 beats becomes a chapter whose anchor is the short's own screen; same order, same engine and vocabulary; ≈ 20 min — L'impasse 3:00 · Clio 1:30 · SECNA 4:15 · Les gros, et nous 8:15 (notebook 5:30 on the LangChain run, nine cells landing on $0.15) · Ma recette 3:00; a 15-min cut marked; what has to be built; 5 open questions (corpus on stage, a second weak signal to re-check, the hook, groups vs clusters, recorded mode). |
 | Mon Oct 26 00:22 CET 2026 | **Re-based: short → long** (Michael). The 90 s video is frozen as the base of the 20-min format — the long storyboard extends it (same engine and visual vocabulary) instead of cutting a short from a long. **Cleanup**: `free_en` flattened into `presentation/video_90s/` (`index.html`, `capture.mjs`, `facts_en.md`; frames and MP4 gitignored, rebuilt by `capture.mjs` + ffmpeg); long candidates: **A kept**, B and C removed; short variants `free` / `free_v2` / `with_ref_a`, the first video attempt and `presentation/design/` archived out of the repo (`../secna_attic_2026-10-26.tar.gz`). Plan: Status, Overview, layout, key decisions (style and palette = the short video's; no audio), 3.3 / 3.5 closed, **3.6 short video ✅**, **3.7 long storyboard from the short** (next), 5.1 builds on the short's engine. Commit script prepared, awaiting Michael's 🟩. |
 | Sun Oct 25 2026 (90 s, EN v6) | **`free_en` weak signal** (Michael): *7% merged* dropped (misleading) → *One cluster · 310 PRs · 5 repos* (duckdb on the corpus); the cluster cloud and its label enlarged and lowered by about a quarter of their height; descenders no longer cut by the mask reveal (clip extended below the box). Re-rendered: 1:46. |
 | Sun Oct 25 2026 (90 s, EN v5) | **`free_en` wording** (Michael): strike-through drawn over the text (11 px, one bar per line); bill line *92% of the bill is S.*, S label no larger than N's; *Short texts? Skip the LLM.* kept; Aggregate card *LLM · 1 call in total* (LLM calls counted, as for S and N). Re-rendered: 1:46. |
@@ -260,7 +272,11 @@ figures, the five-letter explanation, the review personas — and now the short 
 ## Workline artifacts
 
 - [`CLAUDE.md`](CLAUDE.md) — orientation for Claude Code; [`.claude/skills/secna-deck/`](.claude/skills/secna-deck/SKILL.md) — the deck skill
-- [`presentation/video_90s/`](presentation/video_90s/index.html) — **the short video** (3.6), base of the long format; `capture.mjs` rebuilds frames and the MP4
+- [`references/0307_01_long_storyboard.md`](references/0307_01_long_storyboard.md) — the long storyboard extended from the short video (3.7)
+- [`references/0307_02_short_video_analysis.md`](references/0307_02_short_video_analysis.md) — the short video shot by shot and its graphic concept (3.7)
+- [`references/0307_03_short_vs_long.md`](references/0307_03_short_vs_long.md) — short vs earlier long plan, shot by shot: what to dwell on, deepen, insert (3.7)
+- [`presentation/short/`](presentation/short/index.html) — **the short video** (3.6), base of the long format; `capture.mjs` rebuilds frames and the MP4
+- [`presentation/long/`](presentation/long/index.html) — **the long version, live** (3.7), v1 built 2026-10-28, reworked 2026-11-06 (WebGL, the real map)
 - [`presentation/video_candidates/a/`](presentation/video_candidates/a/index.html) — long candidate A (3.5)
 - `presentation/deck.md` — *(archived slide-deck track)*
 - [`presentation/theme/secna.css`](presentation/theme/secna.css) + `theme/fonts/` — the neutral theme; [`presentation/build.mjs`](presentation/build.mjs) — `node build.mjs all`

@@ -231,20 +231,20 @@ def test_e_embed():
         df.loc[todo, "embedding"] = pd.Series(list(vectors.astype(np.float32)), index=todo)
         df.to_parquet(CORPUS, index=False)
         print(f"{df['embedding'].notna().sum():,} vectors of {vectors.shape[1]} dimensions · {EMBED_MODEL} on the CPU")
-        return
-    client = OpenAI(base_url=os.getenv("SECNA_BASE_URL") or None, api_key=os.environ["SECNA_API_KEY"], max_retries=10)
-    tokens = 0
-    with tqdm(total=len(df), initial=len(df) - len(todo), unit="MR") as bar:
-        for n, i in enumerate(range(0, len(todo), BATCH), 1):
-            rows = todo[i:i + BATCH]
-            r = client.embeddings.create(model=EMBED_MODEL, input=df.loc[rows, "summary"].tolist())
-            df.loc[rows, "embedding"] = pd.Series([np.float32(d.embedding) for d in r.data], index=rows)
-            tokens += r.usage.total_tokens
-            bar.update(len(rows))
-            if n % 50 == 0 or i + BATCH >= len(todo):
-                df.to_parquet(CORPUS, index=False)
-    print(f"{df['embedding'].notna().sum():,} vectors of {len(df['embedding'].iloc[0])} dimensions · "
-          f"{tokens:,} tokens billed this run")
+    else:  # an embedding API, billed per token
+        client = OpenAI(base_url=os.getenv("SECNA_BASE_URL") or None, api_key=os.environ["SECNA_API_KEY"], max_retries=10)
+        tokens = 0
+        with tqdm(total=len(df), initial=len(df) - len(todo), unit="MR") as bar:
+            for n, i in enumerate(range(0, len(todo), BATCH), 1):
+                rows = todo[i:i + BATCH]
+                r = client.embeddings.create(model=EMBED_MODEL, input=df.loc[rows, "summary"].tolist())
+                df.loc[rows, "embedding"] = pd.Series([np.float32(d.embedding) for d in r.data], index=rows)
+                tokens += r.usage.total_tokens
+                bar.update(len(rows))
+                if n % 50 == 0 or i + BATCH >= len(todo):
+                    df.to_parquet(CORPUS, index=False)
+        print(f"{df['embedding'].notna().sum():,} vectors of {len(df['embedding'].iloc[0])} dimensions · "
+              f"{tokens:,} tokens billed this run")
 
 
 # ── Notebook cell: C — Cluster ───────────────────────────────────────────────────────────────
