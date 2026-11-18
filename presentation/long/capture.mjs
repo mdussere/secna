@@ -4,9 +4,9 @@
 //   node capture.mjs pauses            frames/pauses/pNNN.png at every pause of the live talk (its number in the
 //                                      corner), and frames/pauses.html: each still beside the line it ends
 //   node capture.mjs at <t1,t2,…>      frames/t_XXXX.png at those times (seconds)
-//   node capture.mjs events            render/events.json: sequences, cues and notebook runs (for tools/sound.py)
-//   node capture.mjs video [fps]       render/secna_long.mp4: every frame, rendered in 30-second chunks (resumable),
-//                                      then joined with render/mix.wav. SECNA_VIDEO_SECONDS=20 renders a short test
+//   node capture.mjs talk [fps] [workers]  render/secna_talk.mp4: the talk with its recorded voice, as the player plays it
+//                                      (worklines/secna_voice/out/talk/seg_NN.wav as recorded), holds alive, over the
+//                                      looping ambience bed (out/night/chimes.wav); resumable; + a lighter …_share.mp4
 // Node 22+; puppeteer-core comes with presentation/node_modules (npm ci); Chrome at the macOS path below.
 import { createRequire } from 'module';
 import fs from 'fs';
@@ -18,14 +18,14 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const require = createRequire(path.resolve(here, '../node_modules/'));
 const puppeteer = require('puppeteer-core');
 const [mode = 'sheet', arg] = process.argv.slice(2);
-const out = path.join(here, ['events', 'video'].includes(mode) ? 'render' : 'frames'); fs.mkdirSync(out, { recursive: true });
+const out = path.join(here, mode === 'talk' ? 'render' : 'frames'); fs.mkdirSync(out, { recursive: true });
 const browser = await puppeteer.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
   headless: 'new', args: ['--hide-scrollbars', '--use-angle=metal', '--enable-gpu', '--ignore-gpu-blocklist', '--autoplay-policy=no-user-gesture-required'], protocolTimeout: 600000 });
 const page = await browser.newPage();
 page.on('pageerror', e => console.error('page error:', e.message));
 page.on('console', m => { if (m.type() === 'error') console.error('console:', m.text()); });
 await page.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 1 });
-await page.goto('file://' + path.join(here, 'index.html') + '#t=0&clean&novoice');
+await page.goto('file://' + path.join(here, 'index.html') + '#t=0&clean&novoice&still');
 await page.evaluate(() => document.fonts.ready);
 await new Promise(r => setTimeout(r, 400));
 const shot = async (t, file) => { await page.evaluate(t => window.seek(t), t); await page.evaluate(() => new Promise(r => requestAnimationFrame(() => r()))); await page.screenshot({ path: file, type: 'png' }); };
@@ -34,59 +34,77 @@ const openPage = async () => {
   const pg = await browser.newPage();
   pg.on('pageerror', e => console.error('page error:', e.message));
   await pg.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 1 });
-  await pg.goto('file://' + path.join(here, 'index.html') + '#t=0&clean&novoice');
+  await pg.goto('file://' + path.join(here, 'index.html') + '#t=0&clean&novoice&still');
   await pg.evaluate(() => document.fonts.ready);
   await new Promise(r => setTimeout(r, 400));
   return pg;
 };
-if (mode === 'events') {
-  const ev = await page.evaluate(() => ({ dur: window.DUR, seqs: window.SEQS.map(s => ({ id: s.id, part: s.part, off: s.off, dur: s.dur, cues: s.cues })),
-    runs: SNB.resolve((sid, at) => SECNA.cue(sid, at)).filter(a => a.kind === 'run').map(a => ({ t: a.t, cell: a.cell })) }));
-  fs.writeFileSync(path.join(out, 'events.json'), JSON.stringify(ev, null, 1));
-  console.log(`events: ${ev.seqs.length} sequences, ${ev.runs.length} notebook runs → render/events.json`);
-} else if (mode === 'video') {
-  // One page renders 30-second chunks in turn; each chunk is its own H.264 file, kept once complete,
-  // so an interrupted render resumes where it stopped. Then the chunks and render/mix.wav are joined.
-  const fps = +(arg || 30), workers = +(process.argv[4] || 1), CH = 30 * fps, tail = 2.5;
-  const dur = await page.evaluate(() => window.DUR), test = +process.env.SECNA_VIDEO_SECONDS || 0, n = Math.ceil((test || dur + tail) * fps);
-  const mix = path.join(out, 'mix.wav'), dir = path.join(out, test ? 'chunks_test' : 'chunks');
-  if (!fs.existsSync(mix)) { console.error('render/mix.wav is missing: run tools/sound.py first'); process.exit(1); }
-  fs.mkdirSync(dir, { recursive: true });
+if (mode === 'talk') {
+  // The talk with its recorded voice, as the player shows it: clip n plays (at the player's fixed speed) while the
+  // screen moves to pause n, then holds — still alive, on the ambient clock — until the clip ends. Every frame is
+  // a pure function of (T, ambient seconds), so the render is exact and resumable, in 30-second chunks.
+  const fps = +(arg || 30), workers = +(process.argv[4] || 1), CH = 30 * fps, RATE = 1, GAP = .6, LEAD = 1, TAIL = 2.5;
+  const clips = path.resolve(here, '../../worklines/secna_voice/out/talk');
+  const stops = await page.evaluate(() => window.STOPS);
+  const wavSeconds = f => { const b = fs.readFileSync(f); let o = 12, rate = 0; while (o < b.length) { const id = b.toString('ascii', o, o + 4), sz = b.readUInt32LE(o + 4);
+    if (id === 'fmt ') rate = b.readUInt32LE(o + 16); if (id === 'data') return sz / rate; o += 8 + sz + (sz & 1); } throw new Error('no data chunk in ' + f); };
+  let at = LEAD, amb = 0, prev = 0;
+  const segs = stops.map(p => { const f = path.join(clips, `seg_${String(p.n).padStart(2, '0')}.wav`), anim = p.t - prev, len = Math.round((Math.max(anim, wavSeconds(f) / RATE) + GAP) * fps) / fps;
+    const s = { n: p.n, f, at, from: prev, anim, len, amb }; at += len; amb += len - anim; prev = p.t; return s; });
+  const total = at, test = +process.env.SECNA_VIDEO_SECONDS || 0, n = Math.ceil((test || total + TAIL) * fps);
+  const state = t => { if (t < LEAD) return { T: 0, A: t, fade: 0 }; let s = segs[segs.length - 1]; for (const q of segs) if (t < q.at + q.len) { s = q; break; }
+    const e = Math.min(t - s.at, s.len + TAIL); return { T: s.from + Math.min(e, s.anim), A: LEAD + s.amb + Math.max(0, e - s.anim), fade: Math.max(0, Math.min(1, (t - total - .8) / 1.4)) }; };
+  const dir = path.join(out, test ? 'chunks_talk_test' : 'chunks_talk'); fs.mkdirSync(dir, { recursive: true });
+  const run = (cmd, args) => new Promise((res, rej) => spawn(cmd, args, { stdio: ['ignore', 'inherit', 'inherit'] }).on('close', c => c ? rej(new Error(cmd + ' ' + c)) : res()));
+  // the sound: each clip at the player's speed, padded to its place in the timeline; under it, the bed, looped
+  const vdir = path.join(dir, 'voice'); fs.mkdirSync(vdir, { recursive: true });
+  await run('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'lavfi', '-t', String(LEAD), '-i', 'anullsrc=r=48000:cl=stereo', path.join(vdir, 'lead.wav')]);
+  for (const s of segs) await run('ffmpeg', ['-loglevel', 'error', '-y', '-i', s.f, '-af', RATE === 1 ? 'apad' : `atempo=${RATE},apad`, '-t', s.len.toFixed(6), '-ar', '48000', '-ac', '2', path.join(vdir, `v${String(s.n).padStart(2, '0')}.wav`)]);
+  await run('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'lavfi', '-t', String(TAIL + .5), '-i', 'anullsrc=r=48000:cl=stereo', path.join(vdir, 'tail.wav')]);   // silence under the closing fade
+  fs.writeFileSync(path.join(vdir, 'list.txt'), ["file 'lead.wav'", ...segs.map(s => `file 'v${String(s.n).padStart(2, '0')}.wav'`), "file 'tail.wav'"].join('\n') + '\n');
+  const voice = path.join(dir, 'voice.wav');
+  await run('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', path.join(vdir, 'list.txt'), '-c', 'copy', voice]);
+  // the bed: its own level (−34 LUFS, about 15 dB under the voice), no ducking; in with the lead, out with the closing fade
+  const bed = path.resolve(here, '../../worklines/secna_voice/out/night/chimes.wav'), sound = path.join(dir, 'sound.wav');
+  await run('ffmpeg', ['-loglevel', 'error', '-y', '-i', voice, '-stream_loop', '-1', '-i', bed, '-filter_complex',
+    `[1:a]aresample=48000,afade=t=in:d=${LEAD + 1.5},afade=t=out:st=${total.toFixed(3)}:d=2.5[b];[0:a][b]amix=inputs=2:normalize=0:duration=first[m]`,
+    '-map', '[m]', '-c:a', 'pcm_s16le', sound]);
+  fs.writeFileSync(path.join(dir, 'timeline.json'), JSON.stringify({ fps, rate: RATE, total, segments: segs.map(({ n, at, len, anim }) => ({ n, at: +at.toFixed(3), len: +len.toFixed(3), anim: +anim.toFixed(3) })) }, null, 1));
+  console.log(`talk: ${segs.length} clips at ×${RATE} · ${fmt(total)} · ${n} frames at ${fps} fps · ${workers} worker(s)`);
   const chunks = Math.ceil(n / CH), name = c => path.join(dir, `chunk_${String(c).padStart(3, '0')}.mp4`);
-  let next = 0, done = 0;
-  const t0 = Date.now();
+  let next = 0; const t0 = Date.now(); let made = 0;
   await Promise.all([...Array(Math.min(workers, chunks))].map(async () => {
     const pg = await openPage();
     for (let c = next++; c < chunks; c = next++) {
-      if (fs.existsSync(name(c) + '.done')) { done++; continue; }
+      if (fs.existsSync(name(c) + '.done')) continue;
       const a = c * CH, b = Math.min(n, a + CH);
       const ff = spawn('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-',
-        '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '18', '-pix_fmt', 'yuv420p', '-r', String(fps), name(c)], { stdio: ['pipe', 'inherit', 'inherit'] });
+        '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '18', '-pix_fmt', 'yuv420p', '-r', String(fps), name(c)], { stdio: ['pipe', 'inherit', 'inherit'] });   // a master: large; compress a copy to share
       for (let k = a; k < b; k++) {
-        const t = k / fps;
-        await pg.evaluate((t, dur) => {   // past the end: hold the last frame and fade to black
-          window.seek(Math.min(t, dur));
+        await pg.evaluate(st => { window.SECNA.amb(st.A); window.seek(st.T);
           let d = document.getElementById('capfade');
           if (!d) { d = document.createElement('div'); d.id = 'capfade'; d.style.cssText = 'position:fixed;inset:0;background:#000;pointer-events:none;z-index:99;opacity:0'; document.body.appendChild(d); }
-          d.style.opacity = String(Math.max(0, Math.min(1, (t - dur - .8) / 1.4)));
-        }, t, dur);
+          d.style.opacity = String(st.fade); }, state(k / fps));
         const buf = await pg.screenshot({ type: 'jpeg', quality: 92 });
         if (!ff.stdin.write(buf)) await once(ff.stdin, 'drain');
       }
       ff.stdin.end(); await once(ff, 'close');
-      fs.writeFileSync(name(c) + '.done', '');
-      done++;
+      fs.writeFileSync(name(c) + '.done', ''); made += b - a;
       const el = (Date.now() - t0) / 1000;
-      console.log(`chunk ${c + 1}/${chunks} · ${el.toFixed(0)} s · ${(b / el).toFixed(1)} frames/s overall`);
+      console.log(`chunk ${c + 1}/${chunks} · ${el.toFixed(0)} s · ${(made / el).toFixed(1)} frames/s`);
     }
     await pg.close();
   }));
   fs.writeFileSync(path.join(dir, 'list.txt'), [...Array(chunks)].map((_, c) => `file '${path.basename(name(c))}'`).join('\n') + '\n');
-  const final = path.join(out, test ? 'secna_long_test.mp4' : 'secna_long.mp4');
-  await new Promise((res, rej) => spawn('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', path.join(dir, 'list.txt'), '-i', mix,
-    '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', final], { stdio: 'inherit' })
-    .on('close', c => c ? rej(new Error('ffmpeg ' + c)) : res()));
+  const final = path.join(out, test ? 'secna_talk_test.mp4' : 'secna_talk.mp4');
+  await run('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', path.join(dir, 'list.txt'), '-i', sound,
+    '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '160k', '-shortest', '-movflags', '+faststart', final]);
   console.log(`→ ${path.relative(here, final)} · ${n} frames at ${fps} fps · ${((Date.now() - t0) / 60000).toFixed(1)} min`);
+  if (!test) {   // the master is large (crf 18): a lighter copy to share
+    const share = final.replace('.mp4', '_share.mp4');
+    await run('ffmpeg', ['-loglevel', 'error', '-y', '-i', final, '-c:v', 'libx264', '-preset', 'medium', '-crf', '26', '-pix_fmt', 'yuv420p', '-c:a', 'copy', '-movflags', '+faststart', share]);
+    console.log(`→ ${path.relative(here, share)}`);
+  }
 } else if (mode === 'pauses') {   // the live talk: what the screen holds at each pause
   const stops = await page.evaluate(() => window.STOPS), seqs = await page.evaluate(() => window.SEQS);
   const byId = Object.fromEntries(seqs.map(s => [s.id, s])), dir = path.join(out, 'pauses'); fs.mkdirSync(dir, { recursive: true });

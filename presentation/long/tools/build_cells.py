@@ -1,11 +1,10 @@
-"""Build presentation/long/nb_cells.js — the stage notebook's cells, cut from the real notebook.
+"""Build presentation/long/nb_cells.js — the stage notebook's cells, cut from its display source.
 
-The talk's pseudo-Jupyter (Part 2) shows the notebook's own code, never a copy typed by hand: this
-script reads notebook/test_secna.py and notebook/test_secna_langchain.py, cuts them at their
-"# ── Notebook cell:" markers, unwraps each pytest function into plain cell code (the `def test_…():`
-line goes, its body is dedented), and writes the cells as JSON. Two edits only, both listed below:
-the configuration cell carries the values the LangChain run sets through environment variables, and
-the data path is relative, as in a notebook.
+The talk's pseudo-Jupyter (Part 2) shows presentation/long/nb_display.py: a simplified copy of the
+repository's notebook (notebook/test_secna.py + test_secna_langchain.py), written for the screen. The
+repository's notebook is the one that ran and stays unchanged. This script cuts the display source at
+its "# ── Notebook cell: <id>" markers and writes the cells as JSON; the module docstring before the
+first marker is not shown. Three blank lines or more become one, as in a notebook.
 
   python3 presentation/long/tools/build_cells.py        (from the repo root; standard library only)
 """
@@ -13,96 +12,35 @@ import json
 import pathlib
 import re
 
-ROOT = pathlib.Path(__file__).resolve().parents[3]
-NB = ROOT / "notebook"
-OUT = ROOT / "presentation" / "long" / "nb_cells.js"
-MARK = re.compile(r"^# ── (Notebook cell|Check): (.*?)\s*─*$")
-
-# The configuration of the LangChain run (test_secna_langchain.py sets it through SECNA_* variables).
-CONFIG = {
-    "REPOS = [": 'REPOS = ["github.com/langchain-ai"]        # the whole organisation',
-    "NAME, TITLE = ": 'NAME, TITLE = "langchain", "LangChain"',
-    "EMBED_MODEL = ": 'EMBED_MODEL = "sentence-transformers/LaBSE"  # a local model, on the CPU — or "text-embedding-3-large"',
-    "DATA = ": 'DATA = pathlib.Path("data") / f"{NAME}_{SINCE}_{UNTIL}"',
-}
-DROP = ("REPOS = os.getenv", "NAME, TITLE = os.getenv", "SINCE, UNTIL = os.getenv", "# Another corpus")
+HERE = pathlib.Path(__file__).resolve().parents[1]
+SRC = HERE / "nb_display.py"
+OUT = HERE / "nb_cells.js"
+MARK = re.compile(r"^# ── Notebook cell: (\w+)\s*─*$")
 
 
-def segments(path):
-    """(kind, title, lines) for the imports, then for every marked cell."""
-    lines = path.read_text(encoding="utf-8").splitlines()
-    out, cur = [], None
-    for i, line in enumerate(lines):
+def cells(path):
+    """[{id, src}] for every marked cell, in order."""
+    out = []
+    for line in path.read_text(encoding="utf-8").splitlines():
         m = MARK.match(line)
         if m:
-            cur = [m.group(1), m.group(2), []]
-            out.append(cur)
-        elif cur is not None:
-            cur[2].append(line)
-        elif line.startswith(("import ", "from ")) and "test_secna" not in line:
-            if not out or out[0][0] != "imports":
-                out.insert(0, ["imports", "imports", []])
-            out[0][2].append(line)
+            out.append({"id": m.group(1), "lines": []})
+        elif out:
+            out[-1]["lines"].append(line)
+    for c in out:
+        text = re.sub(r"\n{3,}", "\n\n", "\n".join(c.pop("lines")).strip("\n"))
+        c["src"] = re.sub(r"  # noqa[^\n]*", "", text)
     return out
 
 
-def unwrap(lines):
-    """Module-level code as is; a `def test_…():` line dropped and its body dedented by 4."""
-    out, inside = [], False
-    for line in lines:
-        if re.match(r"^def test_\w*\(\):", line):
-            inside = True
-            continue
-        if inside and line and not line.startswith(" "):
-            inside = False
-        out.append(line[4:] if inside and line.startswith("    ") else line)
-    text = "\n".join(out).strip("\n")
-    return re.sub(r"\n{3,}", "\n\n", text)                      # one blank line between blocks
-
-
-def configure(lines):
-    out = []
-    for line in lines:
-        if line.startswith(DROP):
-            continue
-        key = next((k for k in CONFIG if line.startswith(k)), None)
-        if key == "REPOS = [":                                    # the GitLab list spans several lines
-            out.append(CONFIG[key])
-            continue
-        out.append(CONFIG[key] if key else line)
-    # the GitLab list's continuation lines (indented sources and the closing bracket)
-    return [l for l in out if not re.match(r'^\s+"gitlab\.com/|^\]$', l)]
-
-
-IDS = {"configuration": "config", "the corpus": "extract", "S": "s", "E": "e", "C": "c", "N": "n", "A": "a",
-       "the picture": "graph", "who writes": "who", "the unexpected": "unexpected", "the next day": "route"}
-
-
-def cell_id(title):
-    return next(v for k, v in IDS.items() if title.startswith(k))
-
-
 def main():
-    cells = []
-    for path in (NB / "test_secna.py", NB / "test_secna_langchain.py"):
-        for kind, title, lines in segments(path):
-            if kind == "Check" or (kind == "imports" and path.name != "test_secna.py"):
-                continue
-            if kind == "imports":
-                cells.append({"id": "imports", "title": "imports", "src": "\n".join(lines)})
-                continue
-            cid = cell_id(title)
-            if cid == "config":
-                lines = configure(lines)
-            head = f"# {title}"
-            cells.append({"id": cid, "title": title, "src": head + "\n" + unwrap(lines)})
-    OUT.write_text("// Generated by tools/build_cells.py from notebook/test_secna*.py — do not edit.\n"
-                   "window.SECNA_CELLS=" + json.dumps(cells, ensure_ascii=False, indent=0) + ";\n", encoding="utf-8")
-    for c in cells:
+    cs = cells(SRC)
+    OUT.write_text("// Generated by tools/build_cells.py from nb_display.py — do not edit.\n"
+                   "window.SECNA_CELLS=" + json.dumps(cs, ensure_ascii=False, indent=0) + ";\n", encoding="utf-8")
+    for c in cs:
         n = sum(1 for l in c["src"].splitlines() if l.strip())
-        print(f"{c['id']:11s} {n:3d} non-blank lines")
-    steps = sum(sum(1 for l in c["src"].splitlines() if l.strip()) for c in cells if c["id"] in "secna")
-    print(f"S+E+C+N+A: {steps} non-blank lines")
+        print(f"{c['id']:8s} {n:3d} non-blank lines")
+    print(f"all but the picture: {sum(sum(1 for l in c['src'].splitlines() if l.strip()) for c in cs if c['id'] != 'graph')} non-blank lines")
 
 
 if __name__ == "__main__":

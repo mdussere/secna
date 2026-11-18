@@ -31,7 +31,7 @@ body.idle{cursor:none}
 .tn{font-variant-numeric:tabular-nums}
 
 /* ═══════════ Part 1 · night ═══════════ */
-#night .k{font:500 26px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--soft);padding-left:52px}
+#night .k{font:500 30px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--soft);padding-left:52px}
 #night .k::before{content:"";position:absolute;left:0;top:12px;width:34px;height:2px;background:var(--hot);box-shadow:0 0 14px rgba(232,255,58,.7)}
 #night .k.c,#night .k.n{padding-left:0} #night .k.c::before,#night .k.n::before{display:none}
 .xl{font-weight:800;letter-spacing:-.045em;line-height:.94}
@@ -64,12 +64,18 @@ body.idle{cursor:none}
 .lab span{color:var(--paper)}
 .frame{border:2px solid var(--hot);border-radius:6px;box-shadow:0 0 40px rgba(232,255,58,.35),inset 0 0 40px rgba(232,255,58,.08)}
 .rx{width:700px;white-space:normal}
-.rx .n{font:500 24px/1 var(--mono);color:var(--llm);letter-spacing:.14em}
+.rx .n{font:600 44px/1 var(--mono);color:var(--llm);letter-spacing:.08em}
 .rx .h{font-size:54px;font-weight:800;line-height:1.04;margin-top:14px;letter-spacing:-.03em}
 .rx .d{font-size:30px;line-height:1.3;color:var(--soft);margin-top:14px;font-weight:500}
 .sx{background:linear-gradient(var(--llm),var(--llm)) no-repeat 0 58%/0% 8px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
-.rail{left:84px;font-size:96px;font-weight:900;line-height:1;width:120px;text-align:center;color:transparent;-webkit-text-stroke:1.6px rgba(255,255,255,.22)}
-.rail.on{-webkit-text-stroke:0}
+.rail{left:84px;font-size:96px;font-weight:900;line-height:1;width:120px;text-align:center;color:rgba(255,255,255,.13)}
+/* a bullet point: short lines that appear one by one */
+.bu{font-size:36px;font-weight:600;line-height:1.24;color:#DCDFE6;padding-left:38px;white-space:normal;text-shadow:0 0 22px #000,0 0 10px #000}
+.bu::before{content:"";position:absolute;left:4px;top:.46em;width:13px;height:13px;border-radius:50%;background:var(--hot)}
+.bu.ds::before{background:var(--ds)} .bu.llm::before{background:var(--llm)} .bu.ds,.bu.llm{color:#DCDFE6}
+.grp{font:600 24px/1.1 var(--mono);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.code pre{margin:0;font:500 36px/1.55 var(--mono);color:#E6E8EE;text-shadow:0 0 20px #000}
+.code .kw{color:var(--hot)} .code .ds{color:var(--ds)} .code .llm{color:var(--llm)}
 .step{left:300px;top:96px}
 .step .v{font-size:88px;font-weight:800;letter-spacing:-.04em;line-height:1}
 .step .d{font-size:36px;color:#D6D9E0;margin-top:14px;font-weight:550;letter-spacing:-.01em}
@@ -88,6 +94,8 @@ body.idle{cursor:none}
 .lim .d{font-size:32px;line-height:1.32;color:var(--soft);margin-top:12px;font-weight:500}
 .qr{background:#F4F2EC;border-radius:14px;padding:22px;box-shadow:0 0 0 1px rgba(255,255,255,.2),0 0 80px rgba(232,255,58,.18)}
 .qr svg{display:block;width:100%;height:100%}
+.lnk{display:inline-block;pointer-events:auto;cursor:pointer;text-decoration:none;font:500 22px/1 var(--mono);letter-spacing:.06em;color:var(--ds);padding:11px 18px 10px;border-radius:30px;border:1px solid rgba(79,209,255,.5);background:rgba(79,209,255,.08)}
+.lnk:hover{background:rgba(79,209,255,.2);border-color:var(--ds)}
 .ill{font:500 20px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
 
 /* ═══════════ Part 2 · the notebook (JupyterLab, light) ═══════════ */
@@ -116,11 +124,11 @@ body.idle{cursor:none}
 #nb .jl-busy{width:16px;height:16px;border-radius:50%;border:2px solid #616161}
 #nb .jl-busy.on{background:#616161}
 #nb .jl-scroll{flex:1;position:relative;overflow:hidden;background:#fff}
-#nb .jl-cells{position:absolute;left:0;right:0;top:0;padding:18px 40px 380px 6px;transform-origin:0 0;will-change:transform}
+#nb .jl-cells{position:absolute;left:0;right:0;top:0;padding:18px 40px 60px 6px;transform-origin:0 0;will-change:transform}
 #nb .jl-cell{position:relative;display:block;margin:0 0 10px;padding:6px 0 6px 10px;border-left:5px solid transparent}
 #nb .jl-cells.ov{right:auto;width:7400px;column-count:4;column-gap:80px;padding-bottom:18px}
-#nb .jl-out.note pre{font:400 19px/27px var(--mono);color:#7a2a1d;background:#fdecea;padding:6px 12px;margin:4px 8px 0 18px}
-#nb .jl-out.more pre{color:#9e9e9e;font-style:italic}
+#nb .jl-cells.ov .jl-cell{break-inside:avoid}
+#nb .jl-out.stderr pre{background:#fdd;margin:2px 8px 2px 18px;padding:4px 10px}
 #nb .jl-cell.active{border-left-color:#1976d2}
 #nb .jl-in{display:flex}
 #nb .jl-prompt,#nb .jl-oprompt{flex:none;width:96px;font:400 19px/28px var(--mono);color:#307fc1;text-align:right;padding-right:12px;padding-top:7px;white-space:nowrap}
@@ -132,30 +140,47 @@ body.idle{cursor:none}
 #nb .ln.hl{background:rgba(255,213,0,.36);box-shadow:inset 4px 0 0 #f2b600}
 #nb .jl-foldrow{display:flex;font:400 19px/30px var(--mono);color:#1976d2;background:#e8f0fb;margin:2px 0}
 #nb .jl-foldrow b{width:52px;text-align:right;padding-right:16px;font-weight:600}
-#nb .jl-foldbody{overflow:hidden}
+#nb .jl-foldbody{display:none}
 #nb .jl-outs{display:block}
 #nb .jl-out{display:flex}
 #nb .jl-out pre{flex:1;min-width:0;font:400 19px/27px var(--mono);color:#212121;padding:6px 8px 6px 18px;white-space:pre-wrap;word-break:break-word}
-#nb .jl-out pre span.hl{background:rgba(255,213,0,.42);box-shadow:-4px 0 0 rgba(255,213,0,.42),4px 0 0 rgba(255,213,0,.42)}
-#nb .jl-out.progress pre{color:#212121}
 #nb .jl-img{position:relative;padding:8px 18px;max-width:1460px}
 #nb .jl-img img{display:block;width:100%;height:auto}
-#nb .jl-marks{position:absolute;left:18px;right:18px;top:8px;bottom:8px;pointer-events:none}
-#nb .jl-marks i{position:absolute;left:0;right:0;background:rgba(255,213,0,.30);border-left:5px solid #f2b600}
 #nb .jl-cell.md{padding-top:10px;padding-bottom:12px}
 #nb .jl-cell.md .jl-prompt{display:inline-block;vertical-align:top}
 #nb .jl-mdbody{display:inline-block;width:calc(100% - 110px);vertical-align:top;padding-left:18px}
 #nb .jl-mdbody h1{font:600 40px/1.25 var(--text);color:#212121;margin:4px 0 12px}
-#nb .jl-mdbody h2{font:600 32px/1.25 var(--text);color:#212121;margin:4px 0 10px}
-#nb .jl-mdbody p{font:400 21px/1.5 var(--text);color:#424242;max-width:1400px}
-#nb .s{color:#ba2121} #nb .c{color:#3d7a7a;font-style:italic} #nb .n{color:#008000} #nb .k{color:#008000;font-weight:700}
-#nb .b{color:#008000} #nb .f{color:#0000ff} #nb .o{color:#aa22ff}
+#nb .jl-mdbody p{font:400 21px/1.5 var(--text);color:#424242;max-width:1250px}
+#nb .xs{color:#ba2121} #nb .xc{color:#3d7a7a;font-style:italic} #nb .xn{color:#008000} #nb .xk{color:#008000;font-weight:700}
+#nb .xb{color:#008000} #nb .xf{color:#0000ff} #nb .xo{color:#aa22ff}
 #nb .jl-status{height:34px;flex:none;display:flex;align-items:center;gap:26px;padding:0 18px;font-size:16px;color:#616161;border-top:1px solid #e0e0e0;background:#fff}
 #nb .jl-simple{display:flex;align-items:center;gap:8px}
 #nb .jl-simple i{width:30px;height:16px;border-radius:8px;background:#bdbdbd;display:inline-block}
 #nb .jl-count{font:500 16px var(--mono);color:#616161;padding:3px 10px;border-radius:4px;background:#f5f5f5;transition:none}
 #nb .jl-count b{color:#1976d2}
 #nb .jl-count.beat{background:#fff3c4;color:#212121;box-shadow:0 0 0 2px #f2b600}
+#nb .jl-veil{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+#nb .jl-qr{position:absolute;top:18px;right:34px;width:244px;padding:14px 14px 12px;background:#fff;border:1px solid #e0e0e0;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.10);text-align:center;transform-origin:100% 0;opacity:0}
+#nb .jl-qr .q svg{display:block;width:196px;height:196px;margin:0 auto}
+#nb .jl-qr .u{font:400 15px/1.35 var(--text);color:#616161;margin-top:8px}
+#nb .jl-qr .u b{font:600 13.5px var(--mono);color:#1976d2;white-space:nowrap}
+#nb .jl-note{position:absolute;right:40px;width:480px;padding:20px 26px 22px;background:#fff;border:1px solid #e0e0e0;border-left:5px solid #1976d2;border-radius:6px;box-shadow:0 10px 32px rgba(0,0,0,.12);visibility:hidden}
+#nb .jl-note .h{display:flex;align-items:center;gap:14px;font:700 31px/1.1 var(--text);color:#212121;letter-spacing:-.01em}
+#nb .jl-note .h b,#nb .jl-bill .r b{flex:none;width:46px;height:46px;border-radius:8px;display:grid;place-items:center;font:800 27px/1 var(--text);color:#05060A}
+#nb b.ds{background:var(--ds)} #nb b.llm{background:var(--llm)}
+#nb .jl-note p{font:400 24px/1.4 var(--text);color:#424242;margin:12px 0 0}
+#nb .jl-note code{font:500 22px var(--mono);background:rgba(255,213,0,.36);padding:1px 6px;border-radius:3px;color:#212121}
+#nb .jl-note .f{font:500 20px/1.3 var(--mono);color:#1976d2;margin-top:14px}
+#nb .jl-bill{position:absolute;left:300px;top:50%;width:980px;padding:36px 46px 34px;background:#fff;border:1px solid #e0e0e0;border-radius:14px;box-shadow:0 24px 70px rgba(0,0,0,.18);visibility:hidden;color:#212121}
+#nb .jl-bill .k{font:500 18px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#1976d2}
+#nb .jl-bill .m{font:700 40px/1.2 var(--text);margin:14px 0 22px;letter-spacing:-.01em}
+#nb .jl-bill .r{display:flex;align-items:center;gap:20px;padding:10px 0;border-top:1px solid #eee;font:400 27px/1.2 var(--text);text-align:left}
+#nb .jl-bill .r .h{width:180px;font-weight:700}
+#nb .jl-bill .r .w{flex:1;color:#616161}
+#nb .jl-bill .r .v{font:600 27px var(--mono);text-align:right;min-width:150px}
+#nb .jl-bill .t{display:flex;align-items:baseline;gap:24px;margin-top:12px;padding-top:18px;border-top:3px solid #212121}
+#nb .jl-bill .t .v{font:900 100px/1 var(--text);letter-spacing:-.03em}
+#nb .jl-bill .t .w{font:600 32px/1.2 var(--text);color:#424242}
 
 /* ═══════════ controls, review panel ═══════════ */
 #app{position:absolute;inset:0}
@@ -188,8 +213,16 @@ body.clean #bar{display:none}
 #track .pl{position:absolute;top:-10px;font:600 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);white-space:nowrap}
 #track .pl.on{color:#fff}
 #bar .sp{flex:none;width:250px}
-#snd{flex:none;font:500 12px/1 var(--mono);color:#aab;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:6px;padding:6px 10px;cursor:pointer}
-#snd.on{color:var(--hot);border-color:rgba(232,255,58,.45)}
+#playB{flex:none;font:600 12px/1 var(--mono);color:#05060A;background:var(--hot);border:1px solid var(--hot);border-radius:6px;padding:6px 12px;cursor:pointer;min-width:74px}
+#start{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(5,6,10,.55);z-index:20}
+#start .bx{display:flex;flex-direction:column;align-items:center;gap:18px;padding:38px 54px;border-radius:18px;background:rgba(8,9,14,.92);border:1px solid rgba(255,255,255,.14);font-family:var(--sans);color:var(--paper)}
+#start .tt{font:800 30px/1.1 var(--sans);letter-spacing:-.02em}
+#start button{font:600 18px/1 var(--sans);border-radius:10px;padding:14px 26px;cursor:pointer;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#ccd}
+#start #startPlay{font-size:24px;padding:18px 44px;color:#05060A;background:var(--hot);border-color:var(--hot)}
+#start #startVoice.on,#start #startBed.on,#start #startLang.on{color:var(--hot);border-color:rgba(232,255,58,.45)}
+#start .rw{display:flex;gap:12px}
+#snd,#bedB,#langB{flex:none;font:500 12px/1 var(--mono);color:#aab;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:6px;padding:6px 10px;cursor:pointer}
+#snd.on,#bedB.on,#langB.on{color:var(--hot);border-color:rgba(232,255,58,.45)}
 /* the pause number and the time: always on screen (b hides them), to name a moment of the talk */
 #hud{position:absolute;right:28px;bottom:8px;display:flex;align-items:center;gap:8px;pointer-events:none;font:500 13px/1 var(--mono);z-index:5}
 #hud .pn{display:flex;align-items:baseline;gap:7px;padding:5px 11px 6px 10px;border-radius:8px;background:rgba(8,9,14,.66);border:1px solid rgba(255,255,255,.14);color:#99a}
@@ -217,76 +250,100 @@ body.help #help{display:block}
 
 <!-- ── Part 1 · the recipe ── -->
 <section data-s="title">
-<div class="it k c" style="top:300px" data-in="0.2" data-fx="fade">Generative AI Bordeaux · Meetup #7 · 19 November 2026</div>
+<div class="it k c" style="top:290px" data-in="0.2" data-fx="fade">Generative AI Bordeaux · Meetup #7 · 19 November 2026</div>
 <div class="it xl c sh" style="top:372px;font-size:128px" data-in="c0" data-fx="words">Your corpora keep growing.</div>
-<div class="it xl c hot gh" style="top:512px;font-size:128px" data-in="c0+1.9" data-fx="words">Your token budget doesn't.</div>
-<div class="it c" style="top:746px;font-size:40px;font-weight:650;letter-spacing:-.01em" data-in="c1" data-fx="up">Michael Dussère</div>
+<div class="it xl c hot gh" style="top:512px;font-size:128px" data-in="c0+0.9" data-fx="words">Your token budget doesn't.</div>
+<div class="it c" style="top:740px;font-size:44px;font-weight:650;letter-spacing:-.01em" data-in="c1" data-fx="up">Michaël Dussère</div>
+<div class="it s c" style="top:806px" data-in="c1+0.3" data-fx="up">Senior Solution Architect · Betclic</div>
 </section>
 
 <section data-s="pile">
 <div class="it k" style="left:160px;top:150px" data-in="c0">Text that keeps coming in</div>
-<div class="it h1 sh" style="left:152px;top:250px" data-in="c0+0.1" data-out="c1" data-fx="words">We all have a pile.</div>
 <div class="it src sh" style="left:152px;top:240px" data-in="c1+0.1" data-out="c3" data-fx="slam">Customer reviews</div>
-<div class="it src sh" style="left:152px;top:350px" data-in="c1+1.5" data-out="c3" data-fx="slam">Support tickets</div>
-<div class="it src sh" style="left:152px;top:460px" data-in="c1+3.0" data-out="c3" data-fx="slam">Seller messages</div>
-<div class="it src sh" style="left:152px;top:570px" data-in="c1+4.4" data-out="c3" data-fx="slam">Application logs</div>
+<div class="it src sh" style="left:152px;top:350px" data-in="c1+0.5" data-out="c3" data-fx="slam">Support tickets</div>
+<div class="it src sh" style="left:152px;top:460px" data-in="c1+0.9" data-out="c3" data-fx="slam">Seller messages</div>
+<div class="it src sh" style="left:152px;top:570px" data-in="c1+1.3" data-out="c3" data-fx="slam">Chat conversations</div>
 <div class="it h2 hot gh" style="left:156px;top:740px" data-in="c2" data-out="c3" data-fx="words">Every day, more.</div>
 <div class="it xl c sh" style="top:460px;font-size:120px" data-in="c3" data-fx="focus">Nobody reads it all.</div>
 </section>
 
 <section data-s="wall">
 <div class="it k" style="left:1100px;top:150px" data-in="c0">Three reflexes</div>
-<div class="it rx" style="left:1100px;top:210px;width:760px" data-in="c1" data-fx="up"><div class="n">01</div><div class="h">Give the model everything</div></div>
-<div class="it b sh" style="left:1100px;top:350px" data-in="c2" data-out="c5" data-fx="up">1,000,000 reviews × ~100 tokens</div>
-<div class="it xl tn sh" style="left:1092px;top:416px;font-size:112px" data-in="c2+2.6" data-out="c5" data-fx="fade"><span data-count="0,100000000,c2+2.6,c2+5.6,int">0</span></div>
-<div class="it s" style="left:1100px;top:540px" data-in="c2+3.2" data-out="c5">tokens · one dot ≈ 7,000 tokens</div>
-<div class="it b hot gh wrap" style="left:1100px;top:630px;width:720px" data-in="c3" data-out="c5" data-fx="up">The largest context windows take a few million.</div>
-<div class="it h2 llm gl wrap" style="left:1096px;top:770px;width:760px" data-in="c4" data-out="c5" data-fx="slam">It doesn't fit. What fits gets diluted.</div>
-<div class="it b sh wrap" style="left:1100px;top:350px;width:720px" data-in="c5+0.3" data-fx="words">Bigger models won't fix it. The stronger they get, the more they write: summaries, agent traces, pull requests. And the faster the pile grows.</div>
-<div class="it frame" style="width:170px;height:88px;transform:translate(-50%,-50%)" data-in="c3" data-fx="fade" data-ax="227" data-ay="171" data-scale></div>
+<div class="it rx" style="left:1100px;top:210px;width:760px" data-in="c1" data-out="end+0.7" data-fx="up"><div class="n">01</div><div class="h"><span class="sx" data-strike="end-0.25">Give the model everything</span></div></div>
+<div class="it b sh" style="left:1100px;top:390px" data-in="c2" data-out="c5" data-fx="up">1,000,000 reviews × ~100 tokens</div>
+<div class="it xl tn sh" style="left:1092px;top:456px;font-size:112px" data-in="c2+0.5" data-out="c5" data-fx="fade"><span data-count="0,100000000,c2+0.5,c2+2.1,int">0</span></div>
+<div class="it b hot gh wrap" style="left:1100px;top:660px;width:720px" data-in="c3" data-out="c5" data-fx="up">The largest context windows take a few million.</div>
+<div class="it h2 llm gl wrap" style="left:1096px;top:790px;width:760px" data-in="c4" data-out="c5" data-fx="slam">It doesn't fit. What fits gets diluted.</div>
+<div class="it bu wrap" style="left:1100px;top:400px;width:740px" data-in="c5+0.3" data-out="end+0.7" data-fx="up">Bigger models won't fix it.</div>
+<div class="it bu wrap" style="left:1100px;top:500px;width:740px" data-in="c5+0.8" data-out="end+0.7" data-fx="up">The stronger they get, the more they write: summaries, agent traces, pull requests.</div>
+<div class="it bu wrap" style="left:1100px;top:650px;width:740px" data-in="c5+1.3" data-out="end+0.7" data-fx="up">The pile grows faster than the models.</div>
+<div class="it frame" style="width:170px;height:88px;transform:translate(-50%,-50%)" data-in="c3" data-out="c5" data-fx="fade" data-ax="227" data-ay="171" data-scale></div>
 </section>
 
 <section data-s="dead">
-<div class="it k" style="left:160px;top:120px" data-in="0">Three reflexes</div>
-<div class="it rx" style="left:160px;top:180px" data-in="0" data-fx="fade"><div class="n">01</div><div class="h"><span class="sx" data-strike="0.3">Give the model everything</span></div></div>
-<div class="it rx" style="left:160px;top:340px" data-in="c0" data-fx="up"><div class="n">02</div><div class="h"><span class="sx" data-strike="c1+3.4">Take a sample</span></div></div>
-<div class="it rx" style="left:160px;top:470px" data-in="c1" data-fx="up"><div class="d">What isn't drawn doesn't exist: weak signals vanish.</div></div>
-<div class="it rx" style="left:160px;top:590px" data-in="c2" data-fx="up"><div class="n">03</div><div class="h">One LLM call per document</div></div>
-<div class="it rx" style="left:160px;top:720px;width:760px" data-in="c3" data-out="c4" data-fx="up"><div class="d">Useful. It's what Pietro does with images tonight.</div></div>
-<div class="it rx" style="left:160px;top:720px;width:760px" data-in="c4" data-fx="up"><div class="d">Alone: a million descriptions, still no overview.</div></div>
-<div class="it tag" style="left:160px;top:850px" data-in="c4+1.6" data-fx="up">necessary, not enough</div>
+<div class="it k" style="left:160px;top:120px" data-in="0" data-out="c4+0.6">Three reflexes</div>
+<div class="it rx" style="left:160px;top:180px;width:820px" data-in="c0+0.5" data-out="c2+0.6" data-fx="up"><div class="n">02</div><div class="h"><span class="sx" data-strike="c2">Take a sample</span></div></div>
+<div class="it bu wrap" style="left:160px;top:380px;width:760px" data-in="c1" data-out="c2+0.6" data-fx="up">A small share of the pile: one percent.</div>
+<div class="it bu wrap" style="left:160px;top:480px;width:760px" data-in="c1+0.4" data-out="c2+0.6" data-fx="up">It sees the background: the run-of-the-mill.</div>
+<div class="it bu llm wrap" style="left:160px;top:580px;width:760px" data-in="c1+0.8" data-out="c2+0.6" data-fx="up">Weak signals vanish.</div>
+<div class="it rx" style="left:160px;top:180px;width:820px" data-in="c2+0.7" data-out="c4+0.6" data-fx="up"><div class="n">03</div><div class="h"><span class="sx" data-strike="c4">One LLM call per document</span></div></div>
+<div class="it bu wrap" style="left:160px;top:380px;width:760px" data-in="c3" data-out="c4+0.6" data-fx="up">Useful: a real building block.</div>
+<div class="it bu wrap" style="left:160px;top:480px;width:760px" data-in="c3+0.4" data-out="c4+0.6" data-fx="up">A million descriptions: no more readable than a million reviews.</div>
+<div class="it bu llm wrap" style="left:160px;top:630px;width:760px" data-in="c3+0.8" data-out="c4+0.6" data-fx="up">Still too big for a context. Still no overview.</div>
+<div class="it h2 c sh" style="top:180px" data-in="c4+0.7" data-fx="words">Three naive approaches. None works.</div>
+<div class="it rx" style="left:160px;top:400px;width:500px" data-in="c4+1" data-fx="up"><div class="n">01</div><div class="h"><span class="sx" data-strike="c4+1.5">Give the model everything</span></div><div class="d">It doesn't fit.</div></div>
+<div class="it rx" style="left:710px;top:400px;width:500px" data-in="c4+1.2" data-fx="up"><div class="n">02</div><div class="h"><span class="sx" data-strike="c4+1.7">Take a sample</span></div><div class="d">Weak signals vanish.</div></div>
+<div class="it rx" style="left:1260px;top:400px;width:500px" data-in="c4+1.4" data-fx="up"><div class="n">03</div><div class="h"><span class="sx" data-strike="c4+1.9">One LLM call per document</span></div><div class="d">Still no overview.</div></div>
 </section>
 
 <section data-s="clio">
-<div class="it k" style="left:160px;top:150px" data-in="c0+0.2">December 2024 · Anthropic</div>
-<div class="it xl sh" style="left:148px;top:214px;font-size:150px" data-in="c0+4.6" data-out="c4" data-fx="focus">Clio</div>
-<div class="it b sh" style="left:160px;top:378px" data-in="c0+5.4" data-out="c4">an internal tool, described in a public paper</div>
+<div class="it k" style="left:160px;top:150px" data-in="c0+0.1" data-out="c4">December 2024 · Anthropic</div>
+<div class="it xl sh" style="left:148px;top:214px;font-size:150px" data-in="c0+0.4" data-out="c4" data-fx="focus">Clio</div>
+<div class="it b sh" style="left:160px;top:378px" data-in="c0+0.8" data-out="c4">an internal tool, described in a public paper</div>
 <div class="it h2 sh" style="left:160px;top:560px" data-in="c1" data-out="c4" data-fx="words">Millions of conversations.</div>
 <div class="it h2 sh" style="left:160px;top:650px" data-in="c2" data-out="c4" data-fx="words">Too many to read.</div>
 <div class="it h2 llm gl" style="left:160px;top:740px" data-in="c3" data-out="c4" data-fx="words">And private: not to be read.</div>
-<div class="it xl c sh" style="top:400px;font-size:96px;line-height:1.05" data-in="c4+0.3" data-fx="words">Understand a whole corpus<br>without reading all of it.</div>
+<div class="it xl c sh" style="top:400px;font-size:96px;line-height:1.05" data-in="c4+0.2" data-fx="words">Understand a whole corpus<br>without reading all of it.</div>
 </section>
 
 <section data-s="secna">
 <div class="it k" style="left:300px;top:150px" data-in="c0" data-out="c2">Clio's recipe, in five steps</div>
-<div class="it b sh" style="left:300px;top:860px" data-in="c1" data-out="c2" data-fx="up">SECNA: the name is mine, the recipe is theirs.</div>
-<div class="it rail" id="r0" style="top:300px" data-in="c1+0.6" data-out="end">S</div>
-<div class="it rail" id="r1" style="top:420px" data-in="c1+0.75" data-out="end">E</div>
-<div class="it rail" id="r2" style="top:540px" data-in="c1+0.9" data-out="end">C</div>
-<div class="it rail" id="r3" style="top:660px" data-in="c1+1.05" data-out="end">N</div>
-<div class="it rail" id="r4" style="top:780px" data-in="c1+1.2" data-out="end">A</div>
-<div class="it step" data-in="c2" data-out="c3" data-fx="left"><div class="v llm gl">Summarise</div><div class="d">Keep what carries the meaning.</div></div>
-<div class="it quote" id="review" style="left:300px;top:310px;width:1260px" data-in="c2+1" data-out="c3">“Ordered on the 3rd, <b>the parcel never arrived</b>, the tracking says delivered and <b>support doesn't answer</b>. Third time this year, honestly.”</div>
-<div class="it chip llm" style="left:300px;top:500px" data-in="c2+4.6" data-out="c3" data-fx="up">parcel never arrived · support doesn't answer</div>
-<div class="it step" data-in="c3" data-out="c4" data-fx="left"><div class="v ds gd">Embed</div><div class="d">Each text becomes a point. Same meaning, side by side.</div></div>
-<div class="it lab" id="pairA1" style="color:var(--ds)" data-in="c3+4.4" data-out="c4"><span>“My parcel never came.”</span></div>
-<div class="it lab" id="pairA2" style="color:var(--ds)" data-in="c3+5" data-out="c4"><span>“Still waiting for my package.”</span></div>
-<div class="it step" data-in="c4" data-out="c5" data-fx="left"><div class="v ds gd">Cluster</div><div class="d">Find the dense regions. Pure computation.</div></div>
-<div class="it chip ds" style="left:300px;top:310px" data-in="c4+2.6" data-out="c5" data-fx="up">0 tokens</div>
-<div class="it step" data-in="c5" data-out="c6" data-fx="left"><div class="v llm gl">Name</div><div class="d">The LLM reads a few typical texts per cluster, and names it.</div></div>
-<div class="it step" data-in="c6" data-out="c7" data-fx="left"><div class="v llm gl">Aggregate</div><div class="d">One last call stacks the clusters into themes.</div></div>
-<div class="it h1 sh" style="left:300px;top:110px" data-in="c7" data-out="c8" data-fx="words">A map.</div>
-<div class="it h2 c sh" style="top:110px" data-in="c8" data-fx="words"><span class="ds gd">Data science</span> finds the structure. <span class="llm gl">The LLM</span> gives it meaning.</div>
+<div class="it b c sh" style="top:830px" data-in="c0+0.2" data-out="c2" data-fx="up">Understand a whole corpus without reading all of it.</div>
+<div class="it rail" id="r0" style="top:300px" data-in="c1+0.1" data-out="end">S</div>
+<div class="it rail" id="r1" style="top:420px" data-in="c1+0.2" data-out="end">E</div>
+<div class="it rail" id="r2" style="top:540px" data-in="c1+0.3" data-out="end">C</div>
+<div class="it rail" id="r3" style="top:660px" data-in="c1+0.4" data-out="end">N</div>
+<div class="it rail" id="r4" style="top:780px" data-in="c1+0.5" data-out="end">A</div>
+<div class="it step" data-in="c2" data-out="c3" data-fx="left"><div class="v ds gd">Summarise</div></div>
+<div class="it bu ds" style="left:300px;top:216px" data-in="c2+0.3" data-out="c3" data-fx="up">Reduce each text to what carries the meaning</div>
+<div class="it bu ds" style="left:300px;top:264px" data-in="c2+0.6" data-out="c3" data-fx="up">Homogenise it, anonymise it</div>
+<div class="it bu ds" style="left:300px;top:312px" data-in="c2+0.9" data-out="c3" data-fx="up">A small model, or plain code</div>
+<div class="it quote" id="review" style="left:300px;top:470px;width:1520px" data-in="c2+0.8" data-out="c3">“Ordered on the 3rd, <b>the parcel never arrived</b>, the tracking says delivered and <b>support doesn't answer</b>. Third time this year, honestly.”</div>
+<div class="it chip llm" style="left:300px;top:585px" data-in="c2+2" data-out="c3" data-fx="up">parcel never arrived · support doesn't answer</div>
+<div class="it step" data-in="c3" data-out="c4" data-fx="left"><div class="v ds gd">Embed</div></div>
+<div class="it bu ds" style="left:300px;top:216px" data-in="c3+0.3" data-out="c4" data-fx="up">Each text becomes a vector: a point</div>
+<div class="it bu ds" style="left:300px;top:264px" data-in="c3+0.6" data-out="c4" data-fx="up">Close points, close meanings</div>
+<div class="it bu ds" style="left:300px;top:312px" data-in="c3+0.9" data-out="c4" data-fx="up">The same embeddings as for RAG</div>
+<div class="it lab" id="pairA1" style="color:var(--ds)" data-in="c3+2.2" data-out="c4"><span>“My parcel never came.”</span></div>
+<div class="it lab" id="pairA2" style="color:var(--ds)" data-in="c3+2.5" data-out="c4"><span>“Still waiting for my package.”</span></div>
+<div class="it step" data-in="c4" data-out="c5" data-fx="left"><div class="v ds gd">Cluster</div></div>
+<div class="it bu ds" style="left:300px;top:216px" data-in="c4+0.3" data-out="c5" data-fx="up">Find the dense regions</div>
+<div class="it bu ds" style="left:300px;top:264px" data-in="c4+0.6" data-out="c5" data-fx="up">Pure computation: no LLM</div>
+<div class="it bu ds" style="left:300px;top:312px" data-in="c4+0.9" data-out="c5" data-fx="up">One cluster stands for hundreds of texts</div>
+<div class="it step" data-in="c5" data-out="c6" data-fx="left"><div class="v llm gl">Name</div></div>
+<div class="it bu llm" style="left:300px;top:216px" data-in="c5+0.3" data-out="c6" data-fx="up">The LLM reads ten typical texts</div>
+<div class="it bu llm" style="left:300px;top:264px" data-in="c5+0.6" data-out="c6" data-fx="up">and names the cluster</div>
+<div class="it bu llm" style="left:300px;top:312px" data-in="c5+0.9" data-out="c6" data-fx="up">It reads ten, it names a thousand</div>
+<div class="it step" data-in="c6" data-out="c7" data-fx="left"><div class="v llm gl">Aggregate</div></div>
+<div class="it bu llm" style="left:300px;top:216px" data-in="c6+0.3" data-out="c7" data-fx="up">One last LLM call</div>
+<div class="it bu llm" style="left:300px;top:264px" data-in="c6+0.6" data-out="c7" data-fx="up">Clusters into a few themes</div>
+<div class="it bu llm" style="left:300px;top:312px" data-in="c6+0.9" data-out="c7" data-fx="up">One level, or several</div>
+<div class="it grp ds" style="left:34px;top:300px;height:336px;text-align:center;writing-mode:vertical-rl;transform:rotate(180deg)" data-in="c6+1.6" data-fx="fade">concentrate</div>
+<div class="it grp llm" style="left:34px;top:660px;height:216px;text-align:center;writing-mode:vertical-rl;transform:rotate(180deg)" data-in="c6+2" data-fx="fade">give meaning</div>
+<div class="it h1 sh" style="left:1056px;top:130px" data-in="c7+0.2" data-fx="words">A map.</div>
+<div class="it h2 sh" style="left:290px;top:402px" data-in="c8" data-fx="words"><span class="ds gd">Data science</span><br>finds the structure.</div>
+<div class="it h2 sh" style="left:290px;top:702px" data-in="c8+0.7" data-fx="words"><span class="llm gl">The LLM</span><br>gives it meaning.</div>
+<div id="treeLabs"></div>
 <div id="clLabs"></div>
 <div id="thLabs"></div>
 </section>
@@ -294,96 +351,105 @@ body.help #help{display:block}
 <section data-s="bill">
 <div class="it k" style="left:160px;top:150px" data-in="c0">Clio's published bill</div>
 <div class="it b sh" style="left:160px;top:236px" data-in="c0" data-fx="up">100,000 conversations</div>
-<div class="it xl tn sh" style="left:148px;top:300px;font-size:150px" data-in="c0+0.4" data-fx="fade">$<span data-count="48.81,3.81,c4,c4+1.6,money">48.81</span></div>
-<div class="it s llm" style="left:160px;top:650px" data-in="c1" data-out="c3+1.2">S · one LLM call per conversation · $45.00 · 92 %</div>
-<div class="it s llm2" style="left:1610px;top:650px" data-in="c1+1.2">N + A · $3.81</div>
-<div class="it b sh wrap" style="left:160px;top:770px;width:1500px" data-in="c2" data-out="c3" data-fx="words">Short texts can do without it.</div>
-<div class="it b ds gd wrap" style="left:160px;top:770px;width:1550px" data-in="c3" data-fx="words">A review, a ticket, a pull request description: already short and focused. S becomes plain code.</div>
+<div class="it xl tn sh" style="left:148px;top:300px;font-size:150px" data-in="c0+0.3" data-fx="fade">$<span data-count="48.81,3.81,c4,c4+1.4,money">48.81</span></div>
+<div class="it s llm" style="left:160px;top:650px" data-in="c1" data-out="c3+1">S · one LLM call per conversation · $45.00 · 92 %</div>
+<div class="it s llm2" style="left:1610px;top:650px" data-in="c1+0.4">N + A · $3.81</div>
+<div class="it bu" style="left:160px;top:770px" data-in="c2" data-fx="up">Short texts: reviews, tickets, pull request descriptions</div>
+<div class="it bu ds" style="left:160px;top:840px" data-in="c3+0.1" data-fx="up">S becomes plain code</div>
 </section>
 
 <section data-s="curve">
 <div class="it k" style="left:160px;top:150px" data-in="c0" data-out="c3">When the corpus grows</div>
-<div class="it axl" style="left:250px;top:860px" data-in="c0+0.6">1,000 documents</div>
-<div class="it axl" style="left:700px;top:860px" data-in="c0+0.7">10,000</div>
-<div class="it axl" style="left:1160px;top:860px" data-in="c0+0.8">100,000</div>
-<div class="it axl r" style="left:1370px;top:860px;width:300px" data-in="c0+0.9">1,000,000</div>
-<div class="it axl" style="left:250px;top:900px;color:#565c6b" data-in="c0+1">illustration · log scale</div>
-<div class="it s llm r" style="left:1040px;top:250px;width:560px" data-in="c1+3.6">LLM reads every document</div>
-<div class="it b llm gl" style="left:800px;top:430px" data-in="c1+2" data-out="c3">×10 documents, ×10 the bill</div>
-<div class="it s ds r" style="left:1040px;top:830px;width:560px" data-in="c2+3">LLM reads the clusters</div>
+<div class="it axl" style="left:250px;top:860px" data-in="c0+0.2">1,000 documents</div>
+<div class="it axl" style="left:700px;top:860px" data-in="c0+0.3">10,000</div>
+<div class="it axl" style="left:1160px;top:860px" data-in="c0+0.4">100,000</div>
+<div class="it axl r" style="left:1370px;top:860px;width:300px" data-in="c0+0.5">1,000,000</div>
+<div class="it axl" style="left:250px;top:900px;color:#565c6b" data-in="c0+0.6">illustration · log scale</div>
+<div class="it s llm r" style="left:1040px;top:250px;width:560px" data-in="c1+1.8">LLM reads every document</div>
+<div class="it b llm gl" style="left:800px;top:430px" data-in="c1+1" data-out="c3">×10 documents, ×10 the bill</div>
+<div class="it s ds r" style="left:1040px;top:705px;width:560px" data-in="c2+1">LLM reads the clusters</div>
 <div class="it h2 c sh" style="top:150px" data-in="c3" data-fx="words">The bill follows the clusters, not the documents.</div>
 </section>
 
 <section data-s="others">
 <div class="it k" style="left:160px;top:150px" data-in="c0" data-out="c4">Not an isolated case</div>
 <div class="it glass card" style="left:160px;top:640px" data-in="c1" data-fx="focus"><div class="o">Google Research</div><div class="nm ds gd">Urania</div><div class="y">2025</div><div class="ds2">The same shape, with privacy guarantees.</div></div>
-<div class="it glass card" style="left:710px;top:640px" data-in="c2" data-fx="focus"><div class="o">Research</div><div class="nm ds gd">HERCULES</div><div class="y">2025</div><div class="ds2">Made recursive: clusters of clusters, each named by an LLM.</div></div>
-<div class="it glass card" style="left:1260px;top:640px" data-in="c3" data-fx="focus"><div class="o">Open source</div><div class="nm ds gd">Kura</div><div class="y">2025</div><div class="ds2">“A simple reproduction of the CLIO paper.”</div></div>
+<div class="it glass card" style="left:710px;top:640px" data-in="c2" data-fx="focus"><div class="o">LangChain</div><div class="nm ds gd">LangSmith</div><div class="y">Insights · 2025</div><div class="ds2">Agent traces, summarised and grouped into usage patterns.</div></div>
+<div class="it glass card" style="left:1260px;top:640px" data-in="c3" data-fx="focus"><div class="o">Customer support</div><div class="nm ds gd">Intercom</div><div class="y">Topics Explorer</div><div class="ds2">Support conversations, clustered into topics, every day.</div></div>
+<div class="it" style="left:160px;top:958px" data-in="c1+0.4" data-fx="up"><a class="lnk" href="https://arxiv.org/abs/2506.04681" target="_blank" rel="noopener">↗ paper</a></div>
+<div class="it" style="left:710px;top:958px" data-in="c2+0.4" data-fx="up"><a class="lnk" href="https://docs.langchain.com/langsmith/insights" target="_blank" rel="noopener">↗ docs</a></div>
+<div class="it" style="left:1260px;top:958px" data-in="c3+0.4" data-fx="up"><a class="lnk" href="https://www.intercom.com/help/en/articles/11390087-use-the-topics-explorer-to-see-what-s-driving-volume" target="_blank" rel="noopener">↗ docs</a></div>
 <div class="it h2 c sh" style="top:130px" data-in="c4" data-fx="words">The same shape, again and again: the one that scales.</div>
 </section>
 
 <section data-s="turn">
-<div class="it xl c sh" style="top:400px;font-size:116px" data-in="c0" data-fx="words">Within everyone's reach?</div>
-<div class="it b c hot gh" style="top:590px" data-in="c1" data-fx="up">Let's open the notebook.</div>
+<div class="it xl c sh" style="top:150px;font-size:100px" data-in="c0" data-fx="words">Within everyone's reach?</div>
+<div class="it xl c hot gh" style="top:300px;font-size:120px" data-in="c1" data-fx="slam">Yes.</div>
+<div class="it code" style="left:330px;top:500px" data-in="c1+0.5" data-fx="up"><pre><span class="kw">texts</span>    = [as_text(pr) <span class="kw">for</span> pr <span class="kw">in</span> prs]        <span class="ds"># S · plain code</span>
+<span class="kw">vectors</span>  = embed(texts)                       <span class="ds"># E · on the laptop</span>
+<span class="kw">clusters</span> = KMeans(100).fit_predict(vectors)   <span class="ds"># C · no LLM</span>
+<span class="kw">names</span>    = [name(c) <span class="kw">for</span> c <span class="kw">in</span> range(100)]      <span class="llm"># N · 1 call per cluster</span>
+<span class="kw">themes</span>   = aggregate(names)                   <span class="llm"># A · 1 call</span></pre></div>
 </section>
 
 <section data-s="nb12">
-<div class="it xl c sh" style="top:430px;font-size:100px" data-in="c1+0.5" data-fx="words">What is it for, beyond LangChain?</div>
+<div class="it xl c sh" style="top:330px;font-size:96px" data-in="c1+0.5" data-out="c2" data-fx="words">In practice, what does it let us do?</div>
+<div class="it b c" style="top:520px" data-in="c1+1.4" data-out="c2" data-fx="up">Prepared data: <span class="ds gd">faster</span>, <span class="ds gd">cheaper</span>, <span class="hot gh">sourced</span>, so more reliable.</div>
+<div class="it quote wrap" style="left:310px;top:190px;width:1300px;text-align:center;font-size:50px" data-in="c2+0.2" data-fx="up">“RAG fails on global questions directed at an entire text corpus, such as ‘What are the main themes in the dataset?’”<div class="cite">Microsoft Research · GraphRAG · 2024</div></div>
+<div class="it h2 c sh" style="top:620px" data-in="c2+1.1" data-fx="words">Search finds what you know is there.</div>
+<div class="it h2 c ds gd" style="top:730px" data-in="c2+1.7" data-fx="words">A map shows what you didn't know.</div>
 </section>
 
 <!-- ── Part 3 · why it matters ── -->
-<section data-s="factory">
-<div class="it k" style="left:110px;top:130px" data-in="0.3">Use 1 · The agentic software factory</div>
-<div class="it h2 sh wrap" style="left:110px;top:200px;width:560px" data-in="c1" data-out="c4" data-fx="words">A cycle of agents.</div>
-<div class="it b sh wrap" style="left:110px;top:300px;width:540px" data-in="c2" data-out="c4" data-fx="words">All of them keep coming back to the code. Again and again.</div>
-<div class="it pilelist" style="left:110px;top:480px" data-in="c3+0.5" data-out="c4" data-fx="up">pull requests<br>commits<br>files<br>functions<br>logs<br>tests</div>
-<div class="it b ds gd" style="left:110px;top:200px" data-in="c4" data-out="c5" data-fx="up">Memory for agents</div>
-<div class="it glass mcard" style="left:110px;top:290px" data-in="c4+0.6" data-out="c5"><div class="o">GitLab Duo</div><div class="ds2">a knowledge graph of the code</div></div>
-<div class="it glass mcard" style="left:110px;top:450px" data-in="c4+2.2" data-out="c5"><div class="o">Graphify</div><div class="ds2">the codebase as a graph, for Claude Code or Cursor</div></div>
-<div class="it glass mcard" style="left:110px;top:610px" data-in="c4+4.4" data-out="c5"><div class="o">DeepWiki</div><div class="ds2">a wiki written for each repository</div></div>
-<div class="it quote wrap" style="left:110px;top:230px;width:580px" data-in="c5+0.3" data-out="c6" data-fx="up">“RAG fails on global questions directed at an entire text corpus, such as ‘What are the main themes in the dataset?’”<div class="cite">Microsoft Research · GraphRAG · 2024</div></div>
-<div class="it h2 ds gd wrap" style="left:110px;top:220px;width:600px" data-in="c6" data-out="c8" data-fx="words">SECNA: the overview of a whole pile.</div>
-<div class="it b sh wrap" style="left:110px;top:400px;width:560px" data-in="c6+2.2" data-out="c8" data-fx="up">What exists, how much, and what changes.</div>
-<div class="it b hot gh wrap" style="left:110px;top:560px;width:560px" data-in="c7" data-out="c8" data-fx="up">Computed once, for a few cents. Kept in the agent's memory.</div>
-<div class="it h1 sh wrap" style="left:160px;top:330px;width:1600px;text-align:center;font-size:76px;line-height:1.12" data-in="c8" data-fx="words">Distillation spares your agents from reading, re-reading and re-reading again, at random, <span class="hot">your raw data.</span></div>
-<div id="agentLabs"></div>
-</section>
-
 <section data-s="voices">
-<div class="it k" style="left:110px;top:130px" data-in="0.3">Use 2 · The voice of your users</div>
+<div class="it k" style="left:110px;top:130px" data-in="0.3">Use 1 · You · The voice of your users</div>
 <div class="it h2 sh wrap" style="left:110px;top:190px;width:1500px" data-in="c1" data-out="c2" data-fx="words">What they write to you, and what they say everywhere else.</div>
+<div class="it b sh wrap" style="left:110px;top:350px;width:1300px" data-in="c1+1" data-out="c2" data-fx="up">Today it confirms hunches. It rarely shows the unexpected.</div>
 <div class="it h2 sh wrap" style="left:110px;top:190px;width:1500px" data-in="c2" data-out="c3" data-fx="words">Nobody reads it all. A sample misses the weak signals.</div>
 <div class="it h2 sh wrap" style="left:110px;top:190px;width:1500px" data-in="c3" data-fx="words">Everything counted, every month: <span class="hot gh">what rises.</span></div>
 <div class="it ill" style="left:1540px;top:140px" data-in="c1+1">illustration</div>
-<div class="it b ds gd wrap" style="left:110px;top:300px;width:1500px" data-in="c4" data-fx="up">Already shipping: Intercom files each day's new conversations into topics found by clustering.</div>
+<div class="it bu ds" style="left:110px;top:290px" data-in="c4" data-fx="up">Shares and trends: what appears, what disappears</div>
+<div class="it bu ds" style="left:110px;top:345px" data-in="c4+0.4" data-fx="up">Already shipping: Intercom clusters each day's conversations</div>
 <div id="srcLabs"></div>
 <div id="ribLabs"></div>
 </section>
 
 <section data-s="assistants">
-<div class="it k" style="left:110px;top:130px" data-in="0.3">Use 3 · Your own AI products</div>
-<div class="it h2 sh wrap" style="left:110px;top:190px;width:1500px" data-in="c1" data-fx="words">Thousands of conversations and agent traces, every day.</div>
-<div class="it b sh wrap" style="left:110px;top:940px;width:1700px" data-in="c3" data-fx="up">Clio's starting point: understand how an assistant is used, <span class="ds gd">without a human reading the conversations.</span></div>
+<div class="it k" style="left:110px;top:130px" data-in="0.3">Use 2 · Your product team · Your own AI products</div>
+<div class="it h2 sh wrap" style="left:110px;top:190px;width:1760px" data-in="c1" data-out="c2" data-fx="words">Thousands of conversations and agent traces, every day.</div>
+<div class="it b sh wrap" style="left:110px;top:290px;width:1300px" data-in="c1+1" data-out="c2" data-fx="up">What do people really do with them?</div>
+<div class="it h2 sh wrap" style="left:110px;top:190px;width:1500px" data-in="c2" data-fx="words">Find the <span class="hot gh">recurring use cases.</span></div>
+<div class="it b hot gh wrap" style="left:110px;top:290px;width:1300px" data-in="c3" data-fx="up">To industrialise, first know what people do.</div>
+<div class="it b sh wrap" style="left:110px;top:900px;width:1700px" data-in="c3+0.6" data-fx="up">Clio's starting point: understand how an assistant is used, <span class="ds gd">without a human reading the conversations.</span></div>
 <div id="laneLabs"></div>
 </section>
 
-<section data-s="limits">
-<div class="it k" style="left:160px;top:150px" data-in="0.2">Where it stops</div>
-<div class="it h2 sh" style="left:160px;top:210px" data-in="c0" data-fx="words">Three limits, to be honest.</div>
-<div class="it lim" style="left:160px;top:380px" data-in="c1" data-fx="up"><b>1</b><div><div class="h">A map of volume, not an alarm.</div><div class="d">A rare but serious case can drown in a big cluster. Keep a separate watch for critical signals.</div></div></div>
-<div class="it lim" style="left:160px;top:610px" data-in="c2" data-fx="up"><b>2</b><div><div class="h">Small or uniform corpus: nothing to find.</div><div class="d">Let the LLM read all of it.</div></div></div>
-<div class="it lim" style="left:160px;top:800px" data-in="c3" data-fx="up"><b>3</b><div><div class="h">The names are a model's proposal.</div><div class="d">Read a sample, and check what you may send it.</div></div></div>
+
+<section data-s="factory">
+<div class="it k" style="left:110px;top:130px" data-in="0.3">Use 3 · Your agents · The agentic software factory</div>
+<div class="it h2 sh wrap" style="left:110px;top:200px;width:560px" data-in="c1" data-out="c4" data-fx="words">A cycle of agents.</div>
+<div class="it b sh wrap" style="left:110px;top:300px;width:540px" data-in="c2" data-out="c4" data-fx="words">All of them keep coming back to the code. Again and again.</div>
+<div class="it b sh wrap" style="left:110px;top:470px;width:560px" data-in="c3+0.3" data-out="c4" data-fx="up"><span class="hot">The pile grows:</span> pull requests, commits, files, functions, tests.</div>
+<div class="it quote wrap" style="left:110px;top:210px;width:600px" data-in="c4+0.2" data-out="c7" data-fx="up">“What happened in this repository in three months?”</div>
+<div class="it h2 ds gd wrap" style="left:110px;top:440px;width:600px" data-in="c5" data-out="c7" data-fx="words">SECNA: the overview of a whole pile.</div>
+<div class="it b sh wrap tn" style="left:110px;top:610px;width:600px" data-in="c5+1" data-out="c7" data-fx="up">15,000 pull requests<br>100 clusters · 7 themes</div>
+<div class="it b hot gh wrap" style="left:110px;top:760px;width:600px" data-in="c6" data-out="c7" data-fx="up">Computed once, for a few cents. Kept in the agent's memory.</div>
+<div class="it h1 sh wrap" style="left:160px;top:196px;width:1600px;text-align:center;font-size:76px;line-height:1.12" data-in="c7" data-fx="words">Distillation spares your agents from reading, re-reading and re-reading again, at random, <span class="hot">your raw data.</span></div>
+<div id="agentLabs"></div>
 </section>
 
+
 <section data-s="end">
-<div class="it h1 c sh" style="top:120px;font-size:76px;line-height:1.08" data-in="c0" data-fx="words"><span class="ds gd">Data science</span> finds the structure.<br><span class="llm gl">The LLM</span> gives it meaning.</div>
-<div class="it b c hot gh" style="top:310px" data-in="c0+4.4" data-fx="up">The bill follows the clusters, not the documents.</div>
-<div class="it qr" style="left:160px;top:430px;width:300px;height:300px" data-in="c1" data-fx="up" data-qr></div>
-<div class="it h2 sh wrap" style="left:520px;top:450px;width:1240px" data-in="c1+0.3" data-fx="up">The notebook is online. Try it tomorrow on your own corpus.</div>
-<div class="it" style="left:520px;top:640px;font:500 42px var(--mono);color:var(--ds)" data-in="c1+0.8" data-fx="up">github.com/mdussere/secna</div>
-<div class="it b sh wrap" style="left:160px;top:800px;width:1600px" data-in="c2" data-out="c4" data-fx="up">One open question: does the map really cut your agents' bill?</div>
-<div class="it s wrap" style="left:160px;top:870px;width:1600px" data-in="c3" data-out="c4" data-fx="up">Nobody has measured it yet. I'm on it: tell me what you find.</div>
-<div class="it xl c sh" style="top:790px;font-size:120px" data-in="c4" data-fx="slam">Merci.</div>
+<div class="it h1 c sh" style="top:300px" data-in="c0" data-out="c1" data-fx="words">Prepare the data your agents navigate.</div>
+<div class="it b c sh" style="top:480px;font-size:46px" data-in="c0+0.9" data-out="c1" data-fx="up"><span class="ds gd">A map</span>, like SECNA</div>
+<div class="it b c sh" style="top:570px;font-size:46px" data-in="c0+1.3" data-out="c1" data-fx="up"><span class="ds gd">A graph</span>, like Graphify</div>
+<div class="it b c sh" style="top:660px;font-size:46px" data-in="c0+1.7" data-out="c1" data-fx="up"><span class="ds gd">Files</span> they can grep and find</div>
+<div class="it h1 c sh" style="top:250px;font-size:80px;line-height:1.1" data-in="c1" data-out="c2" data-fx="words"><span class="ds gd">Data science</span> finds the structure.<br><span class="llm gl">The LLM</span> gives it meaning.</div>
+<div class="it h2 c hot gh" style="top:560px" data-in="c1+1.2" data-out="c2" data-fx="words">The bill follows the structure, not the number of documents.</div>
+<div class="it xl c sh" style="top:200px;font-size:150px" data-in="c2" data-fx="slam">Thank you.</div>
+<div class="it qr" style="left:620px;top:480px;width:300px;height:300px" data-in="c2+0.4" data-fx="up" data-qr></div>
+<div class="it b sh wrap" style="left:960px;top:540px;width:760px" data-in="c2+0.6" data-fx="up">The notebook is online.<br>Try it tomorrow on your own corpus.</div>
+<div class="it" style="left:960px;top:700px;font:500 38px var(--mono);color:var(--ds)" data-in="c2+0.8" data-fx="up">github.com/mdussere/secna</div>
 </section>
 
 </div>
@@ -402,17 +468,18 @@ body.help #help{display:block}
 <footer id="pFoot"></footer>
 </aside>
 
-<div id="bar"><button id="snd" tabindex="-1" title="v">🔇 voice off</button><span id="modeL"></span><div id="track"></div><span class="sp"></span></div>
+<div id="bar"><button id="playB">▶ Play</button><button id="snd">Voice off</button><button id="langB" title="The voice's language (l)">FR</button><button id="bedB">Ambience off</button><span id="modeL"></span><div id="track"></div><span class="sp"></span></div>
 <div id="hud"><span class="pn"><span id="pauseS">❚❚</span><b id="pauseN">1</b><i id="pauseT"></i></span><span id="clock">0:00</span></div>
+<div id="start"><div class="bx"><div class="tt">SECNA — the talk</div><button id="startPlay">▶ Play</button><div class="rw"><button id="startVoice">Voice: off</button><button id="startLang">Français</button><button id="startBed">Ambience: off</button><button id="startStep">Step through with →</button></div></div></div>
 <div id="fail"></div>
-<div id="help"><b>→ · click</b>play to the next pause; while it plays, show the rest of the step, or go on once all of it is out<br><b>←</b>back to the previous pause<br><b>37 ↵</b>go to pause 37<br><b>space</b>play on, no pauses (the video)<br><b>v · 🔇</b>the draft voice on / off (off for the talk)<br><b>r</b>review panel<br><b>b</b>hide the bar and the pause number<br><b>f</b>fullscreen<br><b>h</b>this help<br><b>wheel</b>scroll the notebook (held)</div>
+<div id="help"><b>→ ↓ · click</b>next step; while it plays, finish it<br><b>← ↑</b>back to the previous pause<br><b>37 ↵</b>go to pause 37<br><b>space</b>play everything, without pausing (or stop)<br><b>v</b>voice on / off, for the player<br><b>l</b>the voice in French / in English<br><b>a</b>ambience on / off, for the player<br><b>r</b>review panel<br><b>b</b>hide the bar and the pause number<br><b>f</b>fullscreen<br><b>h</b>this help<br><b>wheel</b>scroll the notebook (held)</div>
 </div>
 <template id="qrT"><svg viewBox="0 0 29 29" shape-rendering="crispEdges"><path fill="#05060A" d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM11 0h1v1h-1zM12 0h1v1h-1zM13 0h1v1h-1zM16 0h1v1h-1zM19 0h1v1h-1zM22 0h1v1h-1zM23 0h1v1h-1zM24 0h1v1h-1zM25 0h1v1h-1zM26 0h1v1h-1zM27 0h1v1h-1zM28 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM10 1h1v1h-1zM13 1h1v1h-1zM14 1h1v1h-1zM15 1h1v1h-1zM20 1h1v1h-1zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM10 2h1v1h-1zM12 2h1v1h-1zM13 2h1v1h-1zM16 2h1v1h-1zM17 2h1v1h-1zM20 2h1v1h-1zM22 2h1v1h-1zM24 2h1v1h-1zM25 2h1v1h-1zM26 2h1v1h-1zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM13 3h1v1h-1zM14 3h1v1h-1zM15 3h1v1h-1zM18 3h1v1h-1zM19 3h1v1h-1zM20 3h1v1h-1zM22 3h1v1h-1zM24 3h1v1h-1zM25 3h1v1h-1zM26 3h1v1h-1zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM11 4h1v1h-1zM12 4h1v1h-1zM13 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM22 4h1v1h-1zM24 4h1v1h-1zM25 4h1v1h-1zM26 4h1v1h-1zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM9 5h1v1h-1zM10 5h1v1h-1zM11 5h1v1h-1zM13 5h1v1h-1zM14 5h1v1h-1zM17 5h1v1h-1zM19 5h1v1h-1zM20 5h1v1h-1zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM23 6h1v1h-1zM24 6h1v1h-1zM25 6h1v1h-1zM26 6h1v1h-1zM27 6h1v1h-1zM28 6h1v1h-1zM11 7h1v1h-1zM12 7h1v1h-1zM14 7h1v1h-1zM17 7h1v1h-1zM18 7h1v1h-1zM20 7h1v1h-1zM0 8h1v1h-1zM3 8h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM15 8h1v1h-1zM16 8h1v1h-1zM21 8h1v1h-1zM23 8h1v1h-1zM1 9h1v1h-1zM2 9h1v1h-1zM3 9h1v1h-1zM8 9h1v1h-1zM10 9h1v1h-1zM12 9h1v1h-1zM14 9h1v1h-1zM15 9h1v1h-1zM17 9h1v1h-1zM20 9h1v1h-1zM22 9h1v1h-1zM25 9h1v1h-1zM28 9h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM11 10h1v1h-1zM12 10h1v1h-1zM19 10h1v1h-1zM21 10h1v1h-1zM24 10h1v1h-1zM25 10h1v1h-1zM26 10h1v1h-1zM27 10h1v1h-1zM3 11h1v1h-1zM4 11h1v1h-1zM5 11h1v1h-1zM9 11h1v1h-1zM11 11h1v1h-1zM14 11h1v1h-1zM15 11h1v1h-1zM18 11h1v1h-1zM19 11h1v1h-1zM24 11h1v1h-1zM26 11h1v1h-1zM27 11h1v1h-1zM0 12h1v1h-1zM2 12h1v1h-1zM5 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM10 12h1v1h-1zM12 12h1v1h-1zM16 12h1v1h-1zM17 12h1v1h-1zM19 12h1v1h-1zM20 12h1v1h-1zM21 12h1v1h-1zM22 12h1v1h-1zM25 12h1v1h-1zM27 12h1v1h-1zM28 12h1v1h-1zM0 13h1v1h-1zM1 13h1v1h-1zM3 13h1v1h-1zM4 13h1v1h-1zM7 13h1v1h-1zM8 13h1v1h-1zM11 13h1v1h-1zM15 13h1v1h-1zM16 13h1v1h-1zM17 13h1v1h-1zM18 13h1v1h-1zM19 13h1v1h-1zM20 13h1v1h-1zM21 13h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM10 14h1v1h-1zM12 14h1v1h-1zM18 14h1v1h-1zM20 14h1v1h-1zM22 14h1v1h-1zM23 14h1v1h-1zM24 14h1v1h-1zM25 14h1v1h-1zM26 14h1v1h-1zM27 14h1v1h-1zM28 14h1v1h-1zM2 15h1v1h-1zM3 15h1v1h-1zM7 15h1v1h-1zM9 15h1v1h-1zM12 15h1v1h-1zM13 15h1v1h-1zM14 15h1v1h-1zM15 15h1v1h-1zM17 15h1v1h-1zM20 15h1v1h-1zM21 15h1v1h-1zM22 15h1v1h-1zM25 15h1v1h-1zM27 15h1v1h-1zM0 16h1v1h-1zM1 16h1v1h-1zM2 16h1v1h-1zM4 16h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM11 16h1v1h-1zM13 16h1v1h-1zM14 16h1v1h-1zM17 16h1v1h-1zM20 16h1v1h-1zM23 16h1v1h-1zM27 16h1v1h-1zM3 17h1v1h-1zM7 17h1v1h-1zM9 17h1v1h-1zM11 17h1v1h-1zM12 17h1v1h-1zM16 17h1v1h-1zM20 17h1v1h-1zM21 17h1v1h-1zM22 17h1v1h-1zM23 17h1v1h-1zM25 17h1v1h-1zM28 17h1v1h-1zM0 18h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM9 18h1v1h-1zM12 18h1v1h-1zM13 18h1v1h-1zM16 18h1v1h-1zM21 18h1v1h-1zM23 18h1v1h-1zM24 18h1v1h-1zM27 18h1v1h-1zM28 18h1v1h-1zM4 19h1v1h-1zM5 19h1v1h-1zM7 19h1v1h-1zM12 19h1v1h-1zM13 19h1v1h-1zM17 19h1v1h-1zM18 19h1v1h-1zM20 19h1v1h-1zM21 19h1v1h-1zM23 19h1v1h-1zM24 19h1v1h-1zM27 19h1v1h-1zM28 19h1v1h-1zM0 20h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM5 20h1v1h-1zM6 20h1v1h-1zM7 20h1v1h-1zM9 20h1v1h-1zM11 20h1v1h-1zM14 20h1v1h-1zM15 20h1v1h-1zM16 20h1v1h-1zM18 20h1v1h-1zM19 20h1v1h-1zM20 20h1v1h-1zM21 20h1v1h-1zM22 20h1v1h-1zM23 20h1v1h-1zM24 20h1v1h-1zM26 20h1v1h-1zM8 21h1v1h-1zM11 21h1v1h-1zM13 21h1v1h-1zM16 21h1v1h-1zM19 21h1v1h-1zM20 21h1v1h-1zM24 21h1v1h-1zM26 21h1v1h-1zM27 21h1v1h-1zM28 21h1v1h-1zM0 22h1v1h-1zM1 22h1v1h-1zM2 22h1v1h-1zM3 22h1v1h-1zM4 22h1v1h-1zM5 22h1v1h-1zM6 22h1v1h-1zM9 22h1v1h-1zM12 22h1v1h-1zM13 22h1v1h-1zM14 22h1v1h-1zM16 22h1v1h-1zM17 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h1v1h-1zM27 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM8 23h1v1h-1zM10 23h1v1h-1zM11 23h1v1h-1zM12 23h1v1h-1zM13 23h1v1h-1zM18 23h1v1h-1zM20 23h1v1h-1zM24 23h1v1h-1zM25 23h1v1h-1zM26 23h1v1h-1zM0 24h1v1h-1zM2 24h1v1h-1zM3 24h1v1h-1zM4 24h1v1h-1zM6 24h1v1h-1zM10 24h1v1h-1zM14 24h1v1h-1zM16 24h1v1h-1zM17 24h1v1h-1zM20 24h1v1h-1zM21 24h1v1h-1zM22 24h1v1h-1zM23 24h1v1h-1zM24 24h1v1h-1zM28 24h1v1h-1zM0 25h1v1h-1zM2 25h1v1h-1zM3 25h1v1h-1zM4 25h1v1h-1zM6 25h1v1h-1zM8 25h1v1h-1zM9 25h1v1h-1zM11 25h1v1h-1zM12 25h1v1h-1zM14 25h1v1h-1zM17 25h1v1h-1zM18 25h1v1h-1zM19 25h1v1h-1zM20 25h1v1h-1zM22 25h1v1h-1zM23 25h1v1h-1zM24 25h1v1h-1zM25 25h1v1h-1zM26 25h1v1h-1zM27 25h1v1h-1zM0 26h1v1h-1zM2 26h1v1h-1zM3 26h1v1h-1zM4 26h1v1h-1zM6 26h1v1h-1zM10 26h1v1h-1zM12 26h1v1h-1zM18 26h1v1h-1zM19 26h1v1h-1zM20 26h1v1h-1zM24 26h1v1h-1zM25 26h1v1h-1zM26 26h1v1h-1zM28 26h1v1h-1zM0 27h1v1h-1zM6 27h1v1h-1zM9 27h1v1h-1zM14 27h1v1h-1zM15 27h1v1h-1zM16 27h1v1h-1zM17 27h1v1h-1zM18 27h1v1h-1zM19 27h1v1h-1zM20 27h1v1h-1zM21 27h1v1h-1zM24 27h1v1h-1zM27 27h1v1h-1zM0 28h1v1h-1zM1 28h1v1h-1zM2 28h1v1h-1zM3 28h1v1h-1zM4 28h1v1h-1zM5 28h1v1h-1zM6 28h1v1h-1zM8 28h1v1h-1zM17 28h1v1h-1zM20 28h1v1h-1zM21 28h1v1h-1zM22 28h1v1h-1zM23 28h1v1h-1zM24 28h1v1h-1zM25 28h1v1h-1zM27 28h1v1h-1z"/></svg></template>
 <script src="data.js"></script>
 <script src="nb_cells.js"></script>
-<script src="voice/script.js"></script>
+<script src="steps.js?v=1117j"></script>
 <script src="js/gl.js"></script>
-<script src="js/notebook.js"></script>
-<script src="js/talk.js"></script>
+<script src="js/notebook.js?v=1117j"></script>
+<script src="js/talk.js?v=1118a"></script>
 </body>
 </html>
