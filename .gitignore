@@ -257,3 +257,11 @@ commits/
 presentation/long/tools/models/
 presentation/long/voice/*.m4a
 presentation/long/voice/.cache/
+# The voice clone (worklines/secna_voice/): the speaker's recordings and every generated clip stay local —
+# a voice is personal data and the history will be public. Only scripts/ is tracked.
+worklines/secna_voice/ref/
+worklines/secna_voice/out/
+worklines/secna_voice/listen*.html
+worklines/secna_voice/models/
+# Experiments that did not lead anywhere (the short video's tries, the voice bake-off…): kept aside, local only
+worklines/attic/
