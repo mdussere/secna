@@ -65,7 +65,7 @@ Michaël goes through the 52 numbered pauses of the live presentation, saying wh
   - A: one call.
 - **Pace:** the code shown can be simpler than the repository's, perhaps with a generic GitHub version in the repository. He goes fast and does not explain the code.
 - **Cuts:** stop at the chart (34); remove 35–38; keep the overview (39).
-- Bring back the cost equation from the short video: €0.15, a small model ("GPT-6 nano"), tokens used.
+- Bring back the cost equation from the short video: €0.15, a small model ("gpt-6-luna"), tokens used.
 
 **What it is for (40–45)**
 - Drop the "beyond LangChain" transition. Reframe as "in practice, what does it let us do?"; this part is still light.
@@ -208,7 +208,7 @@ And I stop, actually — 34/52 — I'll stop on that, on the creation of the cha
 
 39, the overview: very good. The overview, why not — that's my code.
 
-After that, though, what was good in the short presentation is that there was the economic equation — pull these things from the old one. The economic equation matters here, because it was €0.15 — the economic equation was €0.15. So that matters, and we can say clearly that we use a GPT, GPT-6 nano (*"1GPT Luna, 1GPT 6 Luna"*), that it costs nothing, and at the end show the economic equation: how many tokens we used, how much it cost us, etc.
+After that, though, what was good in the short presentation is that there was the economic equation — pull these things from the old one. The economic equation matters here, because it was €0.15 — the economic equation was €0.15. So that matters, and we can say clearly that we use a GPT, gpt-6-luna (*"1GPT Luna, 1GPT 6 Luna"*), that it costs nothing, and at the end show the economic equation: how many tokens we used, how much it cost us, etc.
 
 ### § 11. Pauses 40–45: what it is for — the agentic software factory
 

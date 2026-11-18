@@ -12,7 +12,8 @@ download them from the links.
 | Google Research (Liu et al., COLM 2025) | **Urania: Differentially Private Insights into AI Use** — the same shape with differential-privacy guarantees. Cites Clio as its non-private **baseline**, not as a pipeline it rebuilt. | [arXiv:2506.04681](https://arxiv.org/abs/2506.04681) |
 | Kura (open source) | Describes itself as *"a simple reproduction of the CLIO paper"*. | [github.com/567-labs/kura](https://github.com/567-labs/kura) · [usekura.xyz](https://usekura.xyz/) |
 | OpenClio (open source) | Two independent reimplementations. | [Phylliida/OpenClio](https://github.com/Phylliida/OpenClio) · [R0bk/openclio](https://github.com/R0bk/openclio) |
-| Petneházi & Aradi (2025) | **HERCULES** — recursive embedding-based clustering with LLM naming, as an installable package. | [arXiv:2506.19992](https://arxiv.org/abs/2506.19992) · [pyhercules](https://github.com/bandeerun/pyhercules) |
+| Intercom — Topics Explorer (help centre, 2 Oct 2026; research post, 30 Mar 2026) | Each conversation summarised into up to three key questions by a lightweight LLM, embedded, clustered into subtopics (HDBSCAN), grouped into topics and named by an LLM; a daily pipeline assigns newly closed conversations to the closest cluster. The research post does not name the product feature: the link between the two pages is inferred from matching steps. | [help centre](https://www.intercom.com/help/en/articles/11390087-use-the-topics-explorer-to-see-what-s-driving-volume) · [fin.ai research](https://fin.ai/research/unsupervised-learning-meets-generative-ai-topic-modelling-for-real-world-dialogue/) |
+| Petneházi & Aradi (2025) — *no longer on screen (replaced by Intercom, 2026-11-17)* | **HERCULES** — recursive embedding-based clustering with LLM naming, as an installable package. | [arXiv:2506.19992](https://arxiv.org/abs/2506.19992) · [pyhercules](https://github.com/bandeerun/pyhercules) |
 
 ## The counter-example
 
