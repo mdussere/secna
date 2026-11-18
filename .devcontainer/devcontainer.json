@@ -1,0 +1,28 @@
+{
+  // GitHub Codespaces (or any dev container): a Linux machine with the notebook's environment, opened on
+  // notebook/secna.ipynb. Your keys are Codespaces secrets — stored in your GitHub account, injected as
+  // environment variables, never in the repository. GITHUB_TOKEN is provided by Codespaces itself.
+  "name": "SECNA notebook",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
+  "hostRequirements": { "cpus": 4, "memory": "8gb" },
+  // torch for the CPU first (the default Linux wheel carries CUDA: gigabytes for nothing here)
+  "postCreateCommand": "pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && pip install --no-cache-dir -r notebook/requirements.txt ipykernel",
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-python.python", "ms-toolsai.jupyter"]
+    },
+    "codespaces": {
+      "openFiles": ["notebook/secna.ipynb"]
+    }
+  },
+  "secrets": {
+    "OPENAI_API_KEY": {
+      "description": "An OpenAI-compatible key, for N and A only (S, E and C run without it).",
+      "documentationUrl": "https://github.com/mdussere/secna#the-notebook"
+    },
+    "OPENAI_BASE_URL": {
+      "description": "Optional: another OpenAI-compatible endpoint, ending in /v1. Leave empty for OpenAI.",
+      "documentationUrl": "https://github.com/mdussere/secna#the-notebook"
+    }
+  }
+}

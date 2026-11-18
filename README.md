@@ -34,6 +34,7 @@ The name *SECNA* is the talk's; the recipe is Clio's, and others' ([sources](BIB
 
 ## The notebook
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/mdussere/secna?quickstart=1)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mdussere/secna/blob/main/notebook/secna.ipynb)
 
 [`notebook/secna.ipynb`](notebook/secna.ipynb) runs the recipe on a public corpus: every pull request of the
@@ -43,10 +44,22 @@ clusters, N and A call a small model: **about $0.15 for the whole run**, and a m
 notebook shown during the talk.
 
 **What it needs**
-- a **GitHub token** (`GITHUB_TOKEN`): GitHub's search API needs one; any token with public read access will do
-  (on your machine, the GitHub CLI's `gh auth token` is picked up on its own);
+- a **GitHub token** (`GITHUB_TOKEN`): GitHub's search API needs one. Codespaces provides it; elsewhere, any
+  token with public read access will do (on your machine, the GitHub CLI's `gh auth token` is picked up on its own);
 - an **OpenAI-compatible key** (`OPENAI_API_KEY`, and `OPENAI_BASE_URL` for another endpoint), for N and A only.
   Without it, the extraction, S, E and C still run.
+
+Keys never go in the repository: they are Codespaces or Colab secrets, environment variables, or a `.env` file
+(gitignored).
+
+**In GitHub Codespaces:** a machine run by GitHub, with the notebook's environment ready
+([`.devcontainer/`](.devcontainer/devcontainer.json)).
+1. Add your key once: *GitHub → Settings → Codespaces → Secrets → New secret*: `OPENAI_API_KEY` (and
+   `OPENAI_BASE_URL` for another endpoint), with access to this repository. Secrets reach the codespace as
+   environment variables.
+2. Click the Codespaces badge (or *Code → Codespaces → Create codespace on main*). The first start installs the
+   environment (a few minutes); the notebook opens.
+3. Select the kernel *Python 3.12*, then *Run All*.
 
 **In Colab:** click the badge, add `GITHUB_TOKEN` and `OPENAI_API_KEY` under 🔑 *Secrets*, then *Runtime → Run
 all*. A GPU runtime makes E faster.
@@ -82,6 +95,7 @@ cp ../env.template ../.env                       # then fill SECNA_API_KEY
 |---|---|
 | [`presentation/`](presentation/) | The presentation: one HTML page, played live step by step. `index.html`, its scripts (`js/`), the run's data (`data.js`), the stage notebook (`nb_display.py` → `nb_cells.js`). |
 | [`notebook/`](notebook/) | The SECNA notebook (`secna.ipynb`), and its full version as pytest cells. |
+| [`.devcontainer/`](.devcontainer/) | The notebook's environment for GitHub Codespaces. |
 | [`voice/`](voice/) | The narrated version's voice, in French and in English: the texts (`texts/`), one segment per pause, and the local text-to-speech scripts. |
 | [`BIBLIO.md`](BIBLIO.md) | Every source the talk relies on. |
 
