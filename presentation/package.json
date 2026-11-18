@@ -1,12 +1,8 @@
 {
   "name": "secna-presentation",
   "private": true,
-  "description": "Build the SECNA talk deck (Marp): node build.mjs <html|pdf|png|standalone|all>",
-  "scripts": {
-    "build": "node build.mjs all"
-  },
+  "description": "Stills and narrated videos of the SECNA presentation, rendered in headless Chrome (capture.mjs)",
   "devDependencies": {
-    "@marp-team/marp-cli": "4.5.1",
-    "pptxgenjs": "4.0.1"
+    "puppeteer-core": "24.43.1"
   }
 }
