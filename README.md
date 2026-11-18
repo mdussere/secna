@@ -7,7 +7,8 @@ Bordeaux (Meetup #7, 19 November 2026), with everything it shows: the presentati
 
 ### ▶ [Open the presentation](https://mdussere.github.io/secna/)
 
-→ or click: the next step · ← back · space: play it all · f: fullscreen · h: help.
+▶ Play: the whole presentation, narrated (French or English, the FR / EN button) · → or click: step by step ·
+← back · f: fullscreen · h: help.
 
 ## The idea
 
@@ -67,6 +68,8 @@ API: about $3).
 # The presentation as one portable HTML file → presentation/dist/
 python3 presentation/tools/build_single.py
 python3 presentation/tools/build_single.py --voice     # with the voice (FR / EN) and the ambience, once recorded
+# → online: the Pages workflow serves the voice build from the release "presentation-voice"
+gh release upload presentation-voice presentation/dist/SECNA_*_voice_fr-en.html --clobber
 
 # The narrated video, one per language → presentation/render/   (Node 22, Chrome, ffmpeg)
 cd presentation && npm install

@@ -1,8 +1,13 @@
-# The presentation on GitHub Pages: the single-file build (presentation/tools/build_single.py), served as index.html.
+# The presentation on GitHub Pages, served as index.html: the build with the voice (FR / EN) and the ambience, taken
+# from the release "presentation-voice" (the audio is not in git); without that release, the silent build.
+# After a new voice build: gh release upload presentation-voice presentation/dist/SECNA_*_voice_fr-en.html --clobber,
+# then run this workflow (Actions → Pages → Run workflow).
 name: Pages
 on:
   push:
     branches: [main]
+  release:
+    types: [published]
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,11 +24,18 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - name: Build the presentation as one file
+      - name: The presentation as one file — with the voice when its release is there
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          python3 presentation/tools/build_single.py
           mkdir -p _site
-          cp presentation/dist/SECNA_*.html _site/index.html
+          if gh release download presentation-voice --repo "$GITHUB_REPOSITORY" --pattern '*_voice_fr-en.html' --dir voice_build; then
+            cp voice_build/*_voice_fr-en.html _site/index.html
+          else
+            python3 presentation/tools/build_single.py
+            cp presentation/dist/SECNA_Michael-Dussere_GenAI-Bordeaux_2026-11-19.html _site/index.html
+          fi
+          ls -la _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
