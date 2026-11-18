@@ -220,48 +220,24 @@ __marimo__/
 .streamlit/secrets.toml
 
 # --- secna ---
-# Marp outputs (deck.md + assets/ are the source)
-presentation/deck.html
-!presentation/dist/
-presentation/dist/*
-!presentation/dist/deck-standalone.html
-presentation/review/
-presentation/.theme-*.generated.css
-# Third-party paper PDFs — BIBLIO.md carries the links
-references/pdf/
-# Downloaded corpora and run outputs
-notebook/data/
-notebook/out/
 .DS_Store
-presentation/node_modules/
-# The short video (presentation/short/, ~2 min): index.html + capture.mjs are the source; frames and the MP4 are rebuilt
-presentation/short/frames/
-presentation/long/frames/
-presentation/long/render/
-presentation/short/render/
+# The notebook's downloaded corpora and outputs
+notebook/data/
+# The presentation: builds, renders and local tools (the narrated videos are rebuilt, never committed)
+presentation/node_modules
+presentation/dist/
+presentation/frames/
+presentation/render/
+presentation/tools/models/
+presentation/voice/*.m4a
+presentation/voice/.cache/
 *.mp4
-
-# Claude Code — local only: the handover note (internal context) and skills linked from
-# outside this repo. Only the repo's own skill (secna-deck) is committed.
+# The voice: the models, the reference clips and every generated clip stay local
+voice/ref/
+voice/out
+voice/models/
+voice/listen*.html
+# Local only
 CLAUDE.local.md
-.claude/settings.local.json
-.claude/skills/workplan
-.claude/skills/clean-verbatim
-.claude/skills/rtfm
-.claude/skills/duckdb
-
-# Commit scripts prepared for review (local only — they hold local paths)
+.claude/
 commits/
-# The talk's voice (presentation/long/tools/voice.py): the Kokoro model and the rendered audio are local;
-# voice/script.js (text, cues, durations) is tracked
-presentation/long/tools/models/
-presentation/long/voice/*.m4a
-presentation/long/voice/.cache/
-# The voice clone (worklines/secna_voice/): the speaker's recordings and every generated clip stay local —
-# a voice is personal data and the history will be public. Only scripts/ is tracked.
-worklines/secna_voice/ref/
-worklines/secna_voice/out/
-worklines/secna_voice/listen*.html
-worklines/secna_voice/models/
-# Experiments that did not lead anywhere (the short video's tries, the voice bake-off…): kept aside, local only
-worklines/attic/

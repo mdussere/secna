@@ -1,0 +1,877 @@
+{
+ "source": "texts/video_en.md",
+ "language": "en",
+ "segments": [
+  {
+   "n": 1,
+   "file": "seg_01.wav",
+   "part": 1,
+   "sequence": "title",
+   "sequence_title": "Title",
+   "ends_on_step": "the speaker",
+   "screen": [
+    "Title: Your corpora keep growing. Your token budget doesn't."
+   ],
+   "animation_s": 3.72,
+   "words": 24,
+   "estimated_s": 9.6,
+   "sha1": "eecd03a03077",
+   "paragraphs": [
+    "We all have a problem we rarely think about: data that keeps growing. Not neat data in a database, with columns and keys. Text."
+   ]
+  },
+  {
+   "n": 2,
+   "file": "seg_02.wav",
+   "part": 1,
+   "sequence": "pile",
+   "sequence_title": "The pile",
+   "ends_on_step": "every day, more",
+   "screen": [
+    "The pile: Customer reviews · Support tickets · Seller messages · Chat conversations"
+   ],
+   "animation_s": 4.41,
+   "words": 46,
+   "estimated_s": 18.4,
+   "sha1": "467382454f86",
+   "paragraphs": [
+    "Customer reviews. Support tickets. Seller messages. Conversations. Every one of you has a pile like this somewhere. And it grows every day.",
+    "Nobody reads it. Nobody can. We've had it for years. We store it, we back it up, and we never really look at it."
+   ]
+  },
+  {
+   "n": 3,
+   "file": "seg_03.wav",
+   "part": 1,
+   "sequence": "pile",
+   "sequence_title": "The pile",
+   "ends_on_step": "nobody reads it all",
+   "screen": [
+    "Nobody reads it all."
+   ],
+   "animation_s": 2.0,
+   "words": 46,
+   "estimated_s": 18.4,
+   "sha1": "4416f4983147",
+   "paragraphs": [
+    "Nobody reads it all. Yet it's a goldmine. In the years ahead, what sets apart the players of one industry will be what they get out of these corpora. Not storing them. Understanding them.",
+    "So what do we do with this pile? We have three reflexes."
+   ]
+  },
+  {
+   "n": 4,
+   "file": "seg_04.wav",
+   "part": 1,
+   "sequence": "wall",
+   "sequence_title": "Reflex 1 · give the model everything",
+   "ends_on_step": "it does not fit",
+   "screen": [
+    "01 · Give the model everything — the wall of blocks, the maths"
+   ],
+   "animation_s": 7.65,
+   "words": 64,
+   "estimated_s": 25.6,
+   "sha1": "144d358d828b",
+   "paragraphs": [
+    "Reflex one: give the model everything. LLMs are powerful, context windows are huge. Put it all in, and ask.",
+    "Do the maths. A million customer reviews, about a hundred tokens each: a hundred million tokens. The largest context windows take a few million. It doesn't fit.",
+    "And even if it did, it would be diluted. No coherent answer comes out of that much text."
+   ]
+  },
+  {
+   "n": 5,
+   "file": "seg_05.wav",
+   "part": 1,
+   "sequence": "wall",
+   "sequence_title": "Reflex 1 · give the model everything",
+   "ends_on_step": "bigger models: three points",
+   "screen": [
+    "The points, one by one: Bigger models won't fix it · The stronger they get, the more they write · The pile grows faster"
+   ],
+   "animation_s": 3.2,
+   "words": 36,
+   "estimated_s": 14.4,
+   "sha1": "40e01e45dc78",
+   "paragraphs": [
+    "Wait for bigger models? That fixes nothing. The stronger models get, the more they write: summaries, agent traces, pull requests. The more we use them, the bigger the pile. And it grows faster than they do."
+   ]
+  },
+  {
+   "n": 6,
+   "file": "seg_06.wav",
+   "part": 1,
+   "sequence": "dead",
+   "sequence_title": "Reflexes 2 and 3, and the recap",
+   "ends_on_step": "three points · weak signals vanish",
+   "screen": [
+    "The first reflex is struck. 02 · Take a sample"
+   ],
+   "animation_s": 4.49,
+   "words": 48,
+   "estimated_s": 19.2,
+   "sha1": "4d610e577130",
+   "paragraphs": [
+    "Reflex two: take a sample. One percent. Read it, or hand it to the model.",
+    "A sample only sees the run-of-the-mill: the main signals, what keeps coming back. And the run-of-the-mill is rarely the interesting part. What isn't drawn doesn't exist. Weak signals vanish. You miss a lot."
+   ]
+  },
+  {
+   "n": 7,
+   "file": "seg_07.wav",
+   "part": 1,
+   "sequence": "dead",
+   "sequence_title": "Reflexes 2 and 3, and the recap",
+   "ends_on_step": "three points",
+   "screen": [
+    "The second is struck. 03 · One LLM call per document"
+   ],
+   "animation_s": 4.44,
+   "words": 72,
+   "estimated_s": 28.8,
+   "sha1": "63b5c258f4f2",
+   "paragraphs": [
+    "Reflex three: one LLM call per document. Take every review, every ticket, and have the model summarise it. Useful. A real building block, in fact: we'll meet it again.",
+    "But on its own, it goes nowhere. I had a million reviews. Now I have a million descriptions. I won't read a million descriptions any more than a million reviews. They still don't fit in a context. And I still have no overview."
+   ]
+  },
+  {
+   "n": 8,
+   "file": "seg_08.wav",
+   "part": 1,
+   "sequence": "dead",
+   "sequence_title": "Reflexes 2 and 3, and the recap",
+   "ends_on_step": "the three, side by side, all struck",
+   "screen": [
+    "The three reflexes side by side, all struck"
+   ],
+   "animation_s": 3.0,
+   "words": 20,
+   "estimated_s": 8.0,
+   "sha1": "09d14b33f03d",
+   "paragraphs": [
+    "That's where we start. A big corpus. Three naive approaches. None of them works.",
+    "So, has anyone solved this? Yes."
+   ]
+  },
+  {
+   "n": 9,
+   "file": "seg_09.wav",
+   "part": 1,
+   "sequence": "clio",
+   "sequence_title": "Clio",
+   "ends_on_step": "private",
+   "screen": [
+    "Clio · December 2024 · Anthropic — the galaxy"
+   ],
+   "animation_s": 6.13,
+   "words": 58,
+   "estimated_s": 23.2,
+   "sha1": "4e82830a310b",
+   "paragraphs": [
+    "December 2024. Anthropic, the company behind Claude, publishes a research paper on an internal tool called Clio.",
+    "Their problem is ours, only bigger. Millions of conversations with Claude, and one question: what do people really use it for? Which tasks? Which fields? Far too many conversations to read. And above all, they must not be read: they're private."
+   ]
+  },
+  {
+   "n": 10,
+   "file": "seg_10.wav",
+   "part": 1,
+   "sequence": "secna",
+   "sequence_title": "SECNA, letter by letter",
+   "ends_on_step": "the five letters",
+   "screen": [
+    "Understand a whole corpus without reading all of it."
+   ],
+   "animation_s": 5.89,
+   "words": 26,
+   "estimated_s": 10.4,
+   "sha1": "d31b82f93996",
+   "paragraphs": [
+    "Clio's answer: understand a whole corpus without reading all of it. With a simple recipe in five steps. Let's call it SECNA, for its five initials."
+   ]
+  },
+  {
+   "n": 11,
+   "file": "seg_11.wav",
+   "part": 1,
+   "sequence": "secna",
+   "sequence_title": "SECNA, letter by letter",
+   "ends_on_step": "S · Summarise",
+   "screen": [
+    "S — Summarise"
+   ],
+   "animation_s": 3.32,
+   "words": 53,
+   "estimated_s": 21.2,
+   "sha1": "c318118d063c",
+   "paragraphs": [
+    "S, for Summarise. That's our third reflex: take each item and cut it down to what carries the meaning. Make it uniform, easier to digest, and anonymise it on the way. In Clio, a small, light model does it. A twenty-turn conversation becomes two or three lines: \"parcel never arrived, support doesn't answer\"."
+   ]
+  },
+  {
+   "n": 12,
+   "file": "seg_12.wav",
+   "part": 1,
+   "sequence": "secna",
+   "sequence_title": "SECNA, letter by letter",
+   "ends_on_step": "E · Embed",
+   "screen": [
+    "E — Embed"
+   ],
+   "animation_s": 3.52,
+   "words": 63,
+   "estimated_s": 25.2,
+   "sha1": "3ffbd0b55708",
+   "paragraphs": [
+    "E, for Embed. Exactly what we already do for RAG. A small model turns each text into a vector: a point in a space of a few hundred dimensions. And that projection has one precious property: distance. Two texts that say the same thing, even in different words, land side by side. \"My parcel never arrived.\" \"Still waiting for my package.\" Two neighbours."
+   ]
+  },
+  {
+   "n": 13,
+   "file": "seg_13.wav",
+   "part": 1,
+   "sequence": "secna",
+   "sequence_title": "SECNA, letter by letter",
+   "ends_on_step": "C · Cluster",
+   "screen": [
+    "C — Cluster"
+   ],
+   "animation_s": 2.72,
+   "words": 70,
+   "estimated_s": 28.0,
+   "sha1": "121f69c03fa2",
+   "paragraphs": [
+    "C, for Cluster. With the points in place, we look for the dense regions: where many items say roughly the same thing. Pure computation. Not a single LLM call.",
+    "This is where it all happens. A cluster is concentrated information. When a hundred points, or a thousand, say the same thing, the model doesn't need to see them all. It needs the cluster: a cluster this big, with this meaning."
+   ]
+  },
+  {
+   "n": 14,
+   "file": "seg_14.wav",
+   "part": 1,
+   "sequence": "secna",
+   "sequence_title": "SECNA, letter by letter",
+   "ends_on_step": "N · Name",
+   "screen": [
+    "N — Name"
+   ],
+   "animation_s": 3.12,
+   "words": 55,
+   "estimated_s": 22.0,
+   "sha1": "7a6dabd934e8",
+   "paragraphs": [
+    "N, for Name. Now the meaning comes back. For each cluster, the LLM reads a few typical examples, the ones at the centre, and gives it a name and a description. \"Refund stuck.\" \"Double charge.\" \"Can't log in.\" It doesn't read every message that says the same thing: it reads ten, and names a thousand."
+   ]
+  },
+  {
+   "n": 15,
+   "file": "seg_15.wav",
+   "part": 1,
+   "sequence": "secna",
+   "sequence_title": "SECNA, letter by letter",
+   "ends_on_step": "A · Aggregate, and the recap",
+   "screen": [
+    "A — Aggregate"
+   ],
+   "animation_s": 3.32,
+   "words": 87,
+   "estimated_s": 34.8,
+   "sha1": "e6ae4be822f3",
+   "paragraphs": [
+    "A, for Aggregate. One last call sorts the clusters into a few big themes: delivery, payment, the app. One level, or several; Clio uses several.",
+    "Five letters, two jobs. S, E and C concentrate the information. N and A structure it: they give it meaning, and a hierarchy that's easy to browse, for a human or for an agent. In our version, the LLM works only there, in N and A. In Clio, S is an LLM call too. Remember that: it shows up on the bill."
+   ]
+  },
+  {
+   "n": 16,
+   "file": "seg_16.wav",
+   "part": 1,
+   "sequence": "secna",
+   "sequence_title": "SECNA, letter by letter",
+   "ends_on_step": "data science · the LLM",
+   "screen": [
+    "A map. — then Data science finds the structure. · The LLM gives it meaning."
+   ],
+   "animation_s": 5.52,
+   "words": 47,
+   "estimated_s": 18.8,
+   "sha1": "9852582fe45b",
+   "paragraphs": [
+    "What you get is a hierarchical map of your data: from the big themes, down into the clusters, all the way to the examples themselves. That's the whole balance of SECNA: data science finds the structure, the LLM gives it meaning. Each does what it does best."
+   ]
+  },
+  {
+   "n": 17,
+   "file": "seg_17.wav",
+   "part": 1,
+   "sequence": "bill",
+   "sequence_title": "The bill",
+   "ends_on_step": "92 % is S",
+   "screen": [
+    "Clio's published bill · 100,000 conversations · $48.81"
+   ],
+   "animation_s": 4.69,
+   "words": 57,
+   "estimated_s": 22.8,
+   "sha1": "fb5be2d3d9de",
+   "paragraphs": [
+    "Clio even publishes its bill: forty-eight dollars and eighty-one cents for a hundred thousand conversations.",
+    "Look where the money goes. Ninety-two percent of it is the S step: one LLM call per conversation. For them, it's essential. Their conversations are long and go everywhere; each must be boiled down to a nugget of information before anything else."
+   ]
+  },
+  {
+   "n": 18,
+   "file": "seg_18.wav",
+   "part": 1,
+   "sequence": "bill",
+   "sequence_title": "The bill",
+   "ends_on_step": "$3.81",
+   "screen": [
+    "Short texts: reviews, tickets, PR descriptions · S becomes plain code — $3.81"
+   ],
+   "animation_s": 6.64,
+   "words": 43,
+   "estimated_s": 17.2,
+   "sha1": "490072d163fc",
+   "paragraphs": [
+    "But our texts are often short already. A review, a ticket, a pull request description: already focused. S becomes plain code: paste the title and two or three fields, cut at a maximum length, done. And the bill drops to three dollars eighty-one."
+   ]
+  },
+  {
+   "n": 19,
+   "file": "seg_19.wav",
+   "part": 1,
+   "sequence": "curve",
+   "sequence_title": "The curve",
+   "ends_on_step": "the LLM reads the clusters",
+   "screen": [
+    "The curve: the corpus grows"
+   ],
+   "animation_s": 5.81,
+   "words": 49,
+   "estimated_s": 19.6,
+   "sha1": "f4ca31025259",
+   "paragraphs": [
+    "Now it gets interesting. Grow the corpus. If the LLM reads every document, the bill follows the corpus: ten times the documents, ten times the bill. If the LLM reads only the clusters, the bill stays almost flat. It follows the number of clusters, not the number of documents."
+   ]
+  },
+  {
+   "n": 20,
+   "file": "seg_20.wav",
+   "part": 1,
+   "sequence": "curve",
+   "sequence_title": "The curve",
+   "ends_on_step": "the bill follows the clusters",
+   "screen": [
+    "The bill follows the clusters, not the documents."
+   ],
+   "animation_s": 2.2,
+   "words": 14,
+   "estimated_s": 5.6,
+   "sha1": "ff1d2e0d1720",
+   "paragraphs": [
+    "That's the title in one line: your corpora keep growing; your token budget doesn't."
+   ]
+  },
+  {
+   "n": 21,
+   "file": "seg_21.wav",
+   "part": 1,
+   "sequence": "others",
+   "sequence_title": "Not an isolated case",
+   "ends_on_step": "the same shape",
+   "screen": [
+    "Urania · LangSmith · Intercom"
+   ],
+   "animation_s": 5.93,
+   "words": 79,
+   "estimated_s": 31.6,
+   "sha1": "37f2dc29cc11",
+   "paragraphs": [
+    "And Clio isn't alone. Google Research published Urania: the same shape, with privacy guarantees on top. LangSmith, LangChain's observability tool, does it with your agents' traces: it summarises them, clusters them, and shows you the main usage patterns. And Intercom, a widely used customer-support tool, does it with support conversations: each one summarised into a few questions, then clustered, named, and sorted into big topics.",
+    "The SECNA shape keeps coming back. That's no accident: it's the shape that scales."
+   ]
+  },
+  {
+   "n": 22,
+   "file": "seg_22.wav",
+   "part": 1,
+   "sequence": "turn",
+   "sequence_title": "Within reach?",
+   "ends_on_step": "yes · five lines",
+   "screen": [
+    "Within everyone's reach? Yes. — the five lines"
+   ],
+   "animation_s": 4.57,
+   "words": 32,
+   "estimated_s": 12.8,
+   "sha1": "b8726a117902",
+   "paragraphs": [
+    "So: is this only for Anthropic and Google? Is it within our reach?",
+    "Yes. It fits in a few lines: summarise, embed, cluster, name, aggregate. And to prove it, I did it."
+   ]
+  },
+  {
+   "n": 23,
+   "file": "seg_23.wav",
+   "part": 2,
+   "sequence": "nb0",
+   "sequence_title": "The notebook",
+   "ends_on_step": "the sweep, down and back up: the whole notebook, its line count",
+   "screen": [
+    "The notebook scrolls: 84 lines of Python — the QR code top right"
+   ],
+   "animation_s": 9.29,
+   "words": 63,
+   "estimated_s": 25.2,
+   "sha1": "d646a445f664",
+   "paragraphs": [
+    "Here's the notebook. One scroll, top to bottom, so you see the size: the five steps, plus the preparation, fit in eighty lines of Python, in the simplified version shown here. The QR code stays top right for this whole part: open the real notebook and run it yourself.",
+    "No line-by-line walkthrough. I go through it and tell you what each block does."
+   ]
+  },
+  {
+   "n": 24,
+   "file": "seg_24.wav",
+   "part": 2,
+   "sequence": "nb1",
+   "sequence_title": "The code, block by block",
+   "ends_on_step": "configuration · change REPOS",
+   "screen": [
+    "The configuration"
+   ],
+   "animation_s": 2.37,
+   "words": 37,
+   "estimated_s": 14.8,
+   "sha1": "7c1ab953ca0a",
+   "paragraphs": [
+    "First, the data: every pull request of the LangChain organisation on GitHub, over three months. Every single one. To run it on your own code, change this one line: put in a public repository you care about."
+   ]
+  },
+  {
+   "n": 25,
+   "file": "seg_25.wav",
+   "part": 2,
+   "sequence": "nb1",
+   "sequence_title": "The code, block by block",
+   "ends_on_step": "the corpus · GitHub’s public API",
+   "screen": [
+    "The extraction"
+   ],
+   "animation_s": 2.12,
+   "words": 27,
+   "estimated_s": 10.8,
+   "sha1": "9f6e9b0f89bd",
+   "paragraphs": [
+    "Then we fetch the corpus straight from GitHub's public API. Nearly fifteen thousand pull requests, across a hundred and thirty-seven repositories, by more than sixteen hundred authors."
+   ]
+  },
+  {
+   "n": 26,
+   "file": "seg_26.wav",
+   "part": 2,
+   "sequence": "nb1",
+   "sequence_title": "The code, block by block",
+   "ends_on_step": "S · a short text, no LLM",
+   "screen": [
+    "S"
+   ],
+   "animation_s": 2.12,
+   "words": 30,
+   "estimated_s": 12.0,
+   "sha1": "59df78e920ac",
+   "paragraphs": [
+    "The S step, as promised, costs nothing. Pull requests are short already: I paste the title, the repository, the labels and the description into a small block of text. Free."
+   ]
+  },
+  {
+   "n": 27,
+   "file": "seg_27.wav",
+   "part": 2,
+   "sequence": "nb1",
+   "sequence_title": "The code, block by block",
+   "ends_on_step": "E · a local model, no bill",
+   "screen": [
+    "E"
+   ],
+   "animation_s": 2.12,
+   "words": 24,
+   "estimated_s": 9.6,
+   "sha1": "8b001598320a",
+   "paragraphs": [
+    "The E step runs locally, on my laptop's CPU, with an open model. Eleven minutes for fifteen thousand texts. No API key. No bill."
+   ]
+  },
+  {
+   "n": 28,
+   "file": "seg_28.wav",
+   "part": 2,
+   "sequence": "nb1",
+   "sequence_title": "The code, block by block",
+   "ends_on_step": "C · one line of k-means",
+   "screen": [
+    "C"
+   ],
+   "animation_s": 2.12,
+   "words": 27,
+   "estimated_s": 10.8,
+   "sha1": "ce18e68dce11",
+   "paragraphs": [
+    "The C step is one line: k-means, a classic algorithm. I ask for a hundred clusters; they range from twenty-two to three hundred and ten pull requests."
+   ]
+  },
+  {
+   "n": 29,
+   "file": "seg_29.wav",
+   "part": 2,
+   "sequence": "nb1",
+   "sequence_title": "The code, block by block",
+   "ends_on_step": "N · one LLM call per cluster",
+   "screen": [
+    "N"
+   ],
+   "animation_s": 2.12,
+   "words": 26,
+   "estimated_s": 10.4,
+   "sha1": "3ca88992b680",
+   "paragraphs": [
+    "The N step is the first LLM call. One call per cluster, with a short prompt and the ten most typical pull requests. A hundred calls."
+   ]
+  },
+  {
+   "n": 30,
+   "file": "seg_30.wav",
+   "part": 2,
+   "sequence": "nb1",
+   "sequence_title": "The code, block by block",
+   "ends_on_step": "A · one single call",
+   "screen": [
+    "A"
+   ],
+   "animation_s": 2.6,
+   "words": 20,
+   "estimated_s": 8.0,
+   "sha1": "5e4ea834fb67",
+   "paragraphs": [
+    "And the A step is a single call: the model reads the hundred names and sorts them into seven themes."
+   ]
+  },
+  {
+   "n": 31,
+   "file": "seg_31.wav",
+   "part": 2,
+   "sequence": "nb2",
+   "sequence_title": "The result, and its bill",
+   "ends_on_step": "the themes chart",
+   "screen": [
+    "The themes chart"
+   ],
+   "animation_s": 1.97,
+   "words": 38,
+   "estimated_s": 15.2,
+   "sha1": "88a1cc21d92e",
+   "paragraphs": [
+    "And here's the result: three months of LangChain, at a glance. Agent products lead, almost a third of the activity. Then automated dependency upkeep, core reliability, documentation… An organisation of fifteen thousand pull requests, mapped in eighty lines."
+   ]
+  },
+  {
+   "n": 32,
+   "file": "seg_32.wav",
+   "part": 2,
+   "sequence": "nb2",
+   "sequence_title": "The result, and its bill",
+   "ends_on_step": "the bill · gpt-6-luna · ≈ $0.15",
+   "screen": [
+    "The notebook's bill: gpt-6-luna · ~1 million tokens · $0.15"
+   ],
+   "animation_s": 2.8,
+   "words": 71,
+   "estimated_s": 28.4,
+   "sha1": "e1e092a9e761",
+   "paragraphs": [
+    "The cost? A small model, gpt-6-luna. Naming: about a million tokens, thirteen cents. Aggregating: two cents. Total: fifteen cents for fifteen thousand pull requests.",
+    "Having the LLM read everything would cost a few dollars. On fifteen thousand pull requests, the gap is small. On a corpus that takes in hundreds of thousands of items a day, it isn't. And above all, one call per document still wouldn't give me a map."
+   ]
+  },
+  {
+   "n": 33,
+   "file": "seg_33.wav",
+   "part": 2,
+   "sequence": "nb12",
+   "sequence_title": "Leaving the notebook",
+   "ends_on_step": "the notebook, seen whole",
+   "screen": [
+    "The notebook at a glance, in columns"
+   ],
+   "animation_s": 2.37,
+   "words": 11,
+   "estimated_s": 4.4,
+   "sha1": "b2e0e21af259",
+   "paragraphs": [
+    "The notebook at a glance. Eighty lines. One map. Fifteen cents."
+   ]
+  },
+  {
+   "n": 34,
+   "file": "seg_34.wav",
+   "part": 2,
+   "sequence": "nb12",
+   "sequence_title": "Leaving the notebook",
+   "ends_on_step": "in practice, what does it let us do?",
+   "screen": [
+    "In practice, what does it let us do? — Prepared data: faster, cheaper, sourced, so more reliable."
+   ],
+   "animation_s": 2.72,
+   "words": 72,
+   "estimated_s": 28.8,
+   "sha1": "61bec2b23cb2",
+   "paragraphs": [
+    "Now the real question: in practice, what does it let us do?",
+    "At heart, it prepares the data. And prepared data changes everything for an LLM: queries get faster, cheaper, and above all far more reliable, because the model relies on sourced material instead of making things up. Same as us: faced with a heap of documents, we get nothing out of it; faced with a map, we know where to look."
+   ]
+  },
+  {
+   "n": 35,
+   "file": "seg_35.wav",
+   "part": 2,
+   "sequence": "nb12",
+   "sequence_title": "Leaving the notebook",
+   "ends_on_step": "search vs a map (GraphRAG)",
+   "screen": [
+    "The Microsoft Research quote — GraphRAG. Then: Search finds what you know is there. · A map shows what you didn't know."
+   ],
+   "animation_s": 3.2,
+   "words": 77,
+   "estimated_s": 30.8,
+   "sha1": "6a5720476653",
+   "paragraphs": [
+    "And there's a deeper difference. Microsoft Research put it in writing: RAG fails on global questions, like \"what are the main themes in this corpus?\"",
+    "Search is focused: you look for what you know is somewhere. Ask a question, find the answer. A map brings out what you didn't even know was there.",
+    "Keep that in mind: it holds for the three examples that follow. Three readers for this map: you, your product team, and your agents."
+   ]
+  },
+  {
+   "n": 36,
+   "file": "seg_36.wav",
+   "part": 3,
+   "sequence": "voices",
+   "sequence_title": "Use 1 · you · the voice of your users",
+   "ends_on_step": "what they write, and say elsewhere",
+   "screen": [
+    "The sources — What they write to you, and what they say everywhere else."
+   ],
+   "animation_s": 4.69,
+   "words": 65,
+   "estimated_s": 26.0,
+   "sha1": "a0a9cc067bac",
+   "paragraphs": [
+    "Back to the pile we started with: what your users tell you. What they write to you, in reviews and tickets, and what they say everywhere else: on social networks, in the app stores, on forums.",
+    "We collect all of it because we know there's value inside. But we mostly look for what we already know: we use it to confirm hunches, not to discover."
+   ]
+  },
+  {
+   "n": 37,
+   "file": "seg_37.wav",
+   "part": 3,
+   "sequence": "voices",
+   "sequence_title": "Use 1 · you · the voice of your users",
+   "ends_on_step": "nobody reads it all",
+   "screen": [
+    "Nobody reads it all. A sample misses the weak signals."
+   ],
+   "animation_s": 1.72,
+   "words": 21,
+   "estimated_s": 8.4,
+   "sha1": "d597f6e0a163",
+   "paragraphs": [
+    "The question nobody asks: what aren't we seeing? Nobody reads it all. At best we sample, and miss the small nuggets."
+   ]
+  },
+  {
+   "n": 38,
+   "file": "seg_38.wav",
+   "part": 3,
+   "sequence": "voices",
+   "sequence_title": "Use 1 · you · the voice of your users",
+   "ends_on_step": "counted, trends · Intercom",
+   "screen": [
+    "Everything counted, every month: what rises. — Already shipping: Intercom…"
+   ],
+   "animation_s": 3.92,
+   "words": 96,
+   "estimated_s": 38.4,
+   "sha1": "a174e5d12d0b",
+   "paragraphs": [
+    "The map gives a coherent overview, with numbers. No more gut feeling: this share of the messages is about this topic. You see what appears, what disappears, what rises from one month to the next.",
+    "A weak signal, here, is a small cluster: twenty messages that say the same thing, and you see them. And once the map exists, every new message falls into its cluster by a simple distance calculation. No LLM call.",
+    "This isn't science fiction: it's what Intercom does, as we saw. Every day, new conversations are sorted into topics found by clustering."
+   ]
+  },
+  {
+   "n": 39,
+   "file": "seg_39.wav",
+   "part": 3,
+   "sequence": "assistants",
+   "sequence_title": "Use 2 · your product team · your own AI products",
+   "ends_on_step": "thousands of conversations",
+   "screen": [
+    "Thousands of conversations and agent traces, every day. · What do people really do with them?"
+   ],
+   "animation_s": 3.69,
+   "words": 42,
+   "estimated_s": 16.8,
+   "sha1": "272676e1a34b",
+   "paragraphs": [
+    "The second pile is the one our own AI tools produce. An assistant or an agent in production means thousands of conversations and traces, every day.",
+    "And again, the question isn't a search question. It's: what do people really do with it?"
+   ]
+  },
+  {
+   "n": 40,
+   "file": "seg_40.wav",
+   "part": 3,
+   "sequence": "assistants",
+   "sequence_title": "Use 2 · your product team · your own AI products",
+   "ends_on_step": "industrialise what comes back",
+   "screen": [
+    "Find the recurring use cases — Clio's starting point…"
+   ],
+   "animation_s": 4.72,
+   "words": 63,
+   "estimated_s": 25.2,
+   "sha1": "db07357645d5",
+   "paragraphs": [
+    "The map answers: the tasks that keep coming back, the ones where the agent fails, the ones nobody planned for. And to industrialise, to automate for real, that's exactly where to start: knowing what people do.",
+    "That's Clio's own starting point: understand how an assistant is used, without a single human reading the conversations. And it's what LangSmith does with your agents' traces."
+   ]
+  },
+  {
+   "n": 41,
+   "file": "seg_41.wav",
+   "part": 3,
+   "sequence": "factory",
+   "sequence_title": "Use 3 · your agents · the agentic software factory",
+   "ends_on_step": "the pile grows",
+   "screen": [
+    "A cycle of agents. · All of them keep coming back to the code."
+   ],
+   "animation_s": 6.53,
+   "words": 64,
+   "estimated_s": 25.6,
+   "sha1": "95a97a109643",
+   "paragraphs": [
+    "The third pile: the code, and everything around it. More and more, LLMs sit at the heart of the development cycle: one agent plans, another codes, another reviews, another tests. And all of them keep coming back to the code. They read it, re-read it, and re-read it again. And the more the factory runs, the bigger the pile: pull requests, commits, files, tests."
+   ]
+  },
+  {
+   "n": 42,
+   "file": "seg_42.wav",
+   "part": 3,
+   "sequence": "factory",
+   "sequence_title": "Use 3 · your agents · the agentic software factory",
+   "ends_on_step": "SECNA: the overview · the notebook’s map",
+   "screen": [
+    "\"What happened in this repository in three months?\" — then SECNA: the overview of a whole pile."
+   ],
+   "animation_s": 4.44,
+   "words": 47,
+   "estimated_s": 18.8,
+   "sha1": "11b2c005451a",
+   "paragraphs": [
+    "Ask an agent: \"What happened in this repository over the last three months?\" It has nowhere to look. It opens files and pull requests, more or less at random.",
+    "You've already seen that answer: it's the notebook's map. Fifteen thousand pull requests, seven themes, a hundred clusters."
+   ]
+  },
+  {
+   "n": 43,
+   "file": "seg_43.wav",
+   "part": 3,
+   "sequence": "factory",
+   "sequence_title": "Use 3 · your agents · the agentic software factory",
+   "ends_on_step": "computed once, kept in memory",
+   "screen": [
+    "Computed once, for a few cents. Kept in the agent's memory."
+   ],
+   "animation_s": 1.92,
+   "words": 23,
+   "estimated_s": 9.2,
+   "sha1": "ef9bcb91ce1a",
+   "paragraphs": [
+    "That's the piece SECNA brings: the overview of a whole pile. Computed once, for a few cents, and kept in the agent's memory."
+   ]
+  },
+  {
+   "n": 44,
+   "file": "seg_44.wav",
+   "part": 3,
+   "sequence": "factory",
+   "sequence_title": "Use 3 · your agents · the agentic software factory",
+   "ends_on_step": "distillation",
+   "screen": [
+    "Distillation spares your agents from reading, re-reading and re-reading again, at random, your raw data."
+   ],
+   "animation_s": 2.2,
+   "words": 28,
+   "estimated_s": 11.2,
+   "sha1": "c491e7a15a05",
+   "paragraphs": [
+    "Distillation spares your agents from reading, re-reading and re-reading again, at random, your raw data. No more time, and no more tokens, wasted searching for who knows what."
+   ]
+  },
+  {
+   "n": 45,
+   "file": "seg_45.wav",
+   "part": 3,
+   "sequence": "end",
+   "sequence_title": "End",
+   "ends_on_step": "prepare the data your agents navigate",
+   "screen": [
+    "Prepare the data your agents navigate. — a map, like SECNA · a graph, like Graphify · files they can grep and find"
+   ],
+   "animation_s": 2.97,
+   "words": 59,
+   "estimated_s": 23.6,
+   "sha1": "77797362d75f",
+   "paragraphs": [
+    "To wrap up. SECNA isn't the only way. GitLab Duo and Graphify build a graph of the code, DeepWiki writes a wiki for every repository, others pick a rigid taxonomy: well-structured files, where their agents grep and find.",
+    "One thing is certain: effective agents need data, and that data has to be prepared, so they can navigate it easily."
+   ]
+  },
+  {
+   "n": 46,
+   "file": "seg_46.wav",
+   "part": 3,
+   "sequence": "end",
+   "sequence_title": "End",
+   "ends_on_step": "the message",
+   "screen": [
+    "Data science finds the structure. The LLM gives it meaning. The bill follows the structure, not the number of documents."
+   ],
+   "animation_s": 2.52,
+   "words": 29,
+   "estimated_s": 11.6,
+   "sha1": "5db1074172de",
+   "paragraphs": [
+    "For unstructured corpora, SECNA exists, and it works. Data science finds the structure. The LLM gives it meaning. And the bill follows the structure, not the number of documents."
+   ]
+  },
+  {
+   "n": 47,
+   "file": "seg_47.wav",
+   "part": 3,
+   "sequence": "end",
+   "sequence_title": "End",
+   "ends_on_step": "thank you · the QR code",
+   "screen": [
+    "Thank you. — the notebook's QR code"
+   ],
+   "animation_s": 2.6,
+   "words": 19,
+   "estimated_s": 7.6,
+   "sha1": "8c9cbbe4c31b",
+   "paragraphs": [
+    "Thank you. The notebook is online, the QR code is right there: try it tomorrow on your own corpus."
+   ]
+  }
+ ]
+}
