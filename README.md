@@ -34,31 +34,54 @@ The name *SECNA* is the talk's; the recipe is Clio's, and others' ([sources](BIB
 
 ## The notebook
 
-[`notebook/`](notebook/) runs the recipe on a public corpus: every pull request of the
-[`langchain-ai`](https://github.com/langchain-ai) organisation on GitHub over three months — 14,947 pull
-requests, 137 repositories. S is plain code, E runs on the laptop's CPU with an open model, C is a k-means into
-100 clusters, N and A call a small model: **about $0.15 for the whole run**, and a map of seven themes.
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mdussere/secna/blob/main/notebook/secna.ipynb)
 
-The notebook is a pytest file: each test is a cell, run in order, its outputs cached on disk.
+[`notebook/secna.ipynb`](notebook/secna.ipynb) runs the recipe on a public corpus: every pull request of the
+[`langchain-ai`](https://github.com/langchain-ai) organisation on GitHub over three months — 14,947 pull
+requests, 137 repositories. S is plain code, E runs on the CPU with an open model, C is a k-means into 100
+clusters, N and A call a small model: **about $0.15 for the whole run**, and a map of seven themes. It is the
+notebook shown during the talk.
+
+**What it needs**
+- a **GitHub token** (`GITHUB_TOKEN`): GitHub's search API needs one; any token with public read access will do
+  (on your machine, the GitHub CLI's `gh auth token` is picked up on its own);
+- an **OpenAI-compatible key** (`OPENAI_API_KEY`, and `OPENAI_BASE_URL` for another endpoint), for N and A only.
+  Without it, the extraction, S, E and C still run.
+
+**In Colab:** click the badge, add `GITHUB_TOKEN` and `OPENAI_API_KEY` under 🔑 *Secrets*, then *Runtime → Run
+all*. A GPU runtime makes E faster.
+
+**On your machine:**
 
 ```bash
 cd notebook
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-cp ../env.template ../.env                     # then fill SECNA_API_KEY (any OpenAI-compatible endpoint)
-.venv/bin/pytest -s test_secna_langchain.py    # the LangChain run
-.venv/bin/pytest -s test_secna_langchain.py -k cluster   # one cell
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt jupyterlab
+export GITHUB_TOKEN=…  OPENAI_API_KEY=…          # or a .env file at the repository's root (see env.template)
+.venv/bin/jupyter lab secna.ipynb               # then Run → Run All Cells
 ```
 
-To run it on your own corpus, change `SECNA_REPOS` (and the dates) at the top of `test_secna_langchain.py`.
-`test_secna.py` holds the cells, configured by default on seven public GitLab repositories (embedded through the
-API: about $3).
+**How long it takes:** the download of the corpus about 9 minutes (saved to `notebook/data/`, so a second run
+skips it), E about 11 minutes on a laptop's CPU, then C in seconds, N (100 calls) and A (1 call) in a few minutes.
+For a quick try, set one repository and one month in the *Configuration* cell. To run it on your own code, put
+your organisation or repository in `REPOS`.
+
+**The full version.** `test_secna.py` and `test_secna_langchain.py` are the notebook as it actually ran, written
+as pytest cells (one test per cell, every output cached on disk), with the checks and extra cells the talk draws
+on: who opens the pull requests, the unexpected cluster, routing the next day's pull requests. `test_secna.py`
+is configured by default on seven public GitLab repositories (embedded through the API: about $3).
+
+```bash
+cp ../env.template ../.env                       # then fill SECNA_API_KEY
+.venv/bin/pytest -s test_secna_langchain.py      # the LangChain run
+.venv/bin/pytest -s test_secna_langchain.py -k cluster   # one cell
+```
 
 ## The repository
 
 | Folder | What |
 |---|---|
 | [`presentation/`](presentation/) | The presentation: one HTML page, played live step by step. `index.html`, its scripts (`js/`), the run's data (`data.js`), the stage notebook (`nb_display.py` → `nb_cells.js`). |
-| [`notebook/`](notebook/) | The SECNA notebook. |
+| [`notebook/`](notebook/) | The SECNA notebook (`secna.ipynb`), and its full version as pytest cells. |
 | [`voice/`](voice/) | The narrated version's voice, in French and in English: the texts (`texts/`), one segment per pause, and the local text-to-speech scripts. |
 | [`BIBLIO.md`](BIBLIO.md) | Every source the talk relies on. |
 

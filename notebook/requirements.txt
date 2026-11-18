@@ -9,6 +9,7 @@ tiktoken
 openai
 tqdm
 python-dotenv
+ipywidgets            # progress bars in Jupyter
 # tests only
 pytest
 boto3
