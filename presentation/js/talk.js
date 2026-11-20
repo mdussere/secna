@@ -735,7 +735,10 @@ function play(until) {
   if (!audioFor(seqAt(T + 1e-4), T + 1e-4 - seqAt(T + 1e-4).off)) silent = true;
 }
 function pause() { playing = false; stopAt = null; stopAudio(); render(T); }
-function go(t) { const was = playing, until = stopAt; pause(); SNB.resetManual(); render(t); if (was) play(until); }
+function go(t) {   // a jump (the bar, the review panel, Home, End); with the voice playing, the clip of the place landed on
+  if (reh) { rehStart(pauseNo(t)); return; }
+  const was = playing, until = stopAt; pause(); SNB.resetManual(); render(t); if (was) play(until);
+}
 let kick = -1, lastAmb = null;
 function loop(now) {
   const da = lastAmb === null ? 0 : Math.min(.1, (now - lastAmb) / 1000); lastAmb = now;
@@ -849,7 +852,6 @@ addEventListener('keydown', e => {
   else if (e.key === 'h' || e.key === 'H' || e.key === '?') document.body.classList.toggle('help');
   else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
 });
-// a link on screen opens its page instead of advancing the talk; while its item is hidden it is not a link
 // links (sources, the QR codes, the repository's address): open in a new tab and don't advance the talk; while a
 // link is not on screen yet (faded out, it or one of its parents), a click on it is an ordinary click: next step
 addEventListener('click', e => {
