@@ -776,7 +776,7 @@ function goPause(n) { pause(); SNB.resetManual(); render(STOPS[clamp(Math.round(
  * list per language; SECNA_VOICE, French only), or read from voice/out/: video_fr/ in French,
  * video_en/ in English (seg_NN.wav). The language (the FR / EN button, or l) changes the clip, not the screen. */
 const VOICE_RATE = 1, VOICE = window.SECNA_VOICES || (window.SECNA_VOICE ? { fr: window.SECNA_VOICE } : null);
-let voiceOpt = false, lang = 'fr';
+let voiceOpt = false, lang = 'en';   // the voice's language: English by default
 let reh = false, rehN = 0, rehAudio = null, rehTimer = null, rehNote = '';
 function rehQuiet() { clearTimeout(rehTimer); if (rehAudio) { try { rehAudio.pause(); } catch (e) { /* ignore */ } rehAudio = null; } }
 function rehStop() { rehQuiet(); reh = false; rehNote = ''; pause(); }
@@ -850,7 +850,13 @@ addEventListener('keydown', e => {
   else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
 });
 // a link on screen opens its page instead of advancing the talk; while its item is hidden it is not a link
-document.querySelectorAll('a.lnk').forEach(a => a.addEventListener('click', e => { if (+getComputedStyle(a.closest('.it')).opacity < .5) e.preventDefault(); else e.stopPropagation(); }));
+// links (sources, the QR codes, the repository's address): open in a new tab and don't advance the talk; while a
+// link is not on screen yet (faded out, it or one of its parents), a click on it is an ordinary click: next step
+addEventListener('click', e => {
+  const a = e.target.closest && e.target.closest('a[href]'); if (!a) return;
+  let op = 1; for (let el = a; el && el !== document.body; el = el.parentElement) op *= +getComputedStyle(el).opacity;
+  if (op < .5) e.preventDefault(); else e.stopPropagation();
+}, true);
 $('view').addEventListener('click', () => { if (reh) rehStart(rehN + 1); else next(); });
 addEventListener('wheel', e => { if (!playing && T >= P2 && T < tOut) { SNB.wheel(e.deltaY); render(T); } }, { passive: true });
 let idle = null; addEventListener('mousemove', () => { document.body.classList.remove('idle'); clearTimeout(idle); idle = setTimeout(() => document.body.classList.add('idle'), 2200); });
@@ -871,7 +877,7 @@ if (hp.has('clean')) document.body.classList.add('clean');
 if (hp.has('review')) document.body.classList.add('review');
 const REH_BASE = hp.get('audio') || '../voice/out/video_fr/';   // the video's French; &audio=<folder>/ for other clips
 const REH_EN = hp.get('audio_en') || '../voice/out/video_en/';   // the English clips; &audio_en=<folder>/
-if (hp.get('lang') === 'en') lang = 'en';   // &lang=en opens with the English voice
+if (['fr', 'en'].includes(hp.get('lang'))) lang = hp.get('lang');   // &lang=fr opens with the French voice
 const BED_BASE = hp.get('bed') || '../voice/out/night/chimes.wav';   // &bed=<file> to try another bed
 // the player's buttons, and its opening card (the single-file build with the voice, or #player)
 voiceOpt = !!VOICE || hp.has('voice'); bedOpt = !!VOICE || hp.has('player') || hp.has('voice');

@@ -24,6 +24,8 @@ body.idle{cursor:none}
 #gl{position:absolute;left:0;top:0;width:1920px;height:1080px}
 .dom{position:absolute;inset:0;pointer-events:none}
 .it{position:absolute;opacity:0;white-space:nowrap}
+a.it{pointer-events:auto;cursor:pointer;text-decoration:none}
+a.it.url:hover{text-decoration:underline;text-underline-offset:8px}
 .w{display:inline-block}
 .ch{display:inline}
 .c{left:0;width:1920px;text-align:center}
@@ -161,6 +163,7 @@ body.idle{cursor:none}
 #nb .jl-count.beat{background:#fff3c4;color:#212121;box-shadow:0 0 0 2px #f2b600}
 #nb .jl-veil{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
 #nb .jl-qr{position:absolute;top:18px;right:34px;width:244px;padding:14px 14px 12px;background:#fff;border:1px solid #e0e0e0;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.10);text-align:center;transform-origin:100% 0;opacity:0}
+#nb a.jl-qr{display:block;cursor:pointer;text-decoration:none}
 #nb .jl-qr .q svg{display:block;width:196px;height:196px;margin:0 auto}
 #nb .jl-qr .u{font:400 15px/1.35 var(--text);color:#616161;margin-top:8px}
 #nb .jl-qr .u b{font:600 13.5px var(--mono);color:#1976d2;white-space:nowrap}
@@ -447,9 +450,9 @@ body.help #help{display:block}
 <div class="it h1 c sh" style="top:250px;font-size:80px;line-height:1.1" data-in="c1" data-out="c2" data-fx="words"><span class="ds gd">Data science</span> finds the structure.<br><span class="llm gl">The LLM</span> gives it meaning.</div>
 <div class="it h2 c hot gh" style="top:560px" data-in="c1+1.2" data-out="c2" data-fx="words">The bill follows the structure, not the number of documents.</div>
 <div class="it xl c sh" style="top:200px;font-size:150px" data-in="c2" data-fx="slam">Thank you.</div>
-<div class="it qr" style="left:620px;top:480px;width:300px;height:300px" data-in="c2+0.4" data-fx="up" data-qr></div>
+<a class="it qr" href="https://github.com/mdussere/secna" target="_blank" rel="noopener" style="left:620px;top:480px;width:300px;height:300px" data-in="c2+0.4" data-fx="up" data-qr></a>
 <div class="it b sh wrap" style="left:960px;top:540px;width:760px" data-in="c2+0.6" data-fx="up">The notebook is online.<br>Try it tomorrow on your own corpus.</div>
-<div class="it" style="left:960px;top:700px;font:500 38px var(--mono);color:var(--ds)" data-in="c2+0.8" data-fx="up">github.com/mdussere/secna</div>
+<a class="it url" href="https://github.com/mdussere/secna" target="_blank" rel="noopener" style="left:960px;top:700px;font:500 38px var(--mono);color:var(--ds)" data-in="c2+0.8" data-fx="up">github.com/mdussere/secna</a>
 </section>
 
 </div>
@@ -468,9 +471,9 @@ body.help #help{display:block}
 <footer id="pFoot"></footer>
 </aside>
 
-<div id="bar"><button id="playB">▶ Play</button><button id="snd">Voice off</button><button id="langB" title="The voice's language (l)">FR</button><button id="bedB">Ambience off</button><span id="modeL"></span><div id="track"></div><span class="sp"></span></div>
+<div id="bar"><button id="playB">▶ Play</button><button id="snd">Voice off</button><button id="langB" title="The voice's language (l)">EN</button><button id="bedB">Ambience off</button><span id="modeL"></span><div id="track"></div><span class="sp"></span></div>
 <div id="hud"><span class="pn"><span id="pauseS">❚❚</span><b id="pauseN">1</b><i id="pauseT"></i></span><span id="clock">0:00</span></div>
-<div id="start"><div class="bx"><div class="tt">SECNA — the talk</div><button id="startPlay">▶ Play</button><div class="rw"><button id="startVoice">Voice: off</button><button id="startLang">Français</button><button id="startBed">Ambience: off</button><button id="startStep">Step through with →</button></div></div></div>
+<div id="start"><div class="bx"><div class="tt">SECNA — the talk</div><button id="startPlay">▶ Play</button><div class="rw"><button id="startVoice">Voice: off</button><button id="startLang">English</button><button id="startBed">Ambience: off</button><button id="startStep">Step through with →</button></div></div></div>
 <div id="fail"></div>
 <div id="help"><b>→ ↓ · click</b>next step; while it plays, finish it<br><b>← ↑</b>back to the previous pause<br><b>37 ↵</b>go to pause 37<br><b>space</b>play everything, without pausing (or stop)<br><b>v</b>voice on / off, for the player<br><b>l</b>the voice in French / in English<br><b>a</b>ambience on / off, for the player<br><b>r</b>review panel<br><b>b</b>hide the bar and the pause number<br><b>f</b>fullscreen<br><b>h</b>this help<br><b>wheel</b>scroll the notebook (held)</div>
 </div>
@@ -479,7 +482,7 @@ body.help #help{display:block}
 <script src="nb_cells.js"></script>
 <script src="steps.js?v=1117j"></script>
 <script src="js/gl.js"></script>
-<script src="js/notebook.js?v=1117j"></script>
-<script src="js/talk.js?v=1118a"></script>
+<script src="js/notebook.js?v=1120a"></script>
+<script src="js/talk.js?v=1120b"></script>
 </body>
 </html>

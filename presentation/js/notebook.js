@@ -120,7 +120,7 @@ function build(container) {
     <div class="jl-toolbar"><span>🖫</span><span>＋</span><span>✂</span><span>⎘</span><span>⎗</span><span>▶</span><span>■</span><span>↻</span><span>⏭</span><span class="jl-sel">Code ⌄</span><span class="jl-fill"></span><span class="jl-kernel">Python 3 (ipykernel)</span><span class="jl-busy"></span></div>
     <div class="jl-scroll" id="jlScroll"><div class="jl-cells" id="jlCells"></div>
       <div class="jl-veil"></div>
-      <div class="jl-qr"><div class="q"></div><div class="u">the notebook<br><b>github.com/mdussere/secna</b></div></div>
+      <a class="jl-qr" href="https://github.com/mdussere/secna" target="_blank" rel="noopener"><div class="q"></div><div class="u">the notebook<br><b>github.com/mdussere/secna</b></div></a>
       <div class="jl-note"></div>
       <div class="jl-bill"><div class="k">The bill of this run</div><div class="m">gpt-6-luna · a small model</div>
         ${BILL.map(([l, c, h, w, v]) => `<div class="r"><b class="${c}">${l}</b><span class="h">${h}</span><span class="w">${w}</span><span class="v">${v}</span></div>`).join('')}

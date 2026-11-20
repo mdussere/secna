@@ -7,7 +7,7 @@ Bordeaux (Meetup #7, 19 November 2026), with everything it shows: the presentati
 
 ### ▶ [Open the presentation](https://mdussere.github.io/secna/)
 
-▶ Play: the whole presentation, narrated (French or English, the FR / EN button) · → or click: step by step ·
+▶ Play: the whole presentation, narrated in English ([in French](https://mdussere.github.io/secna/#lang=fr), or the FR / EN button) · → or click: step by step ·
 ← back · f: fullscreen · h: help.
 
 ## The idea
